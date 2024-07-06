@@ -1,19 +1,27 @@
 import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
+import EntryContext from "../common/EntryContext"
+import WindowUtil from "../common/WindowUtils"
 
 export default class EntryAbility extends UIAbility {
+
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
+    EntryContext.setContext(this.context)
   }
 
   onDestroy(): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onDestroy');
   }
 
-  onWindowStageCreate(windowStage: window.WindowStage): void {
+  async onWindowStageCreate(windowStage: window.WindowStage): Promise<void> {
     // Main window is created, set main page for this ability
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
+
+    const windowClass = await windowStage.getMainWindow()
+    windowClass.setWindowLayoutFullScreen(true)
+    WindowUtil.init(windowClass)
 
     windowStage.loadContent('pages/Index', (err) => {
       if (err.code) {
