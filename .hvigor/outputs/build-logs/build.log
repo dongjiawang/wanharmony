@@ -1,0 +1,120 @@
+[2024-07-06T10:28:02.985] [DEBUG] debug-file - env: nodejsVersion=v18.20.1
+[2024-07-06T10:28:03.471] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: false,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' }
+}
+[2024-07-06T10:28:03.492] [DEBUG] debug-file - hvigorfile, resolving /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/hvigorfile.ts
+[2024-07-06T10:28:05.144] [DEBUG] debug-file - hvigorfile, require result:  { default: { system: [Function: appTasks], plugins: [] } }
+[2024-07-06T10:28:05.362] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2024-07-06T10:28:05.366] [DEBUG] debug-file - Product 'default' using build option: {
+  "debuggable": true
+} in this build.
+[2024-07-06T10:28:05.387] [DEBUG] debug-file - Local scan or download HarmonyOS sdk components toolchains,ets,js,native
+[2024-07-06T10:28:05.391] [DEBUG] debug-file - Local scan or download hmscore sdk components toolchains,ets,native
+[2024-07-06T10:28:05.400] [DEBUG] debug-file - Sdk init in 18 ms 
+[2024-07-06T10:28:05.428] [DEBUG] debug-file - Project task initialization takes 27 ms 
+[2024-07-06T10:28:05.436] [DEBUG] debug-file - hvigorfile, resolving /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/hvigorfile.ts
+[2024-07-06T10:28:05.456] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2024-07-06T10:28:05.467] [DEBUG] debug-file - project has submodules:entry
+[2024-07-06T10:28:05.465] [DEBUG] debug-file - Module entry task initialization takes 6 ms 
+[2024-07-06T10:28:05.485] [DEBUG] debug-file - Executing task :entry:clean
+[2024-07-06T10:28:05.489] [DEBUG] debug-file - entry : clean cost memory 0.474639892578125
+[2024-07-06T10:28:02.987] [DEBUG] debug-file - env: hvigor-config.json5 content = {
+  modelVersion: '5.0.0',
+  dependencies: {},
+  execution: {},
+  logging: {},
+  debugging: {},
+  nodeOptions: {}
+}
+[2024-07-06T10:28:03.473] [DEBUG] debug-file - Since current hvigor version 5.2.2 differs from last hvigor version 
+      undefined, delete file-cache.json and task-cache.json.
+[2024-07-06T10:28:05.144] [DEBUG] debug-file - hvigorfile, binding system plugins [Function: appTasks]
+[2024-07-06T10:28:05.362] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2024-07-06T10:28:05.381] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2024-07-06T10:28:05.429] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2024-07-06T10:28:05.443] [DEBUG] debug-file - hvigorfile, require result:  { default: { system: [Function: hapTasks], plugins: [] } }
+[2024-07-06T10:28:05.456] [DEBUG] debug-file - Target 'default' config: {}
+[2024-07-06T10:28:05.465] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2024-07-06T10:28:05.486] [DEBUG] debug-file - clean: Worker pool is inactive.
+[2024-07-06T10:28:05.489] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 36 ms 
+[2024-07-06T10:28:05.524] [DEBUG] debug-file - Current worker pool is stopped or closed.
+[2024-07-06T10:28:05.468] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2024-07-06T10:28:02.989] [DEBUG] debug-file - env: daemon=false
+[2024-07-06T10:28:03.474] [DEBUG] debug-file - Cache service initialization finished in 2 ms 
+[2024-07-06T10:28:05.362] [DEBUG] debug-file - Product 'default' build option: {}
+[2024-07-06T10:28:05.429] [DEBUG] debug-file - hvigorfile, no custom plugins were found in /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/hvigorfile.ts
+[2024-07-06T10:28:05.443] [DEBUG] debug-file - hvigorfile, binding system plugins [Function: hapTasks]
+[2024-07-06T10:28:05.456] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2024-07-06T10:28:05.465] [DEBUG] debug-file - hvigorfile, no custom plugins were found in /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/hvigorfile.ts
+[2024-07-06T10:28:05.490] [INFO] debug-file - Finished :entry:clean... after 4 ms 
+[2024-07-06T10:28:05.537] [DEBUG] debug-file - Current worker pool is terminated.
+[2024-07-06T10:28:05.471] [DEBUG] debug-file - load to the disk finished
+[2024-07-06T10:28:02.989] [DEBUG] debug-file - no-daemon, use the parent process.execArgv --max-old-space-size=8192,--expose-gc
+[2024-07-06T10:28:05.362] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2024-07-06T10:28:05.429] [DEBUG] debug-file - hvigorfile, resolve finished /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/hvigorfile.ts
+[2024-07-06T10:28:05.457] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "name": "debug"
+}
+[2024-07-06T10:28:05.465] [DEBUG] debug-file - hvigorfile, resolve finished /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/hvigorfile.ts
+[2024-07-06T10:28:05.491] [DEBUG] debug-file - Executing task ::clean
+[2024-07-06T10:28:05.472] [DEBUG] debug-file - Module wanHarmony Collected Dependency: 
+[2024-07-06T10:28:05.457] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "name": "default"
+}
+[2024-07-06T10:28:05.491] [DEBUG] debug-file - clean: Worker pool is inactive.
+[2024-07-06T10:28:05.472] [DEBUG] debug-file - Module wanHarmony's total dependency: 0
+[2024-07-06T10:28:05.457] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2024-07-06T10:28:05.491] [DEBUG] debug-file - wanHarmony : clean cost memory 0.02724456787109375
+[2024-07-06T10:28:05.474] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2024-07-06T10:28:05.457] [DEBUG] debug-file - Module 'entry' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "name": "debug"
+} in this build.
+[2024-07-06T10:28:05.491] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 38 ms 
+[2024-07-06T10:28:05.474] [DEBUG] debug-file - Module entry's total dependency: 0
+[2024-07-06T10:28:05.491] [INFO] debug-file - Finished ::clean... after 1 ms 
+[2024-07-06T10:28:05.479] [DEBUG] debug-file - Configuration phase cost:1 s 997 ms 
+[2024-07-06T10:28:05.492] [DEBUG] debug-file - Executing task :entry:init
+[2024-07-06T10:28:05.482] [DEBUG] debug-file - Configuration task cost before running: 2 s 28 ms 
+[2024-07-06T10:28:05.492] [DEBUG] debug-file - entry : init cost memory 0.0098419189453125
+[2024-07-06T10:28:05.492] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 39 ms 
+[2024-07-06T10:28:05.492] [INFO] debug-file - Finished :entry:init... after 1 ms 
+[2024-07-06T10:28:05.492] [DEBUG] debug-file - Executing task ::init
+[2024-07-06T10:28:05.492] [DEBUG] debug-file - wanHarmony : init cost memory 0.008544921875
+[2024-07-06T10:28:05.492] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 39 ms 
+[2024-07-06T10:28:05.492] [INFO] debug-file - Finished ::init... after 1 ms 
+[2024-07-06T10:28:05.498] [DEBUG] debug-file - Module 'entry' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "name": "debug"
+} in this build.
+[2024-07-06T10:28:05.501] [DEBUG] debug-file - Module 'entry' target 'ohosTest' using build option: {
+  "debuggable": true,
+  "name": "default"
+} in this build.
+[2024-07-06T10:28:05.506] [DEBUG] debug-file - hvigor start cli arguments:{
+  prop: [ 'product=default' ],
+  sync: true,
+  parallel: true,
+  incremental: true,
+  daemon: false,
+  _: [ '--analyze=normal' ]
+}
+[2024-07-06T10:28:05.518] [DEBUG] debug-file - Since there is no instance or instance is terminated, create a new worker pool.
+[2024-07-06T10:28:05.518] [DEBUG] debug-file - Worker pool is initialized with config:  {
+  minPoolNum: 2,
+  maxPoolNum: undefined,
+  maxCoreSize: undefined,
+  cacheCapacity: undefined,
+  cacheTtl: undefined
+}
