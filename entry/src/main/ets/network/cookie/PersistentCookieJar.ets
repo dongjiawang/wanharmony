@@ -9,7 +9,6 @@ import CookieUtils from './CookieUtils';
  * 持久化 cookie 容器，通过实现 CookieJar 接口函数
  */
 export default class PersistentCookieJar implements CookieJar {
-  private static TAG = "PersistentCookieJar"
   private cache: HashMap<string, Cookie> = new HashMap()
   private persistor: CookiePersistor
 

@@ -11,7 +11,6 @@ const KEY_COOKIE_KEYS = "COOKIE_KEYS"
  * 持久化 cookie
  */
 export default class KVCookiePersistor implements CookiePersistor {
-  private static TAG = "KVCookiePeristor"
   private preferences: dataPreferences.Preferences
 
   constructor(context: Context) {
