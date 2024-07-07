@@ -20,7 +20,7 @@ export default interface CookiePersistor {
    * 移除指定的
    * @param cookie
    */
-  removeAll(cookie: Cookie[]): void
+  removeAll(cookies: Cookie[]): void
 
   /**
    * 清除所有
