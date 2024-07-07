@@ -1,7 +1,6 @@
 import OHPermission from "../common/OHPermission"
 import WindowUtils from '../common/WindowUtils'
-
-// import Home from "./Home"
+import { Home } from './Home'
 
 @Entry
 @Component
@@ -16,7 +15,7 @@ struct Index {
       if (this.isPermissionGrant) {
         Tabs({ barPosition: BarPosition.End, controller: this.tabsController }) {
           TabContent() {
-            Text("首页")
+            Home()
           }.tabBar(this.tabBuilder("首页", 0, $r("app.media.ic_tab_home_fill"), $r("app.media.ic_tab_home")))
 
           TabContent() {
