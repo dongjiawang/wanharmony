@@ -98,7 +98,7 @@ export struct ArticleItemComponent {
     })
     .onClick(() => {
       router.pushUrl({
-        url: "page/WebPage",
+        url: "pages/WebPage",
         params: {
           url: this.article.link
         }

@@ -4,7 +4,7 @@ import WindowUtils from '../common/WindowUtils'
 export struct TitleLayout {
   @Prop title: string
   isJustShowStatusBar: boolean = false
-  showBack: boolean = false
+  showBack: boolean = true
   menuIcon?: Resource
   onMenuClick?: () => void
   onBack?: () => void

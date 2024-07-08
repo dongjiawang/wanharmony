@@ -24,7 +24,7 @@ export struct WebPage {
         title: this.title,
         onBack: () => {
           if (this.webController.accessBackward()) {
-            this.webController.accessBackward()
+            this.webController.backward()
           } else {
             router.back()
           }
