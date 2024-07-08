@@ -3,8 +3,35 @@ import { Response } from './model/Response';
 import Network from './Network';
 import { http } from '@kit.NetworkKit';
 import { HomeBannerData } from './model/Banner';
+import { User } from '../service/UserService';
 
 export default class API {
+  /**
+   * 登录账户
+   * @param username 用户名
+   * @param password 密码
+   * @returns
+   */
+  static async login(username: string, password: string): Promise<Response<User>> {
+    return Network.requestSync(`/user/login?username=${username}&password=${password}`, http.RequestMethod.POST)
+  }
+
+  /**
+   * 退出账号
+   * @returns
+   */
+  static async logout(): Promise<Response<string>> {
+    return Network.requestSync("/user/logout/json", http.RequestMethod.GET)
+  }
+
+  /**
+   * 获取用户信息
+   * @returns
+   */
+  static async getUserInfo(): Promise<Response<User>> {
+    return Network.requestSync("/lg/coin/userinfo/json", http.RequestMethod.GET)
+  }
+
   /**
    * 获取首页 banner 数据
    * @returns

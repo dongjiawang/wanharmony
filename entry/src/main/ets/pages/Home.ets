@@ -82,7 +82,6 @@ export struct Home {
         return Promise.reject()
       }
     }
-    return Promise.reject()
   }
 
   build() {

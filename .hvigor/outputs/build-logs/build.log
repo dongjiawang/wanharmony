@@ -7814,3 +7814,571 @@
 [2024-07-08T12:58:15.101] [DEBUG] debug-file - Update task entry:default@SignHap input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/outputs/default/entry-default-unsigned.hap cache from map.
 [2024-07-08T12:58:15.101] [DEBUG] debug-file - Update task entry:default@SignHap output file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/outputs/default/entry-default-signed.hap cache.
 [2024-07-08T12:58:15.101] [DEBUG] debug-file - Incremental task entry:default@SignHap post-execution cost:1 ms .
+[2024-07-08T13:00:36.399] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' }
+}
+[2024-07-08T13:00:36.413] [DEBUG] debug-file - Cache service initialization finished in 14 ms 
+[2024-07-08T13:00:36.448] [DEBUG] debug-file - hvigorfile, resolving /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/hvigorfile.ts
+[2024-07-08T13:00:36.497] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2024-07-08T13:00:36.500] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2024-07-08T13:00:36.570] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2024-07-08T13:00:36.574] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2024-07-08T13:00:36.580] [DEBUG] debug-file - Product 'default' build option: {}
+[2024-07-08T13:00:36.580] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2024-07-08T13:00:36.582] [DEBUG] debug-file - Product 'default' using build option: {
+  "debuggable": true
+} in this build.
+[2024-07-08T13:00:36.601] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2024-07-08T13:00:36.629] [DEBUG] debug-file - Sdk init in 20 ms 
+[2024-07-08T13:00:36.693] [DEBUG] debug-file - Project task initialization takes 62 ms 
+[2024-07-08T13:00:36.694] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2024-07-08T13:00:36.694] [DEBUG] debug-file - hvigorfile, no custom plugins were found in /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/hvigorfile.ts
+[2024-07-08T13:00:36.694] [DEBUG] debug-file - hvigorfile, resolve finished /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/hvigorfile.ts
+[2024-07-08T13:00:36.790] [DEBUG] debug-file - hvigorfile, resolving /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/hvigorfile.ts
+[2024-07-08T13:00:36.820] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2024-07-08T13:00:36.824] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2024-07-08T13:00:36.859] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2024-07-08T13:00:36.859] [DEBUG] debug-file - Target 'default' config: {}
+[2024-07-08T13:00:36.860] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2024-07-08T13:00:36.860] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "name": "debug"
+}
+[2024-07-08T13:00:36.860] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "name": "default"
+}
+[2024-07-08T13:00:36.860] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2024-07-08T13:00:36.860] [DEBUG] debug-file - Module 'entry' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "name": "debug"
+} in this build.
+[2024-07-08T13:00:36.868] [DEBUG] debug-file - Module entry task initialization takes 3 ms 
+[2024-07-08T13:00:36.868] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2024-07-08T13:00:36.869] [DEBUG] debug-file - hvigorfile, no custom plugins were found in /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/hvigorfile.ts
+[2024-07-08T13:00:36.869] [DEBUG] debug-file - hvigorfile, resolve finished /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/hvigorfile.ts
+[2024-07-08T13:00:37.444] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 558 ms 
+[2024-07-08T13:00:37.445] [DEBUG] debug-file - project has submodules:entry
+[2024-07-08T13:00:37.452] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2024-07-08T13:00:37.470] [DEBUG] debug-file - load to the disk finished
+[2024-07-08T13:00:37.481] [DEBUG] debug-file - Module wanHarmony Collected Dependency: /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/oh_modules/.ohpm/@ohos+pulltorefresh@2.0.5/oh_modules/@ohos/pulltorefresh
+[2024-07-08T13:00:37.483] [DEBUG] debug-file - Module wanHarmony's total dependency: 1
+[2024-07-08T13:00:37.487] [DEBUG] debug-file - Module entry Collected Dependency: /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/oh_modules/.ohpm/@ohos+pulltorefresh@2.0.5/oh_modules/@ohos/pulltorefresh
+[2024-07-08T13:00:37.487] [DEBUG] debug-file - Module entry's total dependency: 1
+[2024-07-08T13:00:37.501] [DEBUG] debug-file - Configuration phase cost:1 s 77 ms 
+[2024-07-08T13:00:37.508] [DEBUG] debug-file - Configuration task cost before running: 1 s 136 ms 
+[2024-07-08T13:00:37.529] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.532] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.540] [DEBUG] debug-file - Executing task :entry:default@PreBuild
+[2024-07-08T13:00:37.585] [DEBUG] debug-file - Incremental task entry:default@PreBuild pre-execution cost: 21 ms .
+[2024-07-08T13:00:37.588] [DEBUG] debug-file - entry : default@PreBuild cost memory 0.20757293701171875
+[2024-07-08T13:00:37.594] [INFO] debug-file - UP-TO-DATE :entry:default@PreBuild...  
+[2024-07-08T13:00:37.608] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.608] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.611] [DEBUG] debug-file - Executing task :entry:default@GenerateMetadata
+[2024-07-08T13:00:37.619] [DEBUG] debug-file - Incremental task entry:default@GenerateMetadata pre-execution cost: 5 ms .
+[2024-07-08T13:00:37.626] [DEBUG] debug-file - entry : default@GenerateMetadata cost memory 0.116363525390625
+[2024-07-08T13:00:37.632] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateMetadata...  
+[2024-07-08T13:00:37.640] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.640] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.643] [DEBUG] debug-file - Executing task :entry:default@ConfigureCmake
+[2024-07-08T13:00:37.644] [DEBUG] debug-file - entry : default@ConfigureCmake cost memory 0.0128173828125
+[2024-07-08T13:00:37.645] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 273 ms 
+[2024-07-08T13:00:37.646] [INFO] debug-file - Finished :entry:default@ConfigureCmake... after 2 ms 
+[2024-07-08T13:00:37.652] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.653] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.655] [DEBUG] debug-file - Executing task :entry:default@MergeProfile
+[2024-07-08T13:00:37.658] [DEBUG] debug-file - Incremental task entry:default@MergeProfile pre-execution cost: 3 ms .
+[2024-07-08T13:00:37.658] [DEBUG] debug-file - entry : default@MergeProfile cost memory 0.0951080322265625
+[2024-07-08T13:00:37.660] [INFO] debug-file - UP-TO-DATE :entry:default@MergeProfile...  
+[2024-07-08T13:00:37.669] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.670] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.673] [DEBUG] debug-file - Executing task :entry:default@CreateBuildProfile
+[2024-07-08T13:00:37.680] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile pre-execution cost: 6 ms .
+[2024-07-08T13:00:37.680] [DEBUG] debug-file - entry : default@CreateBuildProfile cost memory 0.097503662109375
+[2024-07-08T13:00:37.684] [INFO] debug-file - UP-TO-DATE :entry:default@CreateBuildProfile...  
+[2024-07-08T13:00:37.693] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.693] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.697] [DEBUG] debug-file - Executing task :entry:default@PreCheckSyscap
+[2024-07-08T13:00:37.698] [DEBUG] debug-file - entry : default@PreCheckSyscap cost memory 0.012908935546875
+[2024-07-08T13:00:37.699] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 326 ms 
+[2024-07-08T13:00:37.701] [INFO] debug-file - Finished :entry:default@PreCheckSyscap... after 2 ms 
+[2024-07-08T13:00:37.707] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.708] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.720] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgContextInfo
+[2024-07-08T13:00:37.720] [DEBUG] debug-file - entry : default@GeneratePkgContextInfo cost memory 0.0225067138671875
+[2024-07-08T13:00:37.721] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 349 ms 
+[2024-07-08T13:00:37.721] [INFO] debug-file - Finished :entry:default@GeneratePkgContextInfo... after 1 ms 
+[2024-07-08T13:00:37.726] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.726] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.731] [DEBUG] debug-file - Executing task :entry:default@ProcessIntegratedHsp
+[2024-07-08T13:00:37.734] [DEBUG] debug-file - entry:default@ProcessIntegratedHsp is not up-to-date, since the output file '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/build/cache/default/integrated_hsp/integratedHspCache.json' does not exist.
+[2024-07-08T13:00:37.735] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp pre-execution cost: 3 ms .
+[2024-07-08T13:00:37.735] [DEBUG] debug-file - entry : default@ProcessIntegratedHsp cost memory 0.0814056396484375
+[2024-07-08T13:00:37.735] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 363 ms 
+[2024-07-08T13:00:37.737] [INFO] debug-file - Finished :entry:default@ProcessIntegratedHsp... after 5 ms 
+[2024-07-08T13:00:37.742] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.742] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.745] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithCmake
+[2024-07-08T13:00:37.745] [DEBUG] debug-file - entry : default@BuildNativeWithCmake cost memory 0.01369476318359375
+[2024-07-08T13:00:37.746] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 374 ms 
+[2024-07-08T13:00:37.746] [INFO] debug-file - Finished :entry:default@BuildNativeWithCmake... after 1 ms 
+[2024-07-08T13:00:37.750] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.751] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.754] [DEBUG] debug-file - Executing task :entry:default@MakePackInfo
+[2024-07-08T13:00:37.759] [DEBUG] debug-file - Incremental task entry:default@MakePackInfo pre-execution cost: 4 ms .
+[2024-07-08T13:00:37.759] [DEBUG] debug-file - entry : default@MakePackInfo cost memory 0.12892913818359375
+[2024-07-08T13:00:37.762] [INFO] debug-file - UP-TO-DATE :entry:default@MakePackInfo...  
+[2024-07-08T13:00:37.766] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.766] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.769] [DEBUG] debug-file - Executing task :entry:default@ProcessProfile
+[2024-07-08T13:00:37.770] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile pre-execution cost: 1 ms .
+[2024-07-08T13:00:37.770] [DEBUG] debug-file - entry : default@ProcessProfile cost memory 0.047332763671875
+[2024-07-08T13:00:37.771] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessProfile...  
+[2024-07-08T13:00:37.775] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.776] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.779] [DEBUG] debug-file - Executing task :entry:default@SyscapTransform
+[2024-07-08T13:00:37.784] [DEBUG] debug-file - entry:default@SyscapTransform is not up-to-date, since the output file '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/syscap/default/rpcid.sc' does not exist.
+[2024-07-08T13:00:37.784] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform pre-execution cost: 5 ms .
+[2024-07-08T13:00:37.785] [DEBUG] debug-file - entry : default@SyscapTransform cost memory 0.07714080810546875
+[2024-07-08T13:00:37.785] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 413 ms 
+[2024-07-08T13:00:37.786] [INFO] debug-file - Finished :entry:default@SyscapTransform... after 7 ms 
+[2024-07-08T13:00:37.791] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.791] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.798] [DEBUG] debug-file - Executing task :entry:default@ProcessRouterMap
+[2024-07-08T13:00:37.808] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap pre-execution cost: 6 ms .
+[2024-07-08T13:00:37.808] [DEBUG] debug-file - entry : default@ProcessRouterMap cost memory 0.2333221435546875
+[2024-07-08T13:00:37.812] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessRouterMap...  
+[2024-07-08T13:00:37.817] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.817] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.819] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithNinja
+[2024-07-08T13:00:37.822] [DEBUG] debug-file - entry : default@BuildNativeWithNinja cost memory 0.02742767333984375
+[2024-07-08T13:00:37.822] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 450 ms 
+[2024-07-08T13:00:37.822] [INFO] debug-file - Finished :entry:default@BuildNativeWithNinja... after 3 ms 
+[2024-07-08T13:00:37.828] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.828] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.829] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@ProcessResource
+[2024-07-08T13:00:37.841] [DEBUG] debug-file - Executing task :entry:default@ProcessResource
+[2024-07-08T13:00:37.843] [DEBUG] debug-file - Incremental task entry:default@ProcessResource pre-execution cost: 1 ms .
+[2024-07-08T13:00:37.843] [DEBUG] debug-file - entry : default@ProcessResource cost memory 0.09117889404296875
+[2024-07-08T13:00:37.851] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessResource...  
+[2024-07-08T13:00:37.858] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.860] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.870] [DEBUG] debug-file - Executing task :entry:default@GenerateLoaderJson
+[2024-07-08T13:00:37.909] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson pre-execution cost: 25 ms .
+[2024-07-08T13:00:37.910] [DEBUG] debug-file - entry : default@GenerateLoaderJson cost memory -5.6411895751953125
+[2024-07-08T13:00:37.924] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateLoaderJson...  
+[2024-07-08T13:00:37.933] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.933] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.943] [DEBUG] debug-file - Executing task :entry:default@ProcessLibs
+[2024-07-08T13:00:37.946] [DEBUG] debug-file - Incremental task entry:default@ProcessLibs pre-execution cost: 3 ms .
+[2024-07-08T13:00:37.946] [DEBUG] debug-file - entry : default@ProcessLibs cost memory 0.05695343017578125
+[2024-07-08T13:00:37.947] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessLibs...  
+[2024-07-08T13:00:37.954] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.954] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:37.955] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@CompileResource
+[2024-07-08T13:00:37.960] [DEBUG] debug-file - Executing task :entry:default@CompileResource
+[2024-07-08T13:00:37.986] [DEBUG] debug-file - Incremental task entry:default@CompileResource pre-execution cost: 23 ms .
+[2024-07-08T13:00:37.986] [DEBUG] debug-file - entry : default@CompileResource cost memory 0.6539764404296875
+[2024-07-08T13:00:37.992] [INFO] debug-file - UP-TO-DATE :entry:default@CompileResource...  
+[2024-07-08T13:00:37.996] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:37.996] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:38.001] [DEBUG] debug-file - Executing task :entry:default@DoNativeStrip
+[2024-07-08T13:00:38.002] [DEBUG] debug-file - Incremental task entry:default@DoNativeStrip pre-execution cost: 2 ms .
+[2024-07-08T13:00:38.002] [DEBUG] debug-file - entry : default@DoNativeStrip cost memory 0.0448455810546875
+[2024-07-08T13:00:38.003] [INFO] debug-file - UP-TO-DATE :entry:default@DoNativeStrip...  
+[2024-07-08T13:00:38.007] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:38.007] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:38.015] [DEBUG] debug-file - Executing task :entry:default@CompileArkTS
+[2024-07-08T13:00:38.053] [DEBUG] debug-file - entry:default@CompileArkTS is not up-to-date, since the input file '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/src/main/ets' has been changed.
+[2024-07-08T13:00:38.054] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS pre-execution cost: 29 ms .
+[2024-07-08T13:00:38.079] [DEBUG] debug-file - build config:
+[2024-07-08T13:00:38.079] [DEBUG] debug-file - {
+  moduleType: 'entry',
+  perf: 0,
+  targetName: '.default',
+  packageManagerType: 'ohpm',
+  localPropertiesPath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/local.properties',
+  isPreview: false,
+  isOhosTest: false,
+  buildMode: 'Debug',
+  watchMode: 'false',
+  aceProfilePath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/resources/base/profile',
+  etsLoaderPath: '/Applications/DevEco-Studio.app/Contents/sdk/HarmonyOS-NEXT-DB1/openharmony/ets/build-tools/ets-loader',
+  modulePath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry',
+  testFrameworkPar: {
+    testMode: undefined,
+    coveragePathFilter: undefined,
+    coverageMode: undefined
+  },
+  needCoverageInsert: false,
+  debugLine: false,
+  projectTopDir: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony',
+  compileSdkVersion: 12,
+  compatibleSdkVersion: 12,
+  bundleName: 'com.djw.wanharmony',
+  etsLoaderVersion: '5.0.0.25',
+  etsLoaderReleaseType: 'Beta1',
+  aotCompileMode: 'type',
+  apPath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/modules.ap',
+  entryModuleName: 'entry',
+  entryModuleVersion: '1.0.0',
+  entryPackageName: 'entry',
+  allModuleNameHash: '8dae479ca45c4b18f1e7f2b1aae3a54b',
+  externalApiPaths: [
+    '/Applications/DevEco-Studio.app/Contents/sdk/HarmonyOS-NEXT-DB1/hms/ets'
+  ],
+  compilerTypes: undefined,
+  isCrossplatform: false,
+  hvigorPluginFile: undefined,
+  buildGeneratedProfilePath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/generated/profile/default',
+  bundleType: 'app',
+  arkTSVersion: undefined,
+  apiVersion: 12,
+  needCompleteSourcesMap: false,
+  isFaMode: false,
+  strictMode: undefined,
+  buildDir: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build',
+  deviceTypes: [ 'phone', 'tablet', '2in1' ],
+  moduleDependencies: { dependency: {} },
+  projectDependencies: {
+    '@ohos/hamock': '1.0.0',
+    '@ohos/hypium': '1.0.18',
+    '@ohos/pulltorefresh': '^2.0.5',
+    dependency: {}
+  },
+  useNormalizedOHMUrl: false,
+  pkgContextInfo: undefined,
+  ohPackagePathMap: {},
+  dependencyAliasMap: {},
+  permission: { requestPermissions: [ [Object] ], definePermissions: undefined },
+  integratedHsp: false,
+  projectArkOption: undefined,
+  sourceMapDir: undefined,
+  branchElimination: false,
+  transformLib: undefined,
+  caseSensitiveCheck: false,
+  tsImportSendable: false,
+  resolveConflictMode: true,
+  depName2RootPath: {},
+  aceModuleJsonPath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/module.json',
+  appResource: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/ResourceTable.txt',
+  rawFileResource: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/resources/rawfile',
+  resourceTableHash: 'c8cc1025e88f19564657e4de3660ecf4',
+  runtimeOS: 'HarmonyOS',
+  sdkInfo: 'false:12:5.0.0.25:Beta1',
+  aceModuleRoot: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/src/main/ets',
+  compileMode: 'esmodule',
+  aceSuperVisualPath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/src/main/supervisual',
+  aceBuildJson: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/loader/default/loader.json',
+  cachePath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug',
+  aceModuleBuild: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/loader_out/default/ets',
+  supportChunks: true,
+  pkgNameToPkgBriefInfo: {
+    '@ohos/pulltorefresh': {
+      pkgRoot: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/oh_modules/.ohpm/@ohos+pulltorefresh@2.0.5/oh_modules/@ohos/pulltorefresh',
+      pkgName: '@ohos/pulltorefresh',
+      sourceRoots: undefined
+    },
+    entry: {
+      pkgRoot: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry',
+      originalSourceRoots: undefined,
+      sourceRoots: [Array],
+      pkgName: 'entry'
+    }
+  },
+  projectModel: {
+    '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/src/main': {
+      moduleName: 'entry',
+      modulePkgPath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry'
+    },
+    '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/src/ohosTest/ets': {
+      moduleName: 'entry_test',
+      modulePkgPath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry'
+    },
+    '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/src/ohosTest': {
+      moduleName: 'entry_test',
+      modulePkgPath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry'
+    },
+    '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry': {
+      moduleName: 'entry',
+      modulePkgPath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry'
+    },
+    '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony': {
+      moduleName: 'wanHarmony',
+      modulePkgPath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony'
+    }
+  },
+  pkgJsonFileHash: 'de8b534a1055fd0fd0d7ef394fe52b26',
+  allModulePaths: [ '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry' ],
+  routerMap: {},
+  obfuscationOptions: undefined,
+  mockParams: {
+    decorator: '@MockSetup',
+    packageName: '@ohos/hamock',
+    etsSourceRootPath: 'src/main/ets',
+    mockConfigPath: '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/src/mock/mock-config.json5',
+    mockConfigKey2ModuleInfo: {}
+  },
+  otherPaths: {
+    'entry/*': [ '../*', '../../../build/default/generated/profile/default/*' ]
+  },
+  collectImportersConfig: undefined
+}
+[2024-07-08T13:00:38.143] [DEBUG] debug-file - Compile arkts with external api path: /Applications/DevEco-Studio.app/Contents/sdk/HarmonyOS-NEXT-DB1/hms/ets
+[2024-07-08T13:00:38.147] [DEBUG] debug-file - default@CompileArkTS work[52] is submitted.
+[2024-07-08T13:00:38.153] [DEBUG] debug-file - default@CompileArkTS work[52] is pushed to ready queue.
+[2024-07-08T13:00:38.154] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2024-07-08T13:00:38.154] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2024-07-08T13:00:38.155] [DEBUG] debug-file - A work dispatched to worker[5] failed because unable to get work from ready queue.
+[2024-07-08T13:00:38.155] [DEBUG] debug-file - A work dispatched to worker[4] failed because unable to get work from ready queue.
+[2024-07-08T13:00:38.157] [DEBUG] debug-file - A work dispatched to worker[3] failed because unable to get work from ready queue.
+[2024-07-08T13:00:38.158] [DEBUG] debug-file - A work dispatched to worker[2] failed because unable to get work from ready queue.
+[2024-07-08T13:00:38.158] [DEBUG] debug-file - A work dispatched to worker[1] failed because unable to get work from ready queue.
+[2024-07-08T13:00:38.160] [DEBUG] debug-file - default@CompileArkTS work[52] has been dispatched to worker[0].
+[2024-07-08T13:00:38.161] [DEBUG] debug-file - default@CompileArkTS work[52] is dispatched.
+[2024-07-08T13:00:38.162] [DEBUG] debug-file - CopyResources startTime: 831274546191358
+[2024-07-08T13:00:38.163] [DEBUG] debug-file - default@CompileArkTS work[53] is submitted.
+[2024-07-08T13:00:38.169] [DEBUG] debug-file - default@CompileArkTS work[53] is pushed to ready queue.
+[2024-07-08T13:00:38.170] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2024-07-08T13:00:38.177] [DEBUG] debug-file - default@CompileArkTS work[53] has been dispatched to worker[6].
+[2024-07-08T13:00:38.182] [DEBUG] debug-file - default@CompileArkTS work[53] is dispatched.
+[2024-07-08T13:00:38.186] [DEBUG] debug-file - entry : default@CompileArkTS cost memory 1.3843231201171875
+[2024-07-08T13:00:38.201] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:38.203] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:38.216] [DEBUG] debug-file - Executing task :entry:default@BuildJS
+[2024-07-08T13:00:38.221] [DEBUG] debug-file - entry : default@BuildJS cost memory 0.09513092041015625
+[2024-07-08T13:00:38.221] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 849 ms 
+[2024-07-08T13:00:38.222] [INFO] debug-file - Finished :entry:default@BuildJS... after 6 ms 
+[2024-07-08T13:00:38.228] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:38.228] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:38.234] [DEBUG] debug-file - Executing task :entry:default@CacheNativeLibs
+[2024-07-08T13:00:38.236] [DEBUG] debug-file - Incremental task entry:default@CacheNativeLibs pre-execution cost: 2 ms .
+[2024-07-08T13:00:38.236] [DEBUG] debug-file - entry : default@CacheNativeLibs cost memory 0.05152130126953125
+[2024-07-08T13:00:38.237] [INFO] debug-file - UP-TO-DATE :entry:default@CacheNativeLibs...  
+[2024-07-08T13:00:41.436] [DEBUG] debug-file - CopyResources is end, endTime: 831277820025877
+[2024-07-08T13:00:41.436] [DEBUG] debug-file - default@CompileArkTS work[53] done.
+[2024-07-08T13:00:41.436] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2024-07-08T13:00:43.274] [INFO] debug-file - [33mWARN: [33mArkTS:WARN File: /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/src/main/ets/pages/WebPage.ets:5:1
+ It's not a recommended way to export struct with @Entry decorator, which may cause ACE Engine error in component preview mode.[39m
+
+[2024-07-08T13:00:43.274] [DEBUG] debug-file - Ark compile task finished.finished time is 831279658255653
+[2024-07-08T13:00:43.293] [DEBUG] debug-file - default@CompileArkTS work[52] done.
+[2024-07-08T13:00:43.297] [INFO] debug-file - Finished :entry:default@CompileArkTS... after 5 s 279 ms 
+[2024-07-08T13:00:43.301] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:43.301] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:43.304] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgModuleJson
+[2024-07-08T13:00:43.306] [DEBUG] debug-file - entry:default@GeneratePkgModuleJson is not up-to-date, since the output file '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/package/default/module.json' has been changed.
+[2024-07-08T13:00:43.306] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson pre-execution cost: 1 ms .
+[2024-07-08T13:00:43.307] [DEBUG] debug-file - entry : default@GeneratePkgModuleJson cost memory 0.06618499755859375
+[2024-07-08T13:00:43.307] [DEBUG] debug-file - runTaskFromQueue task cost before running: 6 s 935 ms 
+[2024-07-08T13:00:43.307] [INFO] debug-file - Finished :entry:default@GeneratePkgModuleJson... after 4 ms 
+[2024-07-08T13:00:43.313] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:43.313] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:43.326] [DEBUG] debug-file - Executing task :entry:default@PackageHap
+[2024-07-08T13:00:43.341] [DEBUG] debug-file - entry:default@PackageHap is not up-to-date, since the input file '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/loader_out/default/ets' has been changed.
+[2024-07-08T13:00:43.342] [DEBUG] debug-file - Incremental task entry:default@PackageHap pre-execution cost: 13 ms .
+[2024-07-08T13:00:43.348] [DEBUG] debug-file - Use tool [/Applications/DevEco-Studio.app/Contents/sdk/HarmonyOS-NEXT-DB1/openharmony/toolchains/lib/app_packing_tool.jar]
+ [
+  'java',
+  '-Dfile.encoding=utf-8',
+  '-jar',
+  '/Applications/DevEco-Studio.app/Contents/sdk/HarmonyOS-NEXT-DB1/openharmony/toolchains/lib/app_packing_tool.jar',
+  '--mode',
+  'hap',
+  '--force',
+  'true',
+  '--lib-path',
+  '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/stripped_native_libs/default',
+  '--json-path',
+  '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/package/default/module.json',
+  '--resources-path',
+  '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/resources',
+  '--index-path',
+  '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/resources.index',
+  '--pack-info-path',
+  '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/outputs/default/pack.info',
+  '--out-path',
+  '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/outputs/default/entry-default-unsigned.hap',
+  '--ets-path',
+  '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/loader_out/default/ets'
+]
+[2024-07-08T13:00:43.355] [DEBUG] debug-file - default@PackageHap work[54] is submitted.
+[2024-07-08T13:00:43.358] [DEBUG] debug-file - default@PackageHap work[54] is pushed to ready queue.
+[2024-07-08T13:00:43.359] [DEBUG] debug-file - default@PackageHap work[54] is not dispatched.
+[2024-07-08T13:00:43.365] [DEBUG] debug-file - entry : default@PackageHap cost memory 0.711639404296875
+[2024-07-08T13:00:43.394] [DEBUG] debug-file - default@PackageHap work[54] has been dispatched to worker[0].
+[2024-07-08T13:00:43.413] [DEBUG] debug-file - current process  memoryUsage: {
+  rss: 512212992,
+  heapTotal: 361394176,
+  heapUsed: 300786688,
+  external: 15376102,
+  arrayBuffers: 13367906
+} os memoryUsage :15.969161987304688
+[2024-07-08T13:00:43.460] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2024-07-08T13:00:43.461] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2024-07-08T13:00:43.461] [DEBUG] debug-file - A work dispatched to worker[5] failed because unable to get work from ready queue.
+[2024-07-08T13:00:43.462] [DEBUG] debug-file - A work dispatched to worker[4] failed because unable to get work from ready queue.
+[2024-07-08T13:00:43.462] [DEBUG] debug-file - A work dispatched to worker[3] failed because unable to get work from ready queue.
+[2024-07-08T13:00:43.462] [DEBUG] debug-file - A work dispatched to worker[2] failed because unable to get work from ready queue.
+[2024-07-08T13:00:43.462] [DEBUG] debug-file - A work dispatched to worker[1] failed because unable to get work from ready queue.
+[2024-07-08T13:00:43.462] [DEBUG] debug-file - A work dispatched to worker[0] failed because of worker busy.
+[2024-07-08T13:00:45.470] [DEBUG] debug-file - default@PackageHap work[54] done.
+[2024-07-08T13:00:45.473] [INFO] debug-file - Finished :entry:default@PackageHap... after 2 s 114 ms 
+[2024-07-08T13:00:45.478] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2024-07-08T13:00:45.479] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2024-07-08T13:00:45.484] [DEBUG] debug-file - Executing task :entry:default@SignHap
+[2024-07-08T13:00:45.485] [WARN] debug-file - Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/build-profile.json5.
+[2024-07-08T13:00:45.486] [DEBUG] debug-file - entry:default@SignHap is not up-to-date, since the input file '/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/outputs/default/entry-default-unsigned.hap' has been changed.
+[2024-07-08T13:00:45.487] [DEBUG] debug-file - Incremental task entry:default@SignHap pre-execution cost: 1 ms .
+[2024-07-08T13:00:45.487] [DEBUG] debug-file - entry : default@SignHap cost memory 0.10503387451171875
+[2024-07-08T13:00:45.487] [DEBUG] debug-file - runTaskFromQueue task cost before running: 9 s 115 ms 
+[2024-07-08T13:00:45.488] [INFO] debug-file - Finished :entry:default@SignHap... after 4 ms 
+[2024-07-08T13:00:45.492] [DEBUG] debug-file - Executing task :entry:assembleHap
+[2024-07-08T13:00:45.492] [DEBUG] debug-file - entry : assembleHap cost memory 0.01123046875
+[2024-07-08T13:00:45.493] [DEBUG] debug-file - runTaskFromQueue task cost before running: 9 s 121 ms 
+[2024-07-08T13:00:45.493] [INFO] debug-file - Finished :entry:assembleHap... after 1 ms 
+[2024-07-08T13:00:45.494] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@PreBuild is up-to-date.
+[2024-07-08T13:00:45.495] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateMetadata is up-to-date.
+[2024-07-08T13:00:45.496] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MergeProfile is up-to-date.
+[2024-07-08T13:00:45.496] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CreateBuildProfile is up-to-date.
+[2024-07-08T13:00:45.497] [DEBUG] debug-file - Update task entry:default@GeneratePkgContextInfo output file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/loader/default/pkgContextInfo.json cache.
+[2024-07-08T13:00:45.497] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo post-execution cost:1 ms .
+[2024-07-08T13:00:45.498] [DEBUG] debug-file - Update task entry:default@ProcessIntegratedHsp output file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/build/cache/default/integrated_hsp/integratedHspCache.json cache.
+[2024-07-08T13:00:45.499] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp post-execution cost:2 ms .
+[2024-07-08T13:00:45.499] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MakePackInfo is up-to-date.
+[2024-07-08T13:00:45.499] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessProfile is up-to-date.
+[2024-07-08T13:00:45.500] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:/Applications/DevEco-Studio.app/Contents/sdk/HarmonyOS-NEXT-DB1/openharmony/toolchains/syscap_tool cache by regenerate.
+[2024-07-08T13:00:45.500] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:/Applications/DevEco-Studio.app/Contents/sdk/HarmonyOS-NEXT-DB1/openharmony/ets/api/device-define cache by regenerate.
+[2024-07-08T13:00:45.502] [DEBUG] debug-file - Update task entry:default@SyscapTransform output file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/syscap/default/rpcid.sc cache.
+[2024-07-08T13:00:45.502] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform post-execution cost:4 ms .
+[2024-07-08T13:00:45.503] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessRouterMap is up-to-date.
+[2024-07-08T13:00:45.503] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessResource is up-to-date.
+[2024-07-08T13:00:45.503] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateLoaderJson is up-to-date.
+[2024-07-08T13:00:45.504] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessLibs is up-to-date.
+[2024-07-08T13:00:45.504] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CompileResource is up-to-date.
+[2024-07-08T13:00:45.504] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@DoNativeStrip is up-to-date.
+[2024-07-08T13:00:45.508] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/loader/default cache by regenerate.
+[2024-07-08T13:00:45.509] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/oh_modules/.ohpm/@ohos+pulltorefresh@2.0.5/oh_modules/@ohos/pulltorefresh/index.ets cache by regenerate.
+[2024-07-08T13:00:45.509] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/oh_modules/.ohpm/@ohos+pulltorefresh@2.0.5/oh_modules/@ohos/pulltorefresh/src/main/ets cache by regenerate.
+[2024-07-08T13:00:45.511] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/resources/rawfile cache by regenerate.
+[2024-07-08T13:00:45.512] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/ResourceTable.txt cache by regenerate.
+[2024-07-08T13:00:45.512] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/module.json cache by regenerate.
+[2024-07-08T13:00:45.513] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/resources/base/profile cache by regenerate.
+[2024-07-08T13:00:45.513] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/src/main/ets cache from map.
+[2024-07-08T13:00:45.514] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/generated/profile/default/BuildProfile.ets cache by regenerate.
+[2024-07-08T13:00:45.514] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/src/mock/mock-config.json5 cache by regenerate.
+[2024-07-08T13:00:45.514] [DEBUG] debug-file - Update task entry:default@CompileArkTS output file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/loader_out/default/ets cache.
+[2024-07-08T13:00:45.515] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS post-execution cost:11 ms .
+[2024-07-08T13:00:45.517] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/loader/default cache by regenerate.
+[2024-07-08T13:00:45.518] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/oh_modules/.ohpm/@ohos+pulltorefresh@2.0.5/oh_modules/@ohos/pulltorefresh/index.ets cache by regenerate.
+[2024-07-08T13:00:45.519] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/resources/rawfile cache by regenerate.
+[2024-07-08T13:00:45.521] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/ResourceTable.txt cache by regenerate.
+[2024-07-08T13:00:45.521] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/module.json cache by regenerate.
+[2024-07-08T13:00:45.521] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/resources/base/profile cache by regenerate.
+[2024-07-08T13:00:45.522] [DEBUG] debug-file - Update task entry:default@BuildJS output file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/loader_out/default/js cache.
+[2024-07-08T13:00:45.523] [DEBUG] debug-file - Incremental task entry:default@BuildJS post-execution cost:8 ms .
+[2024-07-08T13:00:45.523] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CacheNativeLibs is up-to-date.
+[2024-07-08T13:00:45.523] [DEBUG] debug-file - Update task entry:default@GeneratePkgModuleJson input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/module.json cache by regenerate.
+[2024-07-08T13:00:45.524] [DEBUG] debug-file - Update task entry:default@GeneratePkgModuleJson output file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/package/default/module.json cache.
+[2024-07-08T13:00:45.524] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson post-execution cost:1 ms .
+[2024-07-08T13:00:45.525] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/stripped_native_libs/default cache by regenerate.
+[2024-07-08T13:00:45.526] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/module.json cache by regenerate.
+[2024-07-08T13:00:45.526] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/resources cache by regenerate.
+[2024-07-08T13:00:45.533] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/res/default/resources.index cache by regenerate.
+[2024-07-08T13:00:45.533] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/outputs/default/pack.info cache by regenerate.
+[2024-07-08T13:00:45.534] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/intermediates/loader_out/default/ets cache from map.
+[2024-07-08T13:00:45.534] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/generated/profile/default/BuildProfile.ets cache by regenerate.
+[2024-07-08T13:00:45.535] [DEBUG] debug-file - Update task entry:default@PackageHap output file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/outputs/default/entry-default-unsigned.hap cache.
+[2024-07-08T13:00:45.536] [DEBUG] debug-file - Update task entry:default@PackageHap output file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/outputs/default/mapping/sourceMaps.map cache.
+[2024-07-08T13:00:45.536] [DEBUG] debug-file - Incremental task entry:default@PackageHap post-execution cost:13 ms .
+[2024-07-08T13:00:45.537] [DEBUG] debug-file - Update task entry:default@SignHap input file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/outputs/default/entry-default-unsigned.hap cache from map.
+[2024-07-08T13:00:45.537] [DEBUG] debug-file - Update task entry:default@SignHap output file:/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build/default/outputs/default/entry-default-signed.hap cache.
+[2024-07-08T13:00:45.537] [DEBUG] debug-file - Incremental task entry:default@SignHap post-execution cost:1 ms .
+[2024-07-08T15:24:24.208] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' }
+}
+[2024-07-08T15:24:24.219] [DEBUG] debug-file - Cache service initialization finished in 11 ms 
+[2024-07-08T15:24:24.235] [DEBUG] debug-file - hvigorfile, resolving /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/hvigorfile.ts
+[2024-07-08T15:24:24.259] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2024-07-08T15:24:24.260] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2024-07-08T15:24:24.271] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2024-07-08T15:24:24.271] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2024-07-08T15:24:24.271] [DEBUG] debug-file - Product 'default' build option: {}
+[2024-07-08T15:24:24.271] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2024-07-08T15:24:24.273] [DEBUG] debug-file - Product 'default' using build option: {
+  "debuggable": true
+} in this build.
+[2024-07-08T15:24:24.283] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2024-07-08T15:24:24.294] [DEBUG] debug-file - Sdk init in 11 ms 
+[2024-07-08T15:24:24.315] [DEBUG] debug-file - Project task initialization takes 19 ms 
+[2024-07-08T15:24:24.315] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2024-07-08T15:24:24.315] [DEBUG] debug-file - hvigorfile, no custom plugins were found in /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/hvigorfile.ts
+[2024-07-08T15:24:24.315] [DEBUG] debug-file - hvigorfile, resolve finished /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/hvigorfile.ts
+[2024-07-08T15:24:24.319] [DEBUG] debug-file - hvigorfile, resolving /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/hvigorfile.ts
+[2024-07-08T15:24:24.324] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2024-07-08T15:24:24.324] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2024-07-08T15:24:24.329] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2024-07-08T15:24:24.330] [DEBUG] debug-file - Target 'default' config: {}
+[2024-07-08T15:24:24.330] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2024-07-08T15:24:24.330] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "name": "debug"
+}
+[2024-07-08T15:24:24.330] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "name": "default"
+}
+[2024-07-08T15:24:24.330] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2024-07-08T15:24:24.332] [DEBUG] debug-file - Module 'entry' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "name": "debug"
+} in this build.
+[2024-07-08T15:24:24.337] [DEBUG] debug-file - Module entry task initialization takes 3 ms 
+[2024-07-08T15:24:24.337] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2024-07-08T15:24:24.337] [DEBUG] debug-file - hvigorfile, no custom plugins were found in /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/hvigorfile.ts
+[2024-07-08T15:24:24.337] [DEBUG] debug-file - hvigorfile, resolve finished /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/hvigorfile.ts
+[2024-07-08T15:24:24.433] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 95 ms 
+[2024-07-08T15:24:24.433] [DEBUG] debug-file - project has submodules:entry
+[2024-07-08T15:24:24.433] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2024-07-08T15:24:24.439] [DEBUG] debug-file - load to the disk finished
+[2024-07-08T15:24:24.441] [DEBUG] debug-file - Module wanHarmony Collected Dependency: /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/oh_modules/.ohpm/@ohos+pulltorefresh@2.0.5/oh_modules/@ohos/pulltorefresh
+[2024-07-08T15:24:24.441] [DEBUG] debug-file - Module wanHarmony's total dependency: 1
+[2024-07-08T15:24:24.443] [DEBUG] debug-file - Module entry Collected Dependency: /Users/dongjiawang/DevEcoStudioProjects/wanHarmony/oh_modules/.ohpm/@ohos+pulltorefresh@2.0.5/oh_modules/@ohos/pulltorefresh
+[2024-07-08T15:24:24.443] [DEBUG] debug-file - Module entry's total dependency: 1
+[2024-07-08T15:24:24.446] [DEBUG] debug-file - Configuration phase cost:218 ms 
+[2024-07-08T15:24:24.448] [DEBUG] debug-file - Configuration task cost before running: 252 ms 
+[2024-07-08T15:24:24.449] [DEBUG] debug-file - Executing task :entry:init
+[2024-07-08T15:24:24.450] [DEBUG] debug-file - entry : init cost memory 0.0125579833984375
+[2024-07-08T15:24:24.450] [DEBUG] debug-file - runTaskFromQueue task cost before running: 254 ms 
+[2024-07-08T15:24:24.451] [INFO] debug-file - Finished :entry:init... after 2 ms 
+[2024-07-08T15:24:24.451] [DEBUG] debug-file - Executing task ::init
+[2024-07-08T15:24:24.451] [DEBUG] debug-file - wanHarmony : init cost memory 0.0113677978515625
+[2024-07-08T15:24:24.452] [DEBUG] debug-file - runTaskFromQueue task cost before running: 256 ms 
+[2024-07-08T15:24:24.452] [INFO] debug-file - Finished ::init... after 1 ms 
+[2024-07-08T15:24:24.473] [DEBUG] debug-file - Module 'entry' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "name": "debug"
+} in this build.
+[2024-07-08T15:24:24.480] [DEBUG] debug-file - Module 'entry' target 'ohosTest' using build option: {
+  "debuggable": true,
+  "name": "default"
+} in this build.

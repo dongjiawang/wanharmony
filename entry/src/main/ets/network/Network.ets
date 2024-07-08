@@ -95,7 +95,7 @@ export default class Network {
     return Network.instance
   }
 
-  clearCookie() {
+  static clearCookie() {
     cookieJar.clear()
   }
 }
