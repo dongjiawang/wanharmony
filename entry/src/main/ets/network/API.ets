@@ -4,6 +4,7 @@ import Network from './Network';
 import { http } from '@kit.NetworkKit';
 import { HomeBannerData } from './model/Banner';
 import { User } from '../service/UserService';
+import { HotKey } from './model/Search';
 
 export default class API {
   /**
@@ -82,5 +83,23 @@ export default class API {
    */
   static async getCollectList(page: number): Promise<Response<ArticleList>> {
     return Network.requestSync(`/lg/collect/list/${page}/json`, http.RequestMethod.GET)
+  }
+
+  /**
+   * 获取搜索热词
+   * @returns
+   */
+  static async getSearchHotKey(): Promise<Response<HotKey>> {
+    return Network.requestSync("/hotkey/json", http.RequestMethod.GET)
+  }
+
+  /**
+   * 搜索
+   * @param keyword 关键字
+   * @param page 页码
+   * @returns
+   */
+  static async search(keyword: string, page: number): Promise<Response<ArticleList>> {
+    return Network.requestSync(`/article/query/${page}/json?k=${encodeURIComponent(keyword)}`, http.RequestMethod.POST)
   }
 }

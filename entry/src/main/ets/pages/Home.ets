@@ -6,9 +6,9 @@ import { BannerComponent } from './BannerComponent'
 import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
 import { TitleLayout } from '../widgets/TitleLayout'
 import { PullToRefresh } from '@ohos/pulltorefresh'
-import { AAID } from '@kit.PushKit'
-import { data } from '@kit.TelephonyKit'
 import CollectUtils from '../common/CollectUtils'
+import { router } from '@kit.ArkUI'
+import { SearchResultParams } from './SearchResult'
 
 declare type HomeItemData = Article | HomeBannerData[]
 
@@ -97,7 +97,13 @@ export struct Home {
         TitleLayout({
           title: this.title,
           showBack: false,
-          menuIcon: $r("app.media.ic_search")
+          menuIcon: $r("app.media.ic_search"),
+          onMenuClick: () => {
+            router.pushUrl({
+              url: "pages/SearchResult",
+              params: new SearchResultParams("安卓")
+            })
+          }
         })
         PullToRefresh({
           data: $data,

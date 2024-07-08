@@ -75,7 +75,6 @@ export default class UserService {
         promptAction.showDialog({
           title: "提示",
           message: "当前操作需要登录",
-          alignment: DialogAlignment.Top,
           buttons: [
             {
               text: "立即登录",
