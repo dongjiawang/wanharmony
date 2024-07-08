@@ -8,7 +8,6 @@ import { TitleLayout } from '../widgets/TitleLayout'
 import { PullToRefresh } from '@ohos/pulltorefresh'
 import CollectUtils from '../common/CollectUtils'
 import { router } from '@kit.ArkUI'
-import { SearchResultParams } from './SearchResult'
 
 declare type HomeItemData = Article | HomeBannerData[]
 
@@ -100,8 +99,7 @@ export struct Home {
           menuIcon: $r("app.media.ic_search"),
           onMenuClick: () => {
             router.pushUrl({
-              url: "pages/SearchResult",
-              params: new SearchResultParams("安卓")
+              url: "pages/SearchEntry",
             })
           }
         })

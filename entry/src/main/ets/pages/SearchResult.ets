@@ -72,7 +72,7 @@ struct SearchResult {
     .height("100%")
   }
 
-  aboutToAppear(): void {
+  aboutToAppear() {
     const param = router.getParams() as SearchResultParams
     this.keyword = param.keyword
     this.title = this.keyword

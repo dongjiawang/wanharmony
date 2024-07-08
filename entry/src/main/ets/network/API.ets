@@ -89,7 +89,7 @@ export default class API {
    * 获取搜索热词
    * @returns
    */
-  static async getSearchHotKey(): Promise<Response<HotKey>> {
+  static async getSearchHotKey(): Promise<Response<HotKey[]>> {
     return Network.requestSync("/hotkey/json", http.RequestMethod.GET)
   }
 

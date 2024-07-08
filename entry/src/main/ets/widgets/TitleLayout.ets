@@ -1,4 +1,5 @@
 import WindowUtils from '../common/WindowUtils'
+import { router } from '@kit.ArkUI'
 
 @Component
 export struct TitleLayout {
@@ -7,7 +8,9 @@ export struct TitleLayout {
   showBack: boolean = true
   menuIcon?: Resource
   onMenuClick?: () => void
-  onBack?: () => void
+  onBack: () => void = () => {
+    router.back()
+  }
 
   build() {
     Column() {
@@ -25,9 +28,7 @@ export struct TitleLayout {
               .fillColor($r("app.color.text_h1"))
               .objectFit(ImageFit.Contain)
               .onClick(() => {
-                if (this.onBack) {
-                  this.onBack()
-                }
+                this.onBack()
               })
           }
           Text(this.title)

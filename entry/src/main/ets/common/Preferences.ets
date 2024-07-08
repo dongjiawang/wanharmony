@@ -5,12 +5,13 @@ import { JSON } from '@kit.ArkTS';
 
 const PREFERENCES_NAME = "top.djw.wanharmony"
 const KEY_USER_INFO = "user_info"
+const KEY_SEARCH_HISTORY = "search_history"
 
 export default class Preferences {
   private static instance: Preferences
   private preferences: dataPreferences.Preferences
 
-  private  constructor(context: Context) {
+  private constructor(context: Context) {
     this.preferences = dataPreferences.getPreferencesSync(context, {
       name: PREFERENCES_NAME
     })
@@ -35,6 +36,7 @@ export default class Preferences {
     }
     return undefined
   }
+
   /**
    * 将用户信息保存到本地
    * @param user
@@ -45,6 +47,23 @@ export default class Preferences {
     } else {
       this.preferences.deleteSync(KEY_USER_INFO)
     }
+    this.preferences.flush()
+  }
+
+  /**
+   * 获取搜索历史
+   * @returns
+   */
+  getSearchHistory(): string[] {
+    return this.preferences.getSync(KEY_SEARCH_HISTORY, []) as string[]
+  }
+
+  /**
+   * 记录搜索
+   * @param historyKeys
+   */
+  putSearchHistory(historyKeys: string[]) {
+    this.preferences.putSync(KEY_SEARCH_HISTORY, historyKeys)
     this.preferences.flush()
   }
 }
