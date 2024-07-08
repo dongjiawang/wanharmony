@@ -1,20 +1,75 @@
+import webview from '@ohos.web.webview';
+import { router } from '@kit.ArkUI';
+import { TitleLayout } from '../widgets/TitleLayout';
+
 @Entry
 @Component
-struct WebPage {
-  @State message: string = 'Hello World';
+export struct WebPage {
+  private webController: webview.WebviewController = new webview.WebviewController()
+  private url: string = (router.getParams() as WebPageParams).url
+  @State title: string = "加载中"
+  @State progress: number = 0
+
+  onBackPress(): boolean | void {
+    if (this.webController.accessBackward()) {
+      this.webController.backward()
+      return true
+    }
+    return false
+  }
 
   build() {
-    RelativeContainer() {
-      Text(this.message)
-        .id('WebPageHelloWorld')
-        .fontSize(50)
-        .fontWeight(FontWeight.Bold)
-        .alignRules({
-          center: { anchor: '__container__', align: VerticalAlign.Center },
-          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+    Column() {
+      TitleLayout({
+        title: this.title,
+        onBack: () => {
+          if (this.webController.accessBackward()) {
+            this.webController.accessBackward()
+          } else {
+            router.back()
+          }
+        }
+      })
+      Stack({ alignContent: Alignment.Top }) {
+        Web({
+          src: this.url,
+          controller: this.webController
         })
+          .width("100%")
+          .height("100%")
+          .onlineImageAccess(true)
+          .javaScriptAccess(true)
+          .domStorageAccess(true)
+          .databaseAccess(true)
+          .mixedMode(MixedMode.All)
+          .onTitleReceive((event) => {
+            this.title = event?.title ?? ""
+          })
+          .onProgressChange((event) => {
+            this.progress = event?.newProgress ?? 0
+          })
+
+        if (this.progress !== 100) {
+          Progress({
+            value: this.progress,
+            total: 100,
+            type: ProgressType.Linear
+          })
+            .width("100%")
+        }
+      }
+      .width("100%")
+      .layoutWeight(1)
     }
-    .height('100%')
-    .width('100%')
+    .width("100%")
+    .height("100%")
+  }
+}
+
+export class WebPageParams {
+  url: string = ""
+
+  constructor(url: string) {
+    this.url = url
   }
 }
