@@ -8,6 +8,7 @@ import { TitleLayout } from '../widgets/TitleLayout'
 import { PullToRefresh } from '@ohos/pulltorefresh'
 import { AAID } from '@kit.PushKit'
 import { data } from '@kit.TelephonyKit'
+import CollectUtils from '../common/CollectUtils'
 
 declare type HomeItemData = Article | HomeBannerData[]
 
@@ -161,7 +162,10 @@ export struct Home {
             ArticleItemComponent({
               article: item as Article,
               onCollectClick: async (article: Article) => {
-                console.info("点击了收藏")
+                const success = await CollectUtils.collect(article)
+                if (success) {
+                  this.data = this.data.map(item => item)
+                }
               }
             })
           }

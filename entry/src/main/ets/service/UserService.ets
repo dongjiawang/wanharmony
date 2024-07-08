@@ -54,8 +54,8 @@ export default class UserService {
    * 判断是否登录用户
    * @returns
    */
-  isLogin(): boolean {
-    if (this.user) {
+  static isLogin(): boolean {
+    if (UserService.get().user) {
       return true
     }
     return false
@@ -66,31 +66,37 @@ export default class UserService {
    * @param onLogin
    */
   static checkLogin(onLogin?: () => void) {
-    if (UserService.get().isLogin()) {
+    if (UserService.isLogin()) {
       if (onLogin !== undefined) {
         onLogin()
       }
     } else {
-      promptAction.showDialog({
-        title: "提示",
-        message: "当前操作需要登录",
-        buttons: [
-          {
-            text: "立即登录",
-            color: $r("app.color.main")
-          },
-          {
-            text: "取消",
-            color: $r("app.color.text_h2")
-          }
-        ]
-      }).then((resp) => {
-        if (resp.index === 0) {
-          router.pushUrl({
-            url: "pages/Login"
+      try {
+        promptAction.showDialog({
+          title: "提示",
+          message: "当前操作需要登录",
+          alignment: DialogAlignment.Top,
+          buttons: [
+            {
+              text: "立即登录",
+              color: $r("app.color.main")
+            },
+            {
+              text: "取消",
+              color: $r("app.color.text_h2")
+            }
+          ]
+        })
+          .then((resp) => {
+            if (resp.index === 0) {
+              router.pushUrl({
+                url: "pages/Login"
+              })
+            }
           })
-        }
-      })
+      } catch (error) {
+        console.error(`showDialog args error code is ${error.code}, message is ${error.message}`)
+      }
     }
   }
 
@@ -99,7 +105,7 @@ export default class UserService {
    * @returns
    */
   async updateUser(): Promise<User> {
-    if (this.isLogin()) {
+    if (UserService.isLogin()) {
       const response = await API.getUserInfo()
       if (response.isSuccessWithData()) {
         const user = this.user!!

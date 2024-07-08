@@ -56,4 +56,31 @@ export default class API {
   static async getTopArticle(): Promise<Response<Article[]>> {
     return Network.requestSync("/article/top/json", http.RequestMethod.GET)
   }
+
+  /**
+   * 收藏文章
+   * @param id
+   * @returns
+   */
+  static async collect(id: number): Promise<Response<object>> {
+    return Network.requestSync(`/lg/collect/${id}/json`, http.RequestMethod.POST)
+  }
+
+  /**
+   * 取消收藏
+   * @param id
+   * @returns
+   */
+  static async unCollect(id: number): Promise<Response<object>> {
+    return Network.requestSync(`/lg/uncollect_originId/${id}/json`, http.RequestMethod.POST)
+  }
+
+  /**
+   * 收藏列表
+   * @param page
+   * @returns
+   */
+  static async getCollectList(page: number): Promise<Response<ArticleList>> {
+    return Network.requestSync(`/lg/collect/list/${page}/json`, http.RequestMethod.GET)
+  }
 }
