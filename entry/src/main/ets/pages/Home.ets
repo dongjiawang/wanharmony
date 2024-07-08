@@ -21,7 +21,6 @@ export struct Home {
 
   async aboutToAppear() {
     this.LoadData()
-    console.log("========================")
   }
 
   async LoadData() {
