@@ -103,11 +103,11 @@ export default class UserService {
    * 更新用户信息
    * @returns
    */
-  async updateUser(): Promise<User> {
+  static async updateUser(): Promise<User> {
     if (UserService.isLogin()) {
       const response = await API.getUserInfo()
       if (response.isSuccessWithData()) {
-        const user = this.user!!
+        const user = UserService.get().user!!
         user.coinCount = response.getDataOrThrow().coinCount
         user.level = response.getDataOrThrow().level
         user.rank = response.getDataOrThrow().rank
