@@ -155,6 +155,6 @@ export class SearchResultParams {
   keyword: string = ""
 
   constructor(keyword: string) {
-    this.keyword = this.keyword
+    this.keyword = keyword
   }
 }
