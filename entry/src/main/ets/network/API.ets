@@ -127,7 +127,7 @@ export default class API {
    * @param page
    * @returns
    */
-  static async getTreeArticleList(id: number, page: number): Promise<Response<ArticleList>> {
+  static async getTreeArticleList(cid: number, page: number): Promise<Response<ArticleList>> {
     return Network.requestSync(`/article/list/${page}/json?cid=${cid}`, http.RequestMethod.GET)
   }
 }

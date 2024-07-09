@@ -1,4 +1,4 @@
-import { PullToRefreshConfigurator } from '@ohos/pulltorefresh'
+import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh'
 import CollectUtils from '../common/CollectUtils'
 import Preferences from '../common/Preferences'
 import { Pair } from '../common/Struct'
@@ -6,7 +6,8 @@ import API from '../network/API'
 import { Article } from '../network/model/Article'
 import { Tree } from '../network/model/Tree'
 import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
-import { LoadState } from '../widgets/PageLoading'
+import { LoadState, PageLoading } from '../widgets/PageLoading'
+import { TitleLayout } from '../widgets/TitleLayout'
 
 @Entry
 @Component
@@ -28,7 +29,190 @@ export struct TreeTab {
   private hasMore: boolean = true
 
   build() {
+    Column() {
+      // 标题
+      TitleLayout({
+        title: this.title,
+        isJustShowStatusBar: true
+      })
+// 整个页面的加载模块
+      PageLoading({
+        loadState: this.loadStateTree,
+        showLoading: this.showLoading,
+        onReload: () => {
+          this.loadTreeData()
+        }
+      }) {
+        Column() {
+          if (this.selectTrees.first && this.selectTrees.second) {
+            Row() {
+              Text(`${this.selectTrees.first.name} > ${this.selectTrees.second.name}`)
+                .fontColor($r("app.color.text_h1"))
+                .fontSize(17)
+                .layoutWeight(1)
+              Text("切换")
+                .margin({ left: 12} )
+                .fontColor($r("app.color.main"))
+                .fontSize(16)
+            }
+              .width("100%")
+              .height(48)
+              .padding({ left: 16, right: 16 })
+              .alignItems(VerticalAlign.Center)
+              .onClick(() => {
+                if (this.showSelectLayer) {
+                  this.showSelectLayer = false
+                  this.selectTreeTemp = this.selectTrees.first
+                } else {
+                  this.showSelectLayer = true
+                  setTimeout(() => {
+                    // 滚动到选中的位置的前一个
+                    const selectedIndex1 = this.treeList.findIndex(item => item.id === this.selectTrees.first!.id)
+                    if (selectedIndex1 >= 0) {
+                      this.treeScroll1.scrollToIndex(Math.max(selectedIndex1 - 1, 0))
+                    }
+                    const selectedIndex2 =
+                      this.selectTrees.first!.children.findIndex(item => item.id === this.selectTrees.second!.id)
+                    if (selectedIndex2 >= 2) {
+                      this.treeScroll2.scrollToIndex(Math.max(selectedIndex2, 0))
+                    }
+                  }, 16)
+                }
+              })
+          }
 
+          Stack() {
+            PageLoading({
+              loadState: this.loadStateArticle,
+              showLoading: this.showLoading,
+              onReload: (() => {
+                this.loadArticleData()
+              })
+            }) {
+              Column() {
+                PullToRefresh({
+                  data: $data,
+                  scroller: this.articleScroller,
+                  refreshConfigurator: this.refreshConfig,
+                  customList: (() => {
+                    this.listViewBuilder()
+                  }),
+                  onLoadMore: (() => {
+                    return new Promise<string>((resolve, reject) => {
+                      if (this.hasMore) {
+                        this.loadArticleDataByPage(this.nextPage).then((data) => {
+                          if (data.length > 0) {
+                            this.nextPage++
+                            this.data = this.data.concat(data)
+                            resolve("加载成功")
+                          } else {
+                            this.hasMore = false
+                            resolve("没有更多了")
+                          }
+                        }, () => {
+                          reject("加载失败")
+                        })
+                      } else {
+                        resolve("没有更多了")
+                      }
+                    })
+                  })
+                })
+              }
+              .width("100%")
+              .height("100%")
+            }
+
+            if (this.showSelectLayer) {
+              Column() {
+                Row() {
+                  List({ scroller: this.treeScroll1 }) {
+                    ForEach(this.treeList, (tree: Tree, index: number) => {
+                      ListItem() {
+                        Text(tree.name)
+                          .width("100%")
+                          .padding({
+                            left: 12,
+                            top: 8,
+                            right: 12,
+                            bottom: 8
+                          })
+                          .fontColor(this.selectTreeTemp!.id === tree.id ? $r("app.color.main") :
+                          $r("app.color.text_h1"))
+                          .fontSize(14)
+                          .textAlign(TextAlign.Center)
+                          .backgroundColor((index % 2 === 0) ? Color.Transparent : $r("app.color.hot_key_bg"))
+                          .onClick(() => {
+                            this.selectTreeTemp = tree
+                          })
+                      }
+                    })
+                  }
+                  .width("50%")
+                  .height("100%")
+
+                  Line()
+                    .width(0.5)
+                    .height("100%")
+                    .backgroundColor($r("app.color.divider"))
+
+                  List({ scroller: this.treeScroll2 }) {
+                    ForEach(this.selectTreeTemp!.children, (tree: Tree, index: number) => {
+                      ListItem() {
+                        Text(tree.name)
+                          .width("100%")
+                          .padding({
+                            left: 12,
+                            top: 8,
+                            right: 12,
+                            bottom: 8
+                          })
+                          .fontColor(this.selectTrees.second!.id === tree.id ? $r("app.color.main") :
+                          $r("app.color.text_h1"))
+                          .fontSize(14)
+                          .textAlign(TextAlign.Center)
+                          .backgroundColor((index % 2 === 0) ? Color.Transparent : $r("app.color.hot_key_bg"))
+                          .onClick(() => {
+                            this.selectTrees = { first: this.selectTreeTemp, second: tree }
+                            Preferences.get(getContext())
+                              .putSelectedTreeId(this.selectTrees.first!.id, this.selectTrees.second!.id)
+                            this.showSelectLayer = false
+                            this.hasMore = true
+                            this.loadArticleData()
+                          })
+                      }
+                    })
+                  }
+                  .width("50%")
+                  .height("100%")
+                }
+                .width("100%")
+                .height("70%")
+                .backgroundColor($r("app.color.start_window_background"))
+              }
+              .width("100%")
+              .height("100%")
+              .backgroundColor($r("app.color.translucent_black_50"))
+              .onClick(() => {
+                this.showSelectLayer = false
+                this.selectTreeTemp = this.selectTrees.first
+              })
+            }
+          }
+          .width("100%")
+          .height("100%")
+        }
+        .width("100%")
+        .height("100%")
+      }
+    }
+    .width("100%")
+    .height("100%")
+  }
+
+  aboutToAppear(): void {
+    this.refreshConfig.setHasRefresh(false)
+    this.loadTreeData()
   }
 
   /**
@@ -56,7 +240,7 @@ export struct TreeTab {
           this.selectTrees = { first: this.treeList[0], second: this.treeList[0].children[0] }
         }
         this.loadStateTree = LoadState.SUCCESS
-        this.loadTreeData()
+        this.loadArticleData()
       } else {
         this.loadStateTree = LoadState.EMPTY
       }

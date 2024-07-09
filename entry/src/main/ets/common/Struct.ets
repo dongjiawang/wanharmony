@@ -1,4 +1,4 @@
-export type Pair<T, U> = {
-  first: T,
-  second: U
+export interface Pair<T, U> {
+  first: T;
+  second: U;
 }
