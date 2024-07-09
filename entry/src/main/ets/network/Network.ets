@@ -28,7 +28,7 @@ export default class Network {
    * @param extraData 返回数据
    * @returns Promise 回调
    */
-  private  async requestSync<T>(path: string, method: http.RequestMethod, extraData?: object): Promise<Response<T>> {
+  private async requestSync<T>(path: string, method: http.RequestMethod, extraData?: object): Promise<Response<T>> {
     return new Promise<Response<T>>((resolve, reject) => {
       const headers = new Headers()
       const url = BASE_URL + path
@@ -57,29 +57,34 @@ export default class Network {
         },
         (err, data) => {
           const response = new Response<T>()
-          if (!err && data.responseCode === 200) {
+          if (err) {
+            // 处理请求过程中出现的错误
+            response.errorCode = -1
+            response.errorMsg = err.message
+            reject(response)
+            hilog.error(0, TAG, `request failed, path：${path}, error: ${JSON.stringify(err, undefined, undefined)}`)
+          } else if (data.responseCode === 200) {
             cookieJar.saveFromResponse(uri, CookieUtils.parseHttpRequestCookies(data.cookies))
             if (data.resultType === http.HttpDataType.STRING) {
               const result: Response<T> = JSON.parse(data.result as string) as Response<T>
               response.errorCode = result.errorCode
               response.errorMsg = result.errorMsg
               response.data = result.data
+              resolve(response)
             } else if (data.resultType === http.HttpDataType.OBJECT) {
               const result = data.result as Response<T>
               response.errorCode = result.errorCode
               response.errorMsg = result.errorMsg
               response.data = result.data
-            } else {
-              response.errorCode = -1
-              response.errorMsg = `不支持的数据类型: ${data.resultType}`
+              resolve(response)
             }
-            resolve(response)
             hilog.info(0, TAG, `请求成功，接口：${path}, result:${JSON.stringify(response, undefined, undefined)}`)
           } else {
-            response.errorCode = data.responseCode ?? -1
-            response.errorMsg = err.message
-            reject(response)
-            hilog.error(0, TAG, `request failed, path：${path}, error: ${JSON.stringify(err, undefined, undefined)}`)
+            // 处理其他响应码
+            response.errorCode = data.responseCode
+            response.errorMsg = `HTTP ${data.responseCode} error: ${data.result}`
+            resolve(response)
+            hilog.error(0, TAG, `请求失败，接口：${path}, errorCode: ${data.responseCode}, errorMsg: ${data.result}`)
           }
           // 当该请求使用完毕时，开发者务必调用destroy方法主动销毁该JavaScript Object。
           httpRequest.destroy()
