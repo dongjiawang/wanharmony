@@ -2,6 +2,7 @@ import OHPermission from "../common/OHPermission"
 import WindowUtils from '../common/WindowUtils'
 import { Home } from './Home'
 import { Square } from "./Square"
+import { TreeTab } from "./TreeTab"
 
 @Entry
 @Component
@@ -24,7 +25,7 @@ struct Index {
           }.tabBar(this.tabBuilder("广场", 1, $r("app.media.ic_tab_discover_fill"), $r("app.media.ic_tab_discover")))
 
           TabContent() {
-            Text("体系")
+            TreeTab()
           }.tabBar(this.tabBuilder("体系", 2, $r("app.media.ic_tab_tree_fill"), $r("app.media.ic_tab_tree")))
 
           TabContent() {

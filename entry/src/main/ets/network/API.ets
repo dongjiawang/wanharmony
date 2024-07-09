@@ -5,6 +5,7 @@ import { http } from '@kit.NetworkKit';
 import { HomeBannerData } from './model/Banner';
 import { User } from '../service/UserService';
 import { HotKey } from './model/Search';
+import { Tree } from './model/Tree';
 
 export default class API {
   /**
@@ -110,5 +111,23 @@ export default class API {
    */
   static async getSquareArticleList(page: number): Promise<Response<ArticleList>> {
     return Network.requestSync(`/user_article/list/${page}/json`, http.RequestMethod.GET)
+  }
+
+  /**
+   * 获取体系列表
+   * @returns
+   */
+  static async getTree(): Promise<Response<Tree[]>> {
+    return Network.requestSync("/tree/json", http.RequestMethod.GET)
+  }
+
+  /**
+   * 获取指定体系的文章列表
+   * @param id
+   * @param page
+   * @returns
+   */
+  static async getTreeArticleList(id: number, page: number): Promise<Response<ArticleList>> {
+    return Network.requestSync(`/article/list/${page}/json?cid=${cid}`, http.RequestMethod.GET)
   }
 }
