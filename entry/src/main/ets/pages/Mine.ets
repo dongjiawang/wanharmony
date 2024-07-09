@@ -30,7 +30,7 @@ export struct Mine {
       this.isLogin = true
       this.userInfo = {
         name: user.nickname,
-        icon: user.icon,
+        icon: user.icon.length > 0 ? user.icon : "https://www.wanandroid.com/resources/image/pc/logo.png",
         level: user.level,
         rank: user.rank,
         point: user.coinCount.toString()
@@ -52,9 +52,12 @@ export struct Mine {
         })
 
         Column() {
-          Image(this.isLogin ? $r(this.userInfo.icon) : $r("app.media.harmony_os"))
+          Image(this.isLogin ? this.userInfo.icon : $r("app.media.harmony_os"))
             .width(100)
             .height(100)
+            .borderRadius(50)
+            .borderWidth(2)
+            .borderColor($r("app.color.main"))
 
           Text(this.userInfo.name)
             .fontColor($r("app.color.text_h1"))
@@ -128,14 +131,13 @@ export struct Mine {
         }
         .width("100%")
         .height(50)
-        .margin({ top: 50 })
         .alignItems(VerticalAlign.Center)
         .padding({ left: 16, right: 16 })
         .backgroundColor($r("app.color.white"))
         .onClick(() => {
           UserService.checkLogin(() => {
             router.pushUrl({
-              url: "pages/Login"
+              url: "pages/CollectList"
             })
           })
         })

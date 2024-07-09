@@ -5,6 +5,7 @@
     "pages/Login",
     "pages/SearchEntry",
     "pages/SearchResult",
-    "pages/Register"
+    "pages/Register",
+    "pages/CollectList"
   ]
 }

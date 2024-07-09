@@ -1,16 +1,17 @@
-import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh'
-import CollectUtils from '../common/CollectUtils'
-import API from '../network/API'
-import { Article } from '../network/model/Article'
-import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
-import { LoadState, PageLoading } from '../widgets/PageLoading'
-import { TitleLayout } from '../widgets/TitleLayout'
+import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh';
+import API from '../network/API';
+import { Article } from '../network/model/Article';
+import { LoadState, PageLoading } from '../widgets/PageLoading';
+import { ArticleItemComponent } from '../widgets/ArticleItemComponent';
+import CollectUtils from '../common/CollectUtils';
+import { TitleLayout } from '../widgets/TitleLayout';
 
+@Entry
 @Component
-export struct Square {
+struct CollectList {
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
-  @State title: string = "广场"
+  @State title: string = '我的收藏';
   @State data: Article[] = []
   private scroller: Scroller = new Scroller()
   private refreshConfig = new PullToRefreshConfigurator()
@@ -20,16 +21,15 @@ export struct Square {
   build() {
     Column() {
       TitleLayout({
-        title: this.title,
-        showBack: false
+        title: this.title
       })
 
       PageLoading({
         loadState: this.loadState,
         showLoading: this.showLoading,
-        onReload: () => {
+        onReload: (() => {
           this.loadData()
-        }
+        })
       }) {
         Column() {
           PullToRefresh({
@@ -57,7 +57,6 @@ export struct Square {
                     if (data.length > 0) {
                       this.nextPage++
                       this.data = this.data.concat(data)
-                      resolve("加载成功")
                     } else {
                       this.hasMore = false
                       resolve("没有更多了")
@@ -99,9 +98,12 @@ export struct Square {
   }
 
   private async loadDataByPage(page: number): Promise<Article[]> {
-    const response = await API.getSquareArticleList(page)
+    const response = await API.getCollectList(page)
     if (response.isSuccessWithData()) {
       const list = response.getDataOrThrow().datas
+      list.forEach((item) => {
+        item.collect = true
+      })
       return Promise.resolve(list)
     } else {
       return Promise.reject()
@@ -110,15 +112,20 @@ export struct Square {
 
   @Builder
   private listViewBuilder() {
-    List({ scroller: this.scroller }) {
+    List() {
       ForEach(this.data, (item: Article) => {
         ListItem() {
           ArticleItemComponent({
             article: item,
             onCollectClick: ((article: Article) => {
-              CollectUtils.collect(article).then((success) => {
+              CollectUtils.collect(article, article.originId).then((success) => {
                 if (success) {
-                  this.data = this.data.map(item => item)
+                  const existIndex = this.data.findIndex((item) => {
+                    return item.id === article.id
+                  })
+                  if (existIndex >= 0) {
+                    this.data.splice(existIndex, 1)
+                  }
                 }
               })
             })
