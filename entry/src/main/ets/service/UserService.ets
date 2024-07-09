@@ -125,9 +125,9 @@ export default class UserService {
    * 添加用户信息监听
    * @param observer
    */
-  addUserObserver(observer: (user?: User) => void) {
-    if (!this.userObservers.includes(observer)) {
-      this.userObservers.push(observer)
+  static addUserObserver(observer: (user?: User) => void) {
+    if (!UserService.get().userObservers.includes(observer)) {
+      UserService.get().userObservers.push(observer)
     }
   }
 
@@ -135,10 +135,10 @@ export default class UserService {
    * 移除用户信息监听
    * @param observer
    */
-  removeUserObserver(observer: (user?: User) => void) {
-    const index = this.userObservers.indexOf(observer)
+  static removeUserObserver(observer: (user?: User) => void) {
+    const index = UserService.get().userObservers.indexOf(observer)
     if (index >= 0) {
-      this.userObservers.splice(index, 1)
+      UserService.get().userObservers.splice(index, 1)
     }
   }
 

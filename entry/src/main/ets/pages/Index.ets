@@ -1,6 +1,7 @@
 import OHPermission from "../common/OHPermission"
 import WindowUtils from '../common/WindowUtils'
 import { Home } from './Home'
+import { Mine } from './Mine'
 import { Square } from "./Square"
 import { TreeTab } from "./TreeTab"
 import { Wechat } from './Wechat'
@@ -34,7 +35,7 @@ struct Index {
           }.tabBar(this.tabBuilder("公众号", 3, $r("app.media.ic_tab_wechat_fill"), $r("app.media.ic_tab_wechat")))
 
           TabContent() {
-            Text("我的")
+            Mine()
           }.tabBar(this.tabBuilder("我的", 4, $r("app.media.ic_tab_my_fill"), $r("app.media.ic_tab_my")))
         }
         .layoutWeight(1)
