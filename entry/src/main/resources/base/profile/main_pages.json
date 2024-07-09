@@ -4,8 +4,6 @@
     "pages/WebPage",
     "pages/Login",
     "pages/SearchEntry",
-    "pages/SearchResult",
-    "pages/Square",
-    "pages/TreeTab"
+    "pages/SearchResult"
   ]
 }

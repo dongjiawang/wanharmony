@@ -10,7 +10,6 @@ import { LoadState, PageLoading } from '../widgets/PageLoading'
 import { TitleLayout } from '../widgets/TitleLayout'
 import { hilog } from '@kit.PerformanceAnalysisKit'
 
-@Entry
 @Component
 export struct TreeTab {
   @State loadStateTree: LoadState = LoadState.LOADING

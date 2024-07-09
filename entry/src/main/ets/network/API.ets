@@ -6,6 +6,7 @@ import { HomeBannerData } from './model/Banner';
 import { User } from '../service/UserService';
 import { HotKey } from './model/Search';
 import { Tree } from './model/Tree';
+import { WeChatAuthor } from './model/WeChat';
 
 export default class API {
   /**
@@ -129,5 +130,23 @@ export default class API {
    */
   static async getTreeArticleList(cid: number, page: number): Promise<Response<ArticleList>> {
     return Network.requestSync(`/article/list/${page}/json?cid=${cid}`, http.RequestMethod.GET)
+  }
+
+  /**
+   * 获取微信公众号列表
+   * @returns
+   */
+  static async getWechatAuthorList(): Promise<Response<WeChatAuthor[]>> {
+    return Network.requestSync("/wxarticle/chapters/json", http.RequestMethod.GET)
+  }
+
+  /**
+   * 获取指定公众号文章列表
+   * @param id 公众号 id
+   * @param page 页码
+   * @returns
+   */
+  static async getWechatArticleList(id: number, page: number): Promise<Response<ArticleList>> {
+    return Network.requestSync(`/wxarticle/list/${id}/${page}/json`, http.RequestMethod.GET)
   }
 }

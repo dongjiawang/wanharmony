@@ -6,7 +6,6 @@ import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
 import { LoadState, PageLoading } from '../widgets/PageLoading'
 import { TitleLayout } from '../widgets/TitleLayout'
 
-@Entry
 @Component
 export struct Square {
   @State loadState: LoadState = LoadState.LOADING

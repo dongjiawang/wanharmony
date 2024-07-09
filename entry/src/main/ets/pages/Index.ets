@@ -3,6 +3,7 @@ import WindowUtils from '../common/WindowUtils'
 import { Home } from './Home'
 import { Square } from "./Square"
 import { TreeTab } from "./TreeTab"
+import { Wechat } from './Wechat'
 
 @Entry
 @Component
@@ -29,7 +30,7 @@ struct Index {
           }.tabBar(this.tabBuilder("体系", 2, $r("app.media.ic_tab_tree_fill"), $r("app.media.ic_tab_tree")))
 
           TabContent() {
-            Text("公众号")
+            Wechat()
           }.tabBar(this.tabBuilder("公众号", 3, $r("app.media.ic_tab_wechat_fill"), $r("app.media.ic_tab_wechat")))
 
           TabContent() {
