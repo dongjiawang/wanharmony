@@ -28,6 +28,17 @@ export default class API {
   }
 
   /**
+   * 注册用户
+   * @param username 用户名
+   * @param password 密码
+   * @param repassword 确认密码
+   * @returns
+   */
+  static async register(username: string, password: string, repassword: string): Promise<Response<User>> {
+    return Network.requestSync(`/user/register?username=${username}&password=${password}&repassword=${repassword}`, http.RequestMethod.POST)
+  }
+
+  /**
    * 获取用户信息
    * @returns
    */
