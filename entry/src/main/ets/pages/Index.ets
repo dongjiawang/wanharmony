@@ -1,6 +1,7 @@
 import OHPermission from "../common/OHPermission"
 import WindowUtils from '../common/WindowUtils'
 import { Home } from './Home'
+import { Square } from "./Square"
 
 @Entry
 @Component
@@ -19,7 +20,7 @@ struct Index {
           }.tabBar(this.tabBuilder("首页", 0, $r("app.media.ic_tab_home_fill"), $r("app.media.ic_tab_home")))
 
           TabContent() {
-            Text("广场")
+            Square()
           }.tabBar(this.tabBuilder("广场", 1, $r("app.media.ic_tab_discover_fill"), $r("app.media.ic_tab_discover")))
 
           TabContent() {

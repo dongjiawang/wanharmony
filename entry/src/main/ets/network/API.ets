@@ -102,4 +102,13 @@ export default class API {
   static async search(keyword: string, page: number): Promise<Response<ArticleList>> {
     return Network.requestSync(`/article/query/${page}/json?k=${encodeURIComponent(keyword)}`, http.RequestMethod.POST)
   }
+
+  /**
+   * 获取广场数据
+   * @param page 页码
+   * @returns
+   */
+  static async getSquareArticleList(page: number): Promise<Response<ArticleList>> {
+    return Network.requestSync(`/user_article/list/${page}/json`, http.RequestMethod.GET)
+  }
 }
