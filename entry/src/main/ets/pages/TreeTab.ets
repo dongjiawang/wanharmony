@@ -8,6 +8,7 @@ import { Tree } from '../network/model/Tree'
 import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
 import { LoadState, PageLoading } from '../widgets/PageLoading'
 import { TitleLayout } from '../widgets/TitleLayout'
+import { hilog } from '@kit.PerformanceAnalysisKit'
 
 @Entry
 @Component
@@ -30,12 +31,12 @@ export struct TreeTab {
 
   build() {
     Column() {
-      // 标题
+      // 标题不需要显示
       TitleLayout({
         title: this.title,
         isJustShowStatusBar: true
       })
-// 整个页面的加载模块
+      // 整个页面的加载模块
       PageLoading({
         loadState: this.loadStateTree,
         showLoading: this.showLoading,
@@ -44,44 +45,46 @@ export struct TreeTab {
         }
       }) {
         Column() {
-          if (this.selectTrees.first && this.selectTrees.second) {
+          if (this.selectTrees.first && this.selectTrees.second) { // 如果存在选中的体系，需要显示在顶部，同时有点击方法，点击展开体系列表
             Row() {
               Text(`${this.selectTrees.first.name} > ${this.selectTrees.second.name}`)
                 .fontColor($r("app.color.text_h1"))
                 .fontSize(17)
                 .layoutWeight(1)
               Text("切换")
-                .margin({ left: 12} )
+                .margin({ left: 12 })
                 .fontColor($r("app.color.main"))
                 .fontSize(16)
             }
-              .width("100%")
-              .height(48)
-              .padding({ left: 16, right: 16 })
-              .alignItems(VerticalAlign.Center)
-              .onClick(() => {
-                if (this.showSelectLayer) {
-                  this.showSelectLayer = false
-                  this.selectTreeTemp = this.selectTrees.first
-                } else {
-                  this.showSelectLayer = true
-                  setTimeout(() => {
-                    // 滚动到选中的位置的前一个
-                    const selectedIndex1 = this.treeList.findIndex(item => item.id === this.selectTrees.first!.id)
-                    if (selectedIndex1 >= 0) {
-                      this.treeScroll1.scrollToIndex(Math.max(selectedIndex1 - 1, 0))
-                    }
-                    const selectedIndex2 =
-                      this.selectTrees.first!.children.findIndex(item => item.id === this.selectTrees.second!.id)
-                    if (selectedIndex2 >= 2) {
-                      this.treeScroll2.scrollToIndex(Math.max(selectedIndex2, 0))
-                    }
-                  }, 16)
-                }
-              })
+            .width("100%")
+            .height(48)
+            .padding({ left: 16, right: 16 })
+            .alignItems(VerticalAlign.Center)
+            .onClick(() => {
+              if (this.showSelectLayer) {
+                this.showSelectLayer = false
+                this.selectTreeTemp = this.selectTrees.first
+              } else {
+                this.showSelectLayer = true
+                setTimeout(() => {
+                  // 滚动到选中的位置的前一个
+                  const selectedIndex1 = this.treeList.findIndex(item => item.id === this.selectTrees.first!.id)
+                  if (selectedIndex1 >= 0) {
+                    this.treeScroll1.scrollToIndex(Math.max(selectedIndex1 - 1, 0))
+                  }
+                  const selectedIndex2 =
+                    this.selectTrees.first!.children.findIndex(item => item.id === this.selectTrees.second!.id)
+                  if (selectedIndex2 >= 2) {
+                    this.treeScroll2.scrollToIndex(Math.max(selectedIndex2, 0))
+                  }
+                }, 16)
+              }
+            })
           }
 
+          //底层的文章列表
           Stack() {
+            // 文章列表加载模块
             PageLoading({
               loadState: this.loadStateArticle,
               showLoading: this.showLoading,
@@ -90,6 +93,7 @@ export struct TreeTab {
               })
             }) {
               Column() {
+                // 文章列表
                 PullToRefresh({
                   data: $data,
                   scroller: this.articleScroller,
@@ -123,8 +127,10 @@ export struct TreeTab {
               .height("100%")
             }
 
+            // 如果显示体系列表状态
             if (this.showSelectLayer) {
               Column() {
+                // 一级体系列表
                 Row() {
                   List({ scroller: this.treeScroll1 }) {
                     ForEach(this.treeList, (tree: Tree, index: number) => {
@@ -143,6 +149,7 @@ export struct TreeTab {
                           .textAlign(TextAlign.Center)
                           .backgroundColor((index % 2 === 0) ? Color.Transparent : $r("app.color.hot_key_bg"))
                           .onClick(() => {
+                            // 选中一级的内容，会更新二级对应的列表数据
                             this.selectTreeTemp = tree
                           })
                       }
@@ -155,7 +162,7 @@ export struct TreeTab {
                     .width(0.5)
                     .height("100%")
                     .backgroundColor($r("app.color.divider"))
-
+                  // 二级体系列表
                   List({ scroller: this.treeScroll2 }) {
                     ForEach(this.selectTreeTemp!.children, (tree: Tree, index: number) => {
                       ListItem() {
@@ -173,6 +180,7 @@ export struct TreeTab {
                           .textAlign(TextAlign.Center)
                           .backgroundColor((index % 2 === 0) ? Color.Transparent : $r("app.color.hot_key_bg"))
                           .onClick(() => {
+                            // 选中二级体系，需要隐藏体系选择，并且同时刷新文章列表
                             this.selectTrees = { first: this.selectTreeTemp, second: tree }
                             Preferences.get(getContext())
                               .putSelectedTreeId(this.selectTrees.first!.id, this.selectTrees.second!.id)
@@ -225,12 +233,8 @@ export struct TreeTab {
       if (response.getDataOrThrow().length > 0) {
         this.treeList = response.getDataOrThrow()
         const selectedIds = Preferences.get(getContext()).getSelectedTreeId()
-        const selectedTree1 = this.treeList.find((item) => {
-          item.id === selectedIds.first
-        })
-        const selectedTree2 = selectedTree1?.children.find((item) => {
-          item.id === selectedIds.second
-        })
+        const selectedTree1 = this.treeList.find((item) => item.id === selectedIds.first)
+        const selectedTree2 = selectedTree1?.children.find((item) => item.id === selectedIds.second)
 
         if (selectedTree1 !== undefined && selectedTree2 !== undefined) {
           this.selectTreeTemp = selectedTree1
