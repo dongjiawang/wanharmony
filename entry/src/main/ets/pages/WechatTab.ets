@@ -36,36 +36,38 @@ export struct WechatTab {
             onLoadMore: (() => {
               return new Promise<string>((resolve, reject) => {
                 if (this.hasMore) {
-                   this.loadDataByPage(this.nextPage).then((data) => {
-                     if (data.length > 0) {
-                       this.nextPage++
-                       this.data = this.data.concat(data)
-                       resolve("加载成功")
-                     } else {
-                       this.hasMore = false
-                       resolve("没有更多了")
-                     }
-                   }, () => {
-                     reject("加载失败")
-                   })
-                } else {}
-                resolve("没有更多了")
+                  this.loadDataByPage(this.nextPage).then((data) => {
+                    if (data.length > 0) {
+                      this.nextPage++
+                      this.data = this.data.concat(data)
+                      resolve("加载成功")
+                    } else {
+                      this.hasMore = false
+                      resolve("没有更多了")
+                    }
+                  }, () => {
+                    reject("加载失败")
+                  })
+                } else {
+                  resolve("没有更多了")
+                }
               })
             })
           })
         }
-          .width("100%")
-          .height("100%")
+        .width("100%")
+        .height("100%")
       }
     }
-      .width("100%")
-      .height("100%")
+    .width("100%")
+    .height("100%")
   }
 
   aboutToAppear(): void {
     this.refreshConfig.setHasRefresh(false)
     this.loadData()
   }
+
   private loadData() {
     if (this.authorId) {
       this.loadState = LoadState.LOADING
@@ -98,7 +100,9 @@ export struct WechatTab {
   private listViewBuilder() {
     List() {
       ForEach(this.data, (item: Article) => {
-        ListItem() {}
+        ListItem() {
+        }
+
         ArticleItemComponent({
           article: item,
           onCollectClick: ((article: Article) => {
@@ -111,15 +115,15 @@ export struct WechatTab {
         })
       })
     }
-      .width("100%")
-      .height("100%")
-      .listDirection(Axis.Vertical)
-      .divider({
-        strokeWidth: 0.5,
-        color: $r("app.color.divider"),
-        startMargin: 16,
-        endMargin: 16
-      })
-      .edgeEffect(EdgeEffect.None)
+    .width("100%")
+    .height("100%")
+    .listDirection(Axis.Vertical)
+    .divider({
+      strokeWidth: 0.5,
+      color: $r("app.color.divider"),
+      startMargin: 16,
+      endMargin: 16
+    })
+    .edgeEffect(EdgeEffect.None)
   }
 }
