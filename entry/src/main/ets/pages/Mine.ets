@@ -52,7 +52,7 @@ export struct Mine {
         })
 
         Column() {
-          Image(this.isLogin ? this.userInfo.icon : $r("app.media.harmony_os"))
+          Image(this.isLogin ? this.userInfo.icon : $r("app.media.logo"))
             .width(100)
             .height(100)
             .borderRadius(50)
