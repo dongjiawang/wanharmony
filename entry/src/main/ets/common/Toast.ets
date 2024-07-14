@@ -7,7 +7,7 @@ import WindowUtil from './WindowUtils'
  */
 export function toast(message: string | Resource) {
   if (message) {
-    const bottom = WindowUtil.windowHeight > 0 ? (WindowUtil.windowHeight / 2 + "px") : undefined;
+    const bottom = WindowUtil.windowHeight > 0 ? (WindowUtil.windowHeight / 2) : undefined;
     promptAction.showToast({
       message: message,
       bottom: bottom

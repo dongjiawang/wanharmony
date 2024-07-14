@@ -9,6 +9,7 @@ import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
 import { LoadState, PageLoading } from '../widgets/PageLoading'
 import { TitleLayout } from '../widgets/TitleLayout'
 import { hilog } from '@kit.PerformanceAnalysisKit'
+import WindowUtils from '../common/WindowUtils'
 
 @Component
 export struct TreeTab {
@@ -30,11 +31,8 @@ export struct TreeTab {
 
   build() {
     Column() {
-      // 标题不需要显示
-      TitleLayout({
-        title: this.title,
-        isJustShowStatusBar: true
-      })
+      Blank().height(WindowUtils.statusBarHeight)
+
       // 整个页面的加载模块
       PageLoading({
         loadState: this.loadStateTree,

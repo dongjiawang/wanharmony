@@ -23,13 +23,13 @@ export default class WindowUtils {
 
   static init(windowClass: window.Window) {
     const windowRect = windowClass.getWindowProperties().windowRect;
-    WindowUtils.windowWidth = windowRect.width;
-    WindowUtils.windowHeight = windowRect.height;
+    WindowUtils.windowWidth = px2vp(windowRect.width);
+    WindowUtils.windowHeight = px2vp(windowRect.height);
 
     const statusBarAvoidArea = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
-    WindowUtils.statusBarHeight = statusBarAvoidArea.topRect.height;
+    WindowUtils.statusBarHeight = px2vp(statusBarAvoidArea.topRect.height);
 
     const navigationBarAvoidArea = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
-    WindowUtils.navigationBarHeight = navigationBarAvoidArea.bottomRect.height;
+    WindowUtils.navigationBarHeight = px2vp(navigationBarAvoidArea.bottomRect.height);
   }
 }

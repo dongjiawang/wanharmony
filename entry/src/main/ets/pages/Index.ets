@@ -51,10 +51,7 @@ struct Index {
           .layoutWeight(1)
           .textAlign(TextAlign.Center)
       }
-      Row()
-        .width("100%")
-        .height(WindowUtils.navigationBarHeight + "px")
-        .backgroundColor($r("app.color.white"))
+      Blank().height(WindowUtils.navigationBarHeight)
     }
   }
 
@@ -80,7 +77,7 @@ struct Index {
     }
     .width("100%")
     .height("100%")
-    .backgroundColor($r("app.color.white"))
+    .backgroundColor($r("app.color.navi_bar_bg"))
     .justifyContent(FlexAlign.Center)
     .onClick(() => {
       this.currentIndex = targetIndex

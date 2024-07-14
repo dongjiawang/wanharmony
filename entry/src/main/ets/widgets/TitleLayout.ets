@@ -14,9 +14,7 @@ export struct TitleLayout {
 
   build() {
     Column() {
-      Row()
-        .width("100%")
-        .height(WindowUtils.statusBarHeight + "px")
+      Blank().height(WindowUtils.statusBarHeight)
 
       if (this.isJustShowStatusBar === false) {
         Row() {

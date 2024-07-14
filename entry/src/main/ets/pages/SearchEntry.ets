@@ -24,10 +24,7 @@ struct SearchEntry {
 
   build() {
     Column() {
-      Row()
-        .width("100%")
-        .height(WindowUtils.statusBarHeight + "px")
-
+      Blank().height(WindowUtils.statusBarHeight)
       Row() {
         Image($r("app.media.ic_back"))
           .width(48)
