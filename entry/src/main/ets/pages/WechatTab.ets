@@ -13,7 +13,7 @@ export struct WechatTab {
   @State data: Article[] = []
   private scroller: Scroller = new Scroller()
   private refreshConfig = new PullToRefreshConfigurator()
-  private nextPage: number = 0
+  private nextPage: number = 1
   private hasMore: boolean = true
 
   build() {
@@ -98,21 +98,20 @@ export struct WechatTab {
 
   @Builder
   private listViewBuilder() {
-    List() {
+    List({ scroller: this.scroller }) {
       ForEach(this.data, (item: Article) => {
         ListItem() {
-        }
-
-        ArticleItemComponent({
-          article: item,
-          onCollectClick: ((article: Article) => {
-            CollectUtils.collect(article).then((success) => {
-              if (success) {
-                this.data = this.data.map(item => item)
-              }
+          ArticleItemComponent({
+            article: item,
+            onCollectClick: ((article: Article) => {
+              CollectUtils.collect(article).then((success) => {
+                if (success) {
+                  this.data = this.data.map(item => item)
+                }
+              })
             })
           })
-        })
+        }
       })
     }
     .width("100%")
