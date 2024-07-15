@@ -4,7 +4,7 @@ import TitleLayout from '../widgets/TitleLayout';
 
 @Entry
 @Component
-export struct WebPage {
+struct WebPage {
   private webController: webview.WebviewController = new webview.WebviewController()
   private url: string = (router.getParams() as WebPageParams).url
   @State title: string = "加载中"
@@ -42,6 +42,8 @@ export struct WebPage {
           .domStorageAccess(true)
           .databaseAccess(true)
           .mixedMode(MixedMode.All)
+          .darkMode(WebDarkMode.Auto)
+          .forceDarkAccess(true)
           .onTitleReceive((event) => {
             this.title = event?.title ?? ""
           })

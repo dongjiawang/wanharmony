@@ -41,7 +41,7 @@ struct Index {
           }.tabBar(this.tabBuilder("我的", 4, $r("app.media.ic_tab_my_fill"), $r("app.media.ic_tab_my")))
         }
         .layoutWeight(1)
-        .scrollable(false)
+        .scrollable(true)
         .animationDuration(0)
         .onChange((index) => {
           this.currentIndex = index

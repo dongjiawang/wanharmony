@@ -4,7 +4,7 @@ import { router } from '@kit.ArkUI'
 @Component
 export default struct TitleLayout {
   enableBack: boolean = true
-  title: string = ""
+  @Prop title: string = ""
   rightImage?: Resource | null = null
   rightText?: string | null = null
   bgColor: Resource = $r("app.color.title_bar_bg")
