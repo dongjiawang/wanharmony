@@ -53,7 +53,7 @@ struct Index {
           .layoutWeight(1)
           .textAlign(TextAlign.Center)
       }
-      Blank().height(WindowUtils.navigationBarHeight)
+      Blank().height(WindowUtils.navigationBarHeight).backgroundColor($r("app.color.navi_bar_bg"))
     }
   }
 
