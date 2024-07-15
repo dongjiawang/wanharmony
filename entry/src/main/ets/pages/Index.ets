@@ -3,7 +3,6 @@ import WindowUtils from '../common/WindowUtils'
 import { Home } from './Home'
 import { Mine } from './Mine'
 import { TreeTab } from "./TreeTab"
-import { Wechat } from './Wechat'
 import { common } from '@kit.AbilityKit'
 import { toast } from '../common/Toast'
 import { Question } from './Question'
@@ -22,23 +21,21 @@ struct Index {
         Tabs({ barPosition: BarPosition.End, controller: this.tabsController }) {
           TabContent() {
             Home()
-          }.tabBar(this.tabBuilder("首页", 0, $r("app.media.ic_tab_home_fill"), $r("app.media.ic_tab_home")))
+          }.tabBar(this.tabBuilder("首页", 0, $r("sys.symbol.house_fill"), $r("sys.symbol.house")))
 
           TabContent() {
             Question()
-          }.tabBar(this.tabBuilder("问答", 1, $r("app.media.ic_tab_discover_fill"), $r("app.media.ic_tab_discover")))
+          }
+          .tabBar(this.tabBuilder("问答", 1, $r("sys.symbol.message_on_message_fill"),
+            $r("sys.symbol.message_on_message")))
 
           TabContent() {
             TreeTab()
-          }.tabBar(this.tabBuilder("体系", 2, $r("app.media.ic_tab_tree_fill"), $r("app.media.ic_tab_tree")))
-
-          TabContent() {
-            Wechat()
-          }.tabBar(this.tabBuilder("公众号", 3, $r("app.media.ic_tab_wechat_fill"), $r("app.media.ic_tab_wechat")))
+          }.tabBar(this.tabBuilder("体系", 2, $r("sys.symbol.satellite_map_fill"), $r("sys.symbol.satellite_map")))
 
           TabContent() {
             Mine()
-          }.tabBar(this.tabBuilder("我的", 4, $r("app.media.ic_tab_my_fill"), $r("app.media.ic_tab_my")))
+          }.tabBar(this.tabBuilder("我的", 3, $r("sys.symbol.person_shield_fill"), $r("sys.symbol.person_shield")))
         }
         .layoutWeight(1)
         .scrollable(true)
@@ -82,11 +79,14 @@ struct Index {
   @Builder
   tabBuilder(title: string, targetIndex: number, selectedImg: Resource, normalImg: Resource) {
     Column() {
-      Image(this.currentIndex === targetIndex ? selectedImg : normalImg)
-        .size({ width: 24, height: 24 })
-        .fillColor(this.currentIndex === targetIndex ? $r("app.color.main") : $r("app.color.navi_tab_unselect"))
+      SymbolGlyph(this.currentIndex == targetIndex ? selectedImg : normalImg)
+        .fontSize(24)
+        .fontColor(this.currentIndex == targetIndex ? [$r("app.color.main")] : [$r("app.color.navi_tab_unselect")])
+        .effectStrategy(this.currentIndex == targetIndex ? SymbolEffectStrategy.SCALE : SymbolEffectStrategy.NONE)
+        .padding({ top: 5, bottom: 5 })
+
       Text(title)
-        .fontColor(this.currentIndex === targetIndex ? $r("app.color.main") : $r("app.color.navi_tab_unselect"))
+        .fontColor(this.currentIndex == targetIndex ? $r("app.color.main") : $r("app.color.navi_tab_unselect"))
         .fontSize(11)
     }
     .width("100%")
