@@ -1,5 +1,6 @@
 import WindowUtils from '../common/WindowUtils'
 import { router } from '@kit.ArkUI'
+import { SymbolEffectStrategy } from '@ohos.arkui.advanced.SubHeader'
 
 @Component
 export default struct TitleLayout {
@@ -7,10 +8,12 @@ export default struct TitleLayout {
   @Prop title: string = ""
   rightImage?: Resource | null = null
   rightText?: string | null = null
+  rightSymbol?: Resource | null = null
   bgColor: Resource = $r("app.color.title_bar_bg")
   onBackClick?: () => void
   onRightTextClick?: () => void
   onRightImageClick?: () => void
+  onRightSymbolClick?: () => void
 
   build() {
     Column() {
@@ -19,10 +22,9 @@ export default struct TitleLayout {
       RelativeContainer() {
         RelativeContainer() {
           Stack() {
-            Image($r("app.media.ic_back"))
-              .width(24)
-              .height(24)
-              .fillColor($r("app.color.title_bar_text"))
+            SymbolGlyph($r("sys.symbol.chevron_left"))
+              .fontSize(30)
+              .fontColor([$r("app.color.title_bar_text")])
           }
           .width(44)
           .height(44)
@@ -86,6 +88,21 @@ export default struct TitleLayout {
           .onClick(() => {
             if (this.onRightImageClick) {
               this.onRightImageClick()
+            }
+          })
+
+          Stack() {
+            SymbolGlyph(this.rightSymbol)
+              .fontSize(22)
+              .fontColor([$r("app.color.title_bar_text")])
+          }
+          .height(44)
+          .padding({ left: 10, right: 10 })
+          .alignContent(Alignment.Center)
+          .visibility(this.rightSymbol == null ? Visibility.None : Visibility.Visible)
+          .onClick(() => {
+            if (this.onRightSymbolClick) {
+              this.onRightSymbolClick()
             }
           })
         }

@@ -26,15 +26,16 @@ struct SearchEntry {
     Column() {
       Blank().height(WindowUtils.statusBarHeight)
       Row() {
-        Image($r("app.media.ic_back"))
-          .width(48)
-          .height(48)
-          .padding(14)
-          .fillColor($r("app.color.text_h1"))
-          .objectFit(ImageFit.Contain)
-          .onClick(() => {
-            router.back()
-          })
+        Stack() {
+          SymbolGlyph($r("sys.symbol.chevron_left"))
+            .fontSize(30)
+            .fontColor([$r("app.color.text_h1")])
+        }
+        .width(44)
+        .height(44)
+        .onClick(() => {
+          router.back()
+        })
 
         TextInput({
           placeholder: "关键词以空格隔开",
@@ -51,12 +52,12 @@ struct SearchEntry {
             this.search()
           })
 
-        Image($r("app.media.ic_search"))
-          .width(48)
-          .height(48)
+        SymbolGlyph($r("sys.symbol.magnifyingglass"))
+          .fontSize(22)
+          .fontColor([$r("app.color.text_h1")])
+          .width(44)
+          .height(44)
           .padding(14)
-          .fillColor($r("app.color.text_h1"))
-          .objectFit(ImageFit.Contain)
           .onClick(() => {
             this.search()
           })

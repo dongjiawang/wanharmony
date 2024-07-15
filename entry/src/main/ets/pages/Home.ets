@@ -89,14 +89,13 @@ export struct Home {
       TitleLayout({
         title: this.title,
         enableBack: false,
-        rightImage: $r("app.media.ic_search"),
-        onRightImageClick: () => {
+        rightSymbol: $r("sys.symbol.magnifyingglass"),
+        onRightSymbolClick: () => {
           router.pushUrl({
             url: "pages/SearchEntry"
           })
         }
       })
-
       PageLoading({
         loadState: this.loadState,
         showLoading: this.showLoading,
