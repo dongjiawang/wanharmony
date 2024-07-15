@@ -32,42 +32,11 @@ struct SearchResult {
         onReload: () => {
           this.loadData()
         },
-      }) {
-        Column() {
-          PullToRefresh({
-            data: $data,
-            scroller: this.scroller,
-            refreshConfigurator: this.refreshConfig,
-            customList: () => {
-              this.listViewBuilder()
-            },
-            onLoadMore: () => {
-              return new Promise<string>((resolve, reject) => {
-                if (this.hasMore) {
-                  this.loadDataByPage(this.nextPage).then((data) => {
-                    if (data.length > 0) {
-                      this.nextPage++
-                      this.data = this.data.concat(data)
-                      resolve("加载成功")
-                    } else {
-                      this.hasMore = false
-                      resolve("没有更多了")
-                    }
-                  }, () => {
-                    reject("没有更多了")
-                  })
-                } else {
-                  reject("没有更多了")
-                }
-              })
-            },
-            customLoad: null,
-            customRefresh: null
-          })
-        }
-        .width("100%")
-        .height("100%")
-      }
+        content:(() => {
+          this.pullToRefreshBuilder()
+        })
+      })
+        .layoutWeight(1)
     }
     .width("100%")
     .height("100%")
@@ -119,6 +88,40 @@ struct SearchResult {
     return text.replace(/<[^>]+>/g, '')
       .replace('&gt;', '>')
       .replace('&lt;', '<')
+  }
+
+  @Builder
+  private pullToRefreshBuilder() {
+    PullToRefresh({
+      data: $data,
+      scroller: this.scroller,
+      refreshConfigurator: this.refreshConfig,
+      customList: () => {
+        this.listViewBuilder()
+      },
+      onLoadMore: () => {
+        return new Promise<string>((resolve, reject) => {
+          if (this.hasMore) {
+            this.loadDataByPage(this.nextPage).then((data) => {
+              if (data.length > 0) {
+                this.nextPage++
+                this.data = this.data.concat(data)
+                resolve("加载成功")
+              } else {
+                this.hasMore = false
+                resolve("没有更多了")
+              }
+            }, () => {
+              reject("没有更多了")
+            })
+          } else {
+            reject("没有更多了")
+          }
+        })
+      },
+      customLoad: null,
+      customRefresh: null
+    })
   }
 
   @Builder

@@ -18,7 +18,7 @@ export struct Home {
   @State showLoading: boolean = false
   @State bannerPosition: number = 0
   private title: string = "首页"
-  private nextPage: number = 0
+  private nextPage: number = 1
   private hasMore: boolean = true
   private scroller: Scroller = new Scroller()
 
@@ -35,7 +35,6 @@ export struct Home {
           this.loadState = LoadState.EMPTY
         } else {
           this.loadState = LoadState.SUCCESS
-          this.nextPage = 1
         }
       }, () => {
         this.loadState = LoadState.FAIL
@@ -85,71 +84,78 @@ export struct Home {
   }
 
   build() {
-    PageLoading({
-      loadState: this.loadState,
-      showLoading: this.showLoading,
-      onReload: () => {
-        this.LoadData()
-      }
-    }) {
-      Column() {
-        TitleLayout({
-          title: this.title,
-          enableBack: false,
-          rightImage: $r("app.media.ic_search"),
-          onRightImageClick: () => {
-            router.pushUrl({
-              url: "pages/SearchEntry"
-            })
-          }
+
+    Column() {
+      TitleLayout({
+        title: this.title,
+        enableBack: false,
+        rightImage: $r("app.media.ic_search"),
+        onRightImageClick: () => {
+          router.pushUrl({
+            url: "pages/SearchEntry"
+          })
+        }
+      })
+
+      PageLoading({
+        loadState: this.loadState,
+        showLoading: this.showLoading,
+        onReload: () => {
+          this.LoadData()
+        },
+        content: (() => {
+          this.pullToRefreshBuilder()
         })
-        PullToRefresh({
-          data: $data,
-          scroller: this.scroller,
-          customList: () => {
-            this.listViewBuilder()
-          },
-          onRefresh: () => {
-            return new Promise<string>((resolve, reject) => {
-              this.loadDataByPage(0)
-                .then((data) => {
-                  this.data = data
-                  this.nextPage = 1
-                  this.hasMore = true
-                  resolve("刷新成功")
-                },
-                  () => {
-                    reject("刷新失败")
-                  })
-            })
-          },
-          onLoadMore: () => {
-            return new Promise<string>((resolve, reject) => {
-              if (this.hasMore) {
-                this.loadDataByPage(this.nextPage)
-                  .then((data) => {
-                    if (data.length > 0) {
-                      this.nextPage++
-                      this.data = this.data.concat(data)
-                      resolve("加载成功")
-                    } else {
-                      this.hasMore = false
-                      resolve("没有更多了")
-                    }
-                  },
-                    () => {
-                      reject("加载失败")
-                    })
-              } else {
-                reject("没有更多了")
-              }
-            })
-          }
-        })
-          .width("100%")
-          .height("100%")
-      }
+      })
+        .layoutWeight(1)
     }
+  }
+
+  @Builder
+  private pullToRefreshBuilder() {
+    PullToRefresh({
+      data: $data,
+      scroller: this.scroller,
+      customList: () => {
+        this.listViewBuilder()
+      },
+      onRefresh: () => {
+        return new Promise<string>((resolve, reject) => {
+          this.loadDataByPage(0)
+            .then((data) => {
+              this.data = data
+              this.nextPage = 1
+              this.hasMore = true
+              resolve("刷新成功")
+            },
+              () => {
+                reject("刷新失败")
+              })
+        })
+      },
+      onLoadMore: () => {
+        return new Promise<string>((resolve, reject) => {
+          if (this.hasMore) {
+            this.loadDataByPage(this.nextPage)
+              .then((data) => {
+                if (data.length > 0) {
+                  this.nextPage++
+                  this.data = this.data.concat(data)
+                  resolve("加载成功")
+                } else {
+                  this.hasMore = false
+                  resolve("没有更多了")
+                }
+              },
+                () => {
+                  reject("加载失败")
+                })
+          } else {
+            reject("没有更多了")
+          }
+        })
+      }
+    })
   }
 
   @Builder

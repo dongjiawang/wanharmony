@@ -23,7 +23,7 @@ export struct TreeTab {
   private treeScroll1: Scroller = new Scroller()
   private treeScroll2: Scroller = new Scroller()
   private articleScroller: Scroller = new Scroller()
-  private nextPage: number = 0
+  private nextPage: number = 1
   private hasMore: boolean = true
 
   build() {
@@ -84,42 +84,13 @@ export struct TreeTab {
               showLoading: this.showLoading,
               onReload: (() => {
                 this.loadArticleData()
-              })
-            }) {
-              Column() {
+              }),
+              content: (() => {
                 // 文章列表
-                PullToRefresh({
-                  data: $data,
-                  scroller: this.articleScroller,
-                  customList: (() => {
-                    this.listViewBuilder()
-                  }),
-                  onLoadMore: (() => {
-                    return new Promise<string>((resolve, reject) => {
-                      if (this.hasMore) {
-                        this.loadArticleDataByPage(this.nextPage).then((data) => {
-                          if (data.length > 0) {
-                            this.nextPage++
-                            this.hasMore = true
-                            this.data = this.data.concat(data)
-                            resolve("加载成功")
-                          } else {
-                            this.hasMore = false
-                            resolve("没有更多了")
-                          }
-                        }, () => {
-                          reject("加载失败")
-                        })
-                      } else {
-                        resolve("没有更多了")
-                      }
-                    })
-                  })
-                })
-              }
-              .width("100%")
-              .height("100%")
-            }
+                this.pullToRefreshBuilder()
+              })
+            })
+              .layoutWeight(1)
 
             // 如果显示体系列表状态
             if (this.showSelectLayer) {
@@ -277,6 +248,38 @@ export struct TreeTab {
     } else {
       return Promise.reject()
     }
+  }
+
+  @Builder
+  private pullToRefreshBuilder() {
+    PullToRefresh({
+      data: $data,
+      scroller: this.articleScroller,
+      customList: (() => {
+        this.listViewBuilder()
+      }),
+      onLoadMore: (() => {
+        return new Promise<string>((resolve, reject) => {
+          if (this.hasMore) {
+            this.loadArticleDataByPage(this.nextPage).then((data) => {
+              if (data.length > 0) {
+                this.nextPage++
+                this.hasMore = true
+                this.data = this.data.concat(data)
+                resolve("加载成功")
+              } else {
+                this.hasMore = false
+                resolve("没有更多了")
+              }
+            }, () => {
+              reject("加载失败")
+            })
+          } else {
+            resolve("没有更多了")
+          }
+        })
+      })
+    })
   }
 
   @Builder

@@ -13,7 +13,7 @@ export struct Question {
   private title: string = '问答';
   @State data: Article[] = []
   private scroller: Scroller = new Scroller()
-  private nextPage: number = 0
+  private nextPage: number = 1
   private hasMore: boolean = true
 
   build() {
@@ -28,51 +28,12 @@ export struct Question {
         showLoading: this.showLoading,
         onReload: (() => {
           this.loadData()
+        }),
+        content: (() => {
+          this.pullToRefreshBuilder()
         })
-      }) {
-        Column() {
-          PullToRefresh({
-            data: $data,
-            scroller: this.scroller,
-            customList: () => {
-              this.listViewBuilder()
-            },
-            onRefresh: () => {
-              return new Promise<string>((resolve, reject) => {
-                this.loadDataByPage(0).then((data) => {
-                  this.nextPage = 1
-                  this.hasMore = true
-                  this.data = data
-                  resolve("刷新成功")
-                }, () => {
-                  reject("刷新失败")
-                })
-              })
-            },
-            onLoadMore: () => {
-              return new Promise<string>((resolve, reject) => {
-                if (this.hasMore) {
-                  this.loadDataByPage(this.nextPage).then((data) => {
-                    if (data.length > 0) {
-                      this.nextPage++
-                      this.data = this.data.concat(data)
-                    } else {
-                      this.hasMore = false
-                      resolve("没有更多了")
-                    }
-                  }, () => {
-                    reject("加载失败")
-                  })
-                } else {
-                  resolve("没有更多了")
-                }
-              })
-            }
-          })
-        }
-        .width("100%")
-        .height("100%")
-      }
+      })
+        .layoutWeight(1)
     }
   }
 
@@ -88,7 +49,6 @@ export struct Question {
         this.loadState = LoadState.EMPTY
       } else {
         this.loadState = LoadState.SUCCESS
-        this.nextPage = 1
       }
     }, () => {
       this.loadState = LoadState.FAIL
@@ -103,6 +63,49 @@ export struct Question {
     } else {
       return Promise.reject()
     }
+  }
+
+  @Builder
+  private pullToRefreshBuilder() {
+    PullToRefresh({
+      data: $data,
+      scroller: this.scroller,
+      customList: () => {
+        this.listViewBuilder()
+      },
+      onRefresh: () => {
+        return new Promise<string>((resolve, reject) => {
+          this.loadDataByPage(0).then((data) => {
+            this.nextPage = 1
+            this.hasMore = true
+            this.data = data
+            resolve("刷新成功")
+          }, () => {
+            reject("刷新失败")
+          })
+        })
+      },
+      onLoadMore: () => {
+        return new Promise<string>((resolve, reject) => {
+          if (this.hasMore) {
+            this.loadDataByPage(this.nextPage).then((data) => {
+              if (data.length > 0) {
+                this.nextPage++
+                this.data = this.data.concat(data)
+                resolve("加载成功")
+              } else {
+                this.hasMore = false
+                resolve("没有更多了")
+              }
+            }, () => {
+              reject("加载失败")
+            })
+          } else {
+            resolve("没有更多了")
+          }
+        })
+      }
+    })
   }
 
   @Builder

@@ -77,7 +77,11 @@ export function getArticleAuthor(article: Article): string {
  * @returns 结果
  */
 export function getArticleChapter(article: Article): string {
-  return article.superChapterName + " • " + article.chapterName
+  let chapter = article.chapterName
+  if (article.superChapterName) {
+    chapter = article.superChapterName + " • " + chapter
+  }
+  return chapter
 }
 
 /**
