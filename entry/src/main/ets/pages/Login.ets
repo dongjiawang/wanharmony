@@ -3,7 +3,7 @@ import API from '../network/API'
 import UserService from '../service/UserService'
 import { LoadState, PageLoading } from '../widgets/PageLoading'
 import { router } from '@kit.ArkUI'
-import { TitleLayout } from '../widgets/TitleLayout'
+import TitleLayout from '../widgets/TitleLayout'
 
 @Entry
 @Component
@@ -22,7 +22,8 @@ struct Login {
       }) {
         Column() {
           TitleLayout({
-            title: this.title
+            title: this.title,
+            enableBack: false
           })
 
           Column() {

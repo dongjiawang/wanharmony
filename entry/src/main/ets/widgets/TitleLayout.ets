@@ -2,59 +2,109 @@ import WindowUtils from '../common/WindowUtils'
 import { router } from '@kit.ArkUI'
 
 @Component
-export struct TitleLayout {
-  @Prop title: string
-  isJustShowStatusBar: boolean = false
-  showBack: boolean = true
-  menuIcon?: Resource
-  onMenuClick?: () => void
-  onBack: () => void = () => {
-    router.back()
-  }
+export default struct TitleLayout {
+  enableBack: boolean = true
+  title: string = ""
+  rightImage?: Resource | null = null
+  rightText?: string | null = null
+  bgColor: Resource = $r("app.color.title_bar_bg")
+  onBackClick?: () => void
+  onRightTextClick?: () => void
+  onRightImageClick?: () => void
 
   build() {
     Column() {
       Blank().height(WindowUtils.statusBarHeight)
 
-      if (this.isJustShowStatusBar === false) {
-        Row() {
-          if (this.showBack) {
+      RelativeContainer() {
+        RelativeContainer() {
+          Stack() {
             Image($r("app.media.ic_back"))
-              .width(48)
-              .height(48)
-              .padding(14)
+              .width(24)
+              .height(24)
               .fillColor($r("app.color.text_h1"))
-              .objectFit(ImageFit.Contain)
-              .onClick(() => {
-                this.onBack()
-              })
           }
+          .width(44)
+          .height(44)
+          .alignRules({
+            center: { anchor: "__container__", align: VerticalAlign.Center },
+            left: { anchor: "__container__", align: HorizontalAlign.Start }
+          })
+          .alignContent(Alignment.Center)
+          .visibility(this.enableBack ? Visibility.Visible : Visibility.None)
+          .onClick(() => {
+            if (this.onBackClick) {
+              this.onBackClick()
+            } else {
+              router.back()
+            }
+          })
+          .id("back")
+
           Text(this.title)
-            .layoutWeight(1)
-            .fontSize(17)
             .fontColor($r("app.color.text_h1"))
+            .fontSize(18)
             .maxLines(1)
             .textOverflow({ overflow: TextOverflow.Ellipsis })
-            .padding({ left: 16, right: 16 })
+            .textAlign(TextAlign.Center)
+            .width("60%")
+            .alignRules({
+              middle: { anchor: "__container__", align: HorizontalAlign.Center },
+              center: { anchor: "__container__", align: VerticalAlign.Center }
+            })
+            .id("title")
+        }
 
-          if (this.menuIcon) {
-            Image(this.menuIcon)
-              .width(48)
-              .height(48)
-              .padding(14)
+
+        Row() {
+          Stack() {
+            Text(this.rightText == null ? "" : this.rightText)
+              .fontSize(16)
+              .fontColor($r("app.color.text_h1"))
+          }
+          .height(44)
+          .padding({ left: 10, right: 10 })
+          .alignContent(Alignment.Center)
+          .visibility(this.rightText == null ? Visibility.None : Visibility.Visible)
+          .onClick(() => {
+            if (this.onRightTextClick) {
+              this.onRightTextClick()
+            }
+          })
+
+          Stack() {
+            Image(this.rightImage == null ? null : this.rightImage)
+              .width(22)
+              .height(22)
               .fillColor($r("app.color.text_h1"))
               .objectFit(ImageFit.Contain)
-              .onClick(() => {
-                if (this.onMenuClick) {
-                  this.onMenuClick()
-                }
-              })
           }
+          .height(44)
+          .padding({ left: 10, right: 10 })
+          .alignContent(Alignment.Center)
+          .visibility(this.rightImage == null ? Visibility.None : Visibility.Visible)
+          .onClick(() => {
+            if (this.onRightImageClick) {
+              this.onRightImageClick()
+            }
+          })
         }
-        .width("100%")
-        .height(48)
-        .alignItems(VerticalAlign.Center)
+        .alignRules({
+          top: { anchor: "__container__", align: VerticalAlign.Top },
+          right: { anchor: "__container__", align: HorizontalAlign.End },
+          bottom: { anchor: "__container__", align: VerticalAlign.Bottom }
+        })
+        .id("right")
       }
+      .alignRules({
+        left: { anchor: "__container__", align: HorizontalAlign.Start },
+        top: { anchor: "__container__", align: VerticalAlign.Top },
+        right: { anchor: "__container__", align: HorizontalAlign.End },
+        bottom: { anchor: "__container__", align: VerticalAlign.Bottom }
+      })
+      .id("content")
+      .width("100%")
+      .height(44)
     }
     .width("100%")
     .backgroundColor($r("app.color.title_bar_bg"))

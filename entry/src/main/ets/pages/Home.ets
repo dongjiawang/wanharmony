@@ -4,7 +4,7 @@ import { HomeBannerData } from '../network/model/Banner'
 import { LoadState, PageLoading } from '../widgets/PageLoading'
 import { BannerComponent } from './BannerComponent'
 import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
-import { TitleLayout } from '../widgets/TitleLayout'
+import TitleLayout from '../widgets/TitleLayout'
 import { PullToRefresh } from '@ohos/pulltorefresh'
 import CollectUtils from '../common/CollectUtils'
 import { router } from '@kit.ArkUI'
@@ -95,11 +95,11 @@ export struct Home {
       Column() {
         TitleLayout({
           title: this.title,
-          showBack: false,
-          menuIcon: $r("app.media.ic_search"),
-          onMenuClick: () => {
+          enableBack: false,
+          rightImage: $r("app.media.ic_search"),
+          onRightImageClick: () => {
             router.pushUrl({
-              url: "pages/SearchEntry",
+              url: "pages/SearchEntry"
             })
           }
         })

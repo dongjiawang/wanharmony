@@ -2,16 +2,15 @@ import { toast } from '../common/Toast'
 import API from '../network/API'
 import UserService from '../service/UserService'
 import { LoadState, PageLoading } from '../widgets/PageLoading'
-import { TitleLayout } from '../widgets/TitleLayout'
+import TitleLayout from '../widgets/TitleLayout'
 import { router } from '@kit.ArkUI'
 
 @Entry
 @Component
-export  struct Register {
+export struct Register {
   @State loadState: LoadState = LoadState.SUCCESS
   @State showLoading: boolean = false
   @State title: string = "注册账号"
-
   private username: string = ""
   private password: string = ""
   private repassword: string = ""
@@ -24,7 +23,8 @@ export  struct Register {
       }) {
         Column() {
           TitleLayout({
-            title: this.title
+            title: this.title,
+            enableBack: false
           })
 
           Column() {

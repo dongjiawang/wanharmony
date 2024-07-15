@@ -1,6 +1,6 @@
 import webview from '@ohos.web.webview';
 import { router } from '@kit.ArkUI';
-import { TitleLayout } from '../widgets/TitleLayout';
+import TitleLayout from '../widgets/TitleLayout';
 
 @Entry
 @Component
@@ -22,7 +22,7 @@ export struct WebPage {
     Column() {
       TitleLayout({
         title: this.title,
-        onBack: () => {
+        onBackClick: () => {
           if (this.webController.accessBackward()) {
             this.webController.backward()
           } else {

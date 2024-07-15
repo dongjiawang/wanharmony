@@ -5,7 +5,7 @@ import { Article } from '../network/model/Article'
 import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
 import { LoadState, PageLoading } from '../widgets/PageLoading'
 import { router } from '@kit.ArkUI'
-import { TitleLayout } from '../widgets/TitleLayout'
+import TitleLayout from '../widgets/TitleLayout'
 
 @Entry
 @Component
@@ -23,7 +23,8 @@ struct SearchResult {
   build() {
     Column() {
       TitleLayout({
-        title: this.title
+        title: this.title,
+        enableBack: false
       })
       PageLoading({
         loadState: this.loadState,

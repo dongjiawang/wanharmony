@@ -7,8 +7,6 @@ import { Article } from '../network/model/Article'
 import { Tree } from '../network/model/Tree'
 import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
 import { LoadState, PageLoading } from '../widgets/PageLoading'
-import { TitleLayout } from '../widgets/TitleLayout'
-import { hilog } from '@kit.PerformanceAnalysisKit'
 import WindowUtils from '../common/WindowUtils'
 
 @Component

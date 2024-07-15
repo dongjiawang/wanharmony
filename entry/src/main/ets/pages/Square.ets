@@ -4,7 +4,7 @@ import API from '../network/API'
 import { Article } from '../network/model/Article'
 import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
 import { LoadState, PageLoading } from '../widgets/PageLoading'
-import { TitleLayout } from '../widgets/TitleLayout'
+import TitleLayout from '../widgets/TitleLayout'
 
 @Component
 export struct Square {
@@ -21,7 +21,7 @@ export struct Square {
     Column() {
       TitleLayout({
         title: this.title,
-        showBack: false
+        enableBack: false
       })
 
       PageLoading({

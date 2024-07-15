@@ -2,7 +2,7 @@ import API from '../network/API'
 import UserService, { User } from '../service/UserService'
 import { LoadState, PageLoading } from '../widgets/PageLoading'
 import { promptAction, router } from '@kit.ArkUI'
-import { TitleLayout } from '../widgets/TitleLayout'
+import WindowUtils from '../common/WindowUtils'
 
 class UserInfo {
   name: string = ""
@@ -47,9 +47,8 @@ export struct Mine {
       showLoading: this.showLoading
     }) {
       Column() {
-        TitleLayout({
-          isJustShowStatusBar: true
-        })
+
+        Blank().height(WindowUtils.statusBarHeight)
 
         Column() {
           Image(this.isLogin ? this.userInfo.icon : $r("app.media.logo"))

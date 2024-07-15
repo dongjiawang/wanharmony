@@ -4,7 +4,7 @@ import { Article } from '../network/model/Article';
 import { LoadState, PageLoading } from '../widgets/PageLoading';
 import { ArticleItemComponent } from '../widgets/ArticleItemComponent';
 import CollectUtils from '../common/CollectUtils';
-import { TitleLayout } from '../widgets/TitleLayout';
+import TitleLayout from '../widgets/TitleLayout';
 
 @Entry
 @Component
