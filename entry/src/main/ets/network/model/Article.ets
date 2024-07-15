@@ -27,7 +27,7 @@ export class Article {
   desc: string = ""
   descMd: string = ""
   envelopePic: string = ""
-  fresh: string = ""
+  fresh: boolean = false
   host: string = ""
   link: string = ""
   niceDate: string = ""
@@ -65,7 +65,10 @@ export class ArticleTag {
  * @returns 结果
  */
 export function getArticleAuthor(article: Article): string {
-  return article.author ?? article.shareUser
+  if (article.author.length > 0) {
+    return article.author
+  }
+  return article.shareUser
 }
 
 /**
@@ -74,12 +77,7 @@ export function getArticleAuthor(article: Article): string {
  * @returns 结果
  */
 export function getArticleChapter(article: Article): string {
-  let chapter = article.superChapterName ?? ""
-  if (chapter && article.chapterName) {
-    chapter = chapter + " / "
-  }
-  chapter = chapter + article.chapterName ?? ""
-  return chapter
+  return article.superChapterName + " • " + article.chapterName
 }
 
 /**

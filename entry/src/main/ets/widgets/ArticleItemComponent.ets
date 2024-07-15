@@ -9,6 +9,18 @@ export struct ArticleItemComponent {
   build() {
     Column() {
       Row() {
+        if (this.article.fresh) {
+          Text("新")
+            .fontColor($r("app.color.main"))
+            .fontSize(10)
+            .padding({ right: 8 })
+        }
+        // 创建文章作者控件
+        Text(getArticleAuthor(this.article))
+          .fontColor($r("app.color.text_h1"))
+          .fontSize(12)
+          .padding({ right: 8 })
+
         // 标签显示,根据标签数量创建控件
         ForEach(this.article.tags, (tag: ArticleTag) => {
           Text(tag.name)
@@ -33,26 +45,20 @@ export struct ArticleItemComponent {
             .height(0)
             .color(Color.Transparent)
         })
-        // 创建文章作者控件
-        Text(getArticleAuthor(this.article))
-          .layoutWeight(1)
-          .fontColor($r("app.color.text_h1"))
-          .fontSize(12)
 
-        Divider()
-          .width(8)
-          .height(0)
-          .color(Color.Transparent)
         // 发表时间
         Text(this.article.niceDate)
+          .layoutWeight(1)
           .fontColor($r("app.color.text_h2"))
           .fontSize(12)
+          .textAlign(TextAlign.End)
       }
 
       Divider()
         .width("100%")
         .height(4)
         .color(Color.Transparent)
+
       // 文章标题
       Text(this.article.title)
         .width("100%")

@@ -17,9 +17,8 @@ export struct Home {
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
   @State bannerPosition: number = 0
-  @State title: string = "首页"
-  private static TAG = "首页"
-  private nextPage: number = 1
+  private title: string = "首页"
+  private nextPage: number = 0
   private hasMore: boolean = true
   private scroller: Scroller = new Scroller()
 
@@ -36,6 +35,7 @@ export struct Home {
           this.loadState = LoadState.EMPTY
         } else {
           this.loadState = LoadState.SUCCESS
+          this.nextPage = 1
         }
       }, () => {
         this.loadState = LoadState.FAIL
