@@ -5,11 +5,13 @@ import { Mine } from './Mine'
 import { Square } from "./Square"
 import { TreeTab } from "./TreeTab"
 import { Wechat } from './Wechat'
+import { common } from '@kit.AbilityKit'
+import { toast } from '../common/Toast'
 
 @Entry
 @Component
 struct Index {
-  private static TAG = "Index"
+  private backTimeStamp: number = 0
   private tabsController = new TabsController()
   @State currentIndex: number = 0
   @State isPermissionGrant: boolean = false
@@ -63,6 +65,18 @@ struct Index {
       .catch(() => {
         this.isPermissionGrant = false
       })
+  }
+
+  onBackPress(): boolean | void {
+    let now = Date.now()
+    if (now - this.backTimeStamp < 1000) {
+      const ctx = getContext(this) as common.UIAbilityContext
+      ctx.terminateSelf()
+    } else {
+      this.backTimeStamp = now
+      toast("再按一次将退出应用")
+    }
+    return true
   }
 
   @Builder
