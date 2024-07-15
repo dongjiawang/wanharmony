@@ -22,7 +22,7 @@ export default struct TitleLayout {
             Image($r("app.media.ic_back"))
               .width(24)
               .height(24)
-              .fillColor($r("app.color.text_h1"))
+              .fillColor($r("app.color.title_bar_text"))
           }
           .width(44)
           .height(44)
@@ -42,7 +42,7 @@ export default struct TitleLayout {
           .id("back")
 
           Text(this.title)
-            .fontColor($r("app.color.text_h1"))
+            .fontColor($r("app.color.title_bar_text"))
             .fontSize(18)
             .maxLines(1)
             .textOverflow({ overflow: TextOverflow.Ellipsis })
@@ -76,7 +76,7 @@ export default struct TitleLayout {
             Image(this.rightImage == null ? null : this.rightImage)
               .width(22)
               .height(22)
-              .fillColor($r("app.color.text_h1"))
+              .fillColor($r("app.color.title_bar_text"))
               .objectFit(ImageFit.Contain)
           }
           .height(44)
@@ -107,6 +107,6 @@ export default struct TitleLayout {
       .height(44)
     }
     .width("100%")
-    .backgroundColor($r("app.color.title_bar_bg"))
+    .backgroundColor(this.bgColor)
   }
 }

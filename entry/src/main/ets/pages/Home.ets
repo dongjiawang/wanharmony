@@ -113,8 +113,9 @@ export struct Home {
             return new Promise<string>((resolve, reject) => {
               this.loadDataByPage(0)
                 .then((data) => {
-                  this.nextPage = 1
                   this.data = data
+                  this.nextPage = 1
+                  this.hasMore = true
                   resolve("刷新成功")
                 },
                   () => {

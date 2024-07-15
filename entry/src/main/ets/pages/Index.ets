@@ -2,11 +2,11 @@ import OHPermission from "../common/OHPermission"
 import WindowUtils from '../common/WindowUtils'
 import { Home } from './Home'
 import { Mine } from './Mine'
-import { Square } from "./Square"
 import { TreeTab } from "./TreeTab"
 import { Wechat } from './Wechat'
 import { common } from '@kit.AbilityKit'
 import { toast } from '../common/Toast'
+import { Question } from './Question'
 
 @Entry
 @Component
@@ -25,8 +25,8 @@ struct Index {
           }.tabBar(this.tabBuilder("首页", 0, $r("app.media.ic_tab_home_fill"), $r("app.media.ic_tab_home")))
 
           TabContent() {
-            Square()
-          }.tabBar(this.tabBuilder("广场", 1, $r("app.media.ic_tab_discover_fill"), $r("app.media.ic_tab_discover")))
+            Question()
+          }.tabBar(this.tabBuilder("问答", 1, $r("app.media.ic_tab_discover_fill"), $r("app.media.ic_tab_discover")))
 
           TabContent() {
             TreeTab()

@@ -14,7 +14,7 @@ export struct Square {
   @State data: Article[] = []
   private scroller: Scroller = new Scroller()
   private refreshConfig = new PullToRefreshConfigurator()
-  private nextPage: number = 1
+  private nextPage: number = 0
   private hasMore: boolean = true
 
   build() {
@@ -90,8 +90,10 @@ export struct Square {
       this.data = data
       if (this.data.length === 0) {
         this.loadState = LoadState.EMPTY
+        this.nextPage = 0
       } else {
         this.loadState = LoadState.SUCCESS
+        this.nextPage = 1
       }
     }, () => {
       this.loadState = LoadState.FAIL

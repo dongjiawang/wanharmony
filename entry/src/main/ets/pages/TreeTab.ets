@@ -1,4 +1,4 @@
-import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh'
+import { PullToRefresh } from '@ohos/pulltorefresh'
 import CollectUtils from '../common/CollectUtils'
 import Preferences from '../common/Preferences'
 import { Pair } from '../common/Struct'
@@ -23,8 +23,7 @@ export struct TreeTab {
   private treeScroll1: Scroller = new Scroller()
   private treeScroll2: Scroller = new Scroller()
   private articleScroller: Scroller = new Scroller()
-  private refreshConfig = new PullToRefreshConfigurator()
-  private nextPage: number = 1
+  private nextPage: number = 0
   private hasMore: boolean = true
 
   build() {
@@ -92,7 +91,6 @@ export struct TreeTab {
                 PullToRefresh({
                   data: $data,
                   scroller: this.articleScroller,
-                  refreshConfigurator: this.refreshConfig,
                   customList: (() => {
                     this.listViewBuilder()
                   }),
@@ -102,6 +100,7 @@ export struct TreeTab {
                         this.loadArticleDataByPage(this.nextPage).then((data) => {
                           if (data.length > 0) {
                             this.nextPage++
+                            this.hasMore = true
                             this.data = this.data.concat(data)
                             resolve("加载成功")
                           } else {
@@ -214,7 +213,6 @@ export struct TreeTab {
   }
 
   aboutToAppear(): void {
-    this.refreshConfig.setHasRefresh(false)
     this.loadTreeData()
   }
 

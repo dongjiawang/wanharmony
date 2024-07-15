@@ -42,7 +42,11 @@
     },
     {
       "name": "title_bar_bg",
-      "value": "#FAFAFA"
+      "value": "#4184F2"
+    },
+    {
+      "name": "title_bar_text",
+      "value": "#FFFFFF"
     },
     {
       "name": "red",

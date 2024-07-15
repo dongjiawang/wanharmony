@@ -1,27 +1,26 @@
-import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh';
+import { PullToRefresh } from '@ohos/pulltorefresh';
+import CollectUtils from '../common/CollectUtils';
 import API from '../network/API';
 import { Article } from '../network/model/Article';
-import { LoadState, PageLoading } from '../widgets/PageLoading';
 import { ArticleItemComponent } from '../widgets/ArticleItemComponent';
-import CollectUtils from '../common/CollectUtils';
+import { LoadState, PageLoading } from '../widgets/PageLoading';
 import TitleLayout from '../widgets/TitleLayout';
 
-@Entry
 @Component
-struct CollectList {
+export struct Question {
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
-  private  title: string = '我的收藏';
+  private title: string = '问答';
   @State data: Article[] = []
   private scroller: Scroller = new Scroller()
-  private refreshConfig = new PullToRefreshConfigurator()
   private nextPage: number = 0
   private hasMore: boolean = true
 
   build() {
     Column() {
       TitleLayout({
-        title: this.title
+        title: this.title,
+        enableBack: false
       })
 
       PageLoading({
@@ -35,16 +34,15 @@ struct CollectList {
           PullToRefresh({
             data: $data,
             scroller: this.scroller,
-            refreshConfigurator: this.refreshConfig,
             customList: () => {
               this.listViewBuilder()
             },
             onRefresh: () => {
               return new Promise<string>((resolve, reject) => {
                 this.loadDataByPage(0).then((data) => {
-                  this.data = data
                   this.nextPage = 1
                   this.hasMore = true
+                  this.data = data
                   resolve("刷新成功")
                 }, () => {
                   reject("刷新失败")
@@ -76,8 +74,6 @@ struct CollectList {
         .height("100%")
       }
     }
-    .width("100%")
-    .height("100%")
   }
 
   aboutToAppear(): void {
@@ -100,12 +96,9 @@ struct CollectList {
   }
 
   private async loadDataByPage(page: number): Promise<Article[]> {
-    const response = await API.getCollectList(page)
+    const response = await API.getWendaArticleList(page)
     if (response.isSuccessWithData()) {
       const list = response.getDataOrThrow().datas
-      list.forEach((item) => {
-        item.collect = true
-      })
       return Promise.resolve(list)
     } else {
       return Promise.reject()
@@ -114,20 +107,15 @@ struct CollectList {
 
   @Builder
   private listViewBuilder() {
-    List() {
+    List({ scroller: this.scroller }) {
       ForEach(this.data, (item: Article) => {
         ListItem() {
           ArticleItemComponent({
             article: item,
             onCollectClick: ((article: Article) => {
-              CollectUtils.collect(article, article.originId).then((success) => {
+              CollectUtils.collect(article).then((success) => {
                 if (success) {
-                  const existIndex = this.data.findIndex((item) => {
-                    return item.id === article.id
-                  })
-                  if (existIndex >= 0) {
-                    this.data.splice(existIndex, 1)
-                  }
+                  this.data = this.data.map(item => item)
                 }
               })
             })

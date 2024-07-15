@@ -45,6 +45,10 @@
       "value": "#424242"
     },
     {
+      "name": "title_bar_text",
+      "value": "#E0E0E0"
+    },
+    {
       "name": "red",
       "value": "#F44336"
     },

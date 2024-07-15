@@ -35,7 +35,8 @@ export default class API {
    * @returns
    */
   static async register(username: string, password: string, repassword: string): Promise<Response<User>> {
-    return Network.requestSync(`/user/register?username=${username}&password=${password}&repassword=${repassword}`, http.RequestMethod.POST)
+    return Network.requestSync(`/user/register?username=${username}&password=${password}&repassword=${repassword}`,
+      http.RequestMethod.POST)
   }
 
   /**
@@ -159,5 +160,14 @@ export default class API {
    */
   static async getWechatArticleList(id: number, page: number): Promise<Response<ArticleList>> {
     return Network.requestSync(`/wxarticle/list/${id}/${page}/json`, http.RequestMethod.GET)
+  }
+
+  /**
+   * 获取问答列表
+   * @param page 页码
+   * @returns
+   */
+  static async getWendaArticleList(page: number): Promise<Response<ArticleList>> {
+    return Network.requestSync(`/wenda/list/${page}/json`, http.RequestMethod.GET)
   }
 }
