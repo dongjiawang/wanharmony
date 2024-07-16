@@ -6,6 +6,7 @@ import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
 import { LoadState, PageLoading } from '../widgets/PageLoading'
 import { router } from '@kit.ArkUI'
 import TitleLayout from '../widgets/TitleLayout'
+import StringTool from '../common/StringTool'
 
 @Entry
 @Component
@@ -71,23 +72,12 @@ struct SearchResult {
     if (response.isSuccessWithData()) {
       const list = response.getDataOrThrow().datas
       list.forEach((item) => {
-        item.title = this.removeHtmlTags(item.title)
+        item.title = StringTool.removeHtmlTags(item.title)
       })
       return Promise.resolve(list)
     } else {
       return Promise.reject()
     }
-  }
-
-  /**
-   * 移除 html 的标签字符
-   * @param text
-   * @returns
-   */
-  private removeHtmlTags(text: string): string {
-    return text.replace(/<[^>]+>/g, '')
-      .replace('&gt;', '>')
-      .replace('&lt;', '<')
   }
 
   @Builder

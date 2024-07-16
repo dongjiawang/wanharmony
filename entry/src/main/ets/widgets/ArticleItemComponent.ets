@@ -1,5 +1,6 @@
 import { Article, ArticleTag, getArticleAuthor, getArticleChapter, getTagColor } from '../network/model/Article'
 import { router } from '@kit.ArkUI'
+import StringTool from '../common/StringTool'
 
 @Component
 export struct ArticleItemComponent {
@@ -56,16 +57,36 @@ export struct ArticleItemComponent {
 
       Divider()
         .width("100%")
-        .height(4)
+        .height(5)
         .color(Color.Transparent)
 
-      // 文章标题
-      Text(this.article.title)
-        .width("100%")
-        .fontColor($r("app.color.text_h1"))
-        .fontSize(15)
-        .maxLines(2)
-        .textOverflow({ overflow: TextOverflow.Ellipsis })
+      if (this.article.desc) {
+        // 文章标题
+        Text(this.article.title)
+          .width("100%")
+          .fontColor($r("app.color.text_h1"))
+          .fontSize(15)
+          .maxLines(1)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+
+        Text(StringTool.removeHtmlTags(this.article.desc))
+          .width("100%")
+          .fontColor($r("app.color.text_h2"))
+          .fontSize(11)
+          .maxLines(3)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+          .padding({
+            top: 5
+          })
+      } else {
+        // 文章标题
+        Text(this.article.title)
+          .width("100%")
+          .fontColor($r("app.color.text_h1"))
+          .fontSize(15)
+          .maxLines(2)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+      }
 
       Divider()
         .width("100%")
