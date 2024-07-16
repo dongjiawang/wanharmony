@@ -2,7 +2,7 @@ import OHPermission from "../common/OHPermission"
 import WindowUtils from '../common/WindowUtils'
 import { Home } from './Home/Home'
 import { Mine } from './Mine/Mine'
-import { TreeTab } from "./Tree/TreeTab"
+import { TreePage } from "./Tree/TreePage"
 import { common } from '@kit.AbilityKit'
 import { toast } from '../common/Toast'
 import { Question } from './Question/Question'
@@ -30,7 +30,7 @@ struct Index {
             $r("sys.symbol.message_on_message")))
 
           TabContent() {
-            TreeTab()
+            TreePage()
           }.tabBar(this.tabBuilder("体系", 2, $r("sys.symbol.satellite_map_fill"), $r("sys.symbol.satellite_map")))
 
           TabContent() {
