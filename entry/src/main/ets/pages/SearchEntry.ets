@@ -121,10 +121,9 @@ struct SearchEntry {
                     .layoutWeight(1)
                     .maxLines(1)
 
-                  Image($r("app.media.ic_close"))
-                    .width(20)
-                    .height(20)
-                    .fillColor($r("app.color.text_h2"))
+                  SymbolGlyph($r("sys.symbol.xmark"))
+                    .fontSize(14)
+                    .fontColor([$r("app.color.text_h2")])
                     .onClick(() => {
                       this.deleteHistory(index)
                     })

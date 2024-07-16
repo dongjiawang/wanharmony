@@ -82,10 +82,9 @@ export struct ArticleItemComponent {
         Blank()
 
         // 收藏状态
-        Image(this.article.collect ? $r("app.media.ic_like_fill") : $r("app.media.ic_like"))
-          .fillColor(this.article.collect ? $r("app.color.red") : $r("app.color.text_h2"))
-          .width(24)
-          .height(24)
+        SymbolGlyph(this.article.collect ? $r("sys.symbol.heart_fill") : $r("sys.symbol.heart"))
+          .fontSize(22)
+          .fontColor(this.article.collect ? [$r("app.color.red")] : [$r("app.color.text_h2")])
           .onClick(() => {
             if (this.onCollectClick) {
               this.onCollectClick(this.article)

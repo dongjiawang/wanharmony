@@ -123,10 +123,10 @@ export struct Mine {
             .layoutWeight(1)
             .fontSize(15)
             .fontColor($r("app.color.text_h1"))
-          Image($r("app.media.ic_arrow_right"))
-            .fillColor($r("app.color.text_h1"))
-            .width(20)
-            .height(20)
+
+          SymbolGlyph($r("sys.symbol.chevron_right"))
+            .fontSize(22)
+            .fontColor([$r("app.color.text_h1")])
         }
         .width("100%")
         .height(50)
