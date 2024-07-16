@@ -15,3 +15,4 @@
 /Users
 *.log
 .hvigor/outputs/sync/fileCache.json
+.DS_Store
