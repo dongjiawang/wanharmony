@@ -24,12 +24,12 @@ struct SearchEntry {
 
   build() {
     Column() {
-      Blank().height(WindowUtils.statusBarHeight)
+      Blank().height(WindowUtils.statusBarHeight).backgroundColor($r("app.color.main"))
       Row() {
         Stack() {
           SymbolGlyph($r("sys.symbol.chevron_left"))
             .fontSize(30)
-            .fontColor([$r("app.color.text_h1")])
+            .fontColor([$r("app.color.title_bar_text")])
         }
         .width(44)
         .height(44)
@@ -39,11 +39,15 @@ struct SearchEntry {
 
         TextInput({
           placeholder: "关键词以空格隔开",
-          text: this.showKeyword
+          text: this.showKeyword,
         })
+          .height(30)
           .layoutWeight(1)
-          .fontSize(17)
-          .fontColor($r("app.color.text_h1"))
+          .fontSize(12)
+          .fontColor($r("app.color.title_bar_text"))
+          .placeholderFont({ size: 12 })
+          .placeholderColor($r("app.color.search_input_placeholder"))
+          .caretColor($r("app.color.title_bar_text"))
           .padding({ left: 16, right: 16 })
           .onChange((value) => {
             this.keyword = value
@@ -54,7 +58,7 @@ struct SearchEntry {
 
         SymbolGlyph($r("sys.symbol.magnifyingglass"))
           .fontSize(22)
-          .fontColor([$r("app.color.text_h1")])
+          .fontColor([$r("app.color.title_bar_text")])
           .width(44)
           .height(44)
           .padding(14)
@@ -63,7 +67,8 @@ struct SearchEntry {
           })
       }
       .width("100%")
-      .height(48)
+      .height(44)
+      .backgroundColor($r("app.color.main"))
       .alignItems(VerticalAlign.Center)
 
       Column() {
@@ -80,7 +85,7 @@ struct SearchEntry {
         }) {
           ForEach(this.hotkeys, (key: HotKey) => {
             Text(key.name)
-              .fontColor($r("app.color.text_h1"))
+              .fontColor($r("app.color.text_h2"))
               .fontSize(14)
               .padding({
                 left: 12,

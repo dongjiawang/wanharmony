@@ -24,8 +24,7 @@ struct SearchResult {
   build() {
     Column() {
       TitleLayout({
-        title: this.title,
-        enableBack: false
+        title: this.title
       })
       PageLoading({
         loadState: this.loadState,

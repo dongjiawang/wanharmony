@@ -41,10 +41,6 @@
       "value": "#424242"
     },
     {
-      "name": "title_bar_bg",
-      "value": "#424242"
-    },
-    {
       "name": "title_bar_text",
       "value": "#E0E0E0"
     },
@@ -70,7 +66,11 @@
     },
     {
       "name": "hot_key_bg",
-      "value": "#555555"
+      "value": "#4A4A4A"
+    },
+    {
+      "name": "search_input_placeholder",
+      "value": "#A9A9A9"
     }
   ]
 }

@@ -9,7 +9,7 @@ export default struct TitleLayout {
   rightImage?: Resource | null = null
   rightText?: string | null = null
   rightSymbol?: Resource | null = null
-  bgColor: Resource = $r("app.color.title_bar_bg")
+  bgColor: Resource = $r("app.color.main")
   onBackClick?: () => void
   onRightTextClick?: () => void
   onRightImageClick?: () => void
