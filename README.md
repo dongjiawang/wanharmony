@@ -6,5 +6,5 @@
 * Harmony OS Api 12
 
 # 截图
-[浅色模式](./Art/art_light.png)
-[深色模式](./Art/art_dark.png)
+![浅色模式](./Art/art_light.png)
+![深色模式](./Art/art_dark.png)
