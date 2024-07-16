@@ -24,7 +24,7 @@ struct SearchEntry {
 
   build() {
     Column() {
-      Blank().height(WindowUtils.statusBarHeight).backgroundColor($r("app.color.main"))
+      Blank().height(WindowUtils.statusBarHeight).backgroundColor($r("app.color.title_bar_bg"))
       Row() {
         Stack() {
           SymbolGlyph($r("sys.symbol.chevron_left"))
@@ -68,7 +68,7 @@ struct SearchEntry {
       }
       .width("100%")
       .height(44)
-      .backgroundColor($r("app.color.main"))
+      .backgroundColor($r("app.color.title_bar_bg"))
       .alignItems(VerticalAlign.Center)
 
       Column() {
