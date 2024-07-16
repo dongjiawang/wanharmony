@@ -11,9 +11,10 @@
 ![浅色模式](./Art/art_light.png)
 ![深色模式](./Art/art_dark.png)
 
-#感谢
+# 感谢
 
-UI 参考了：https://github.com/goweii/WanAndroid
+UI 参考了：https://github.com/goweii/WanAndroid  
+
 初建项目时参考了：https://github.com/wangchenyan/wan-harmony
 
-感谢大佬的项目
+** 感谢大佬的项目**
