@@ -1,7 +1,7 @@
 import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh'
-import CollectUtils from '../../common/CollectUtils'
 import API from '../../network/API'
 import { Article } from '../../network/model/Article'
+import { ListDataSource } from '../../network/model/ListDataSource'
 import { ArticleItemComponent } from '../../widgets/ArticleItemComponent'
 import { LoadState, PageLoading } from '../../widgets/PageLoading'
 
@@ -10,7 +10,7 @@ export struct WechatTab {
   authorId: number = 0
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
-  @State data: Article[] = []
+  @State articles: ListDataSource<Article> = new ListDataSource()
   private scroller: Scroller = new Scroller()
   private refreshConfig = new PullToRefreshConfigurator()
   private nextPage: number = 1
@@ -43,8 +43,10 @@ export struct WechatTab {
     if (this.authorId) {
       this.loadState = LoadState.LOADING
       this.loadDataByPage(0).then((data) => {
-        this.data = data
-        if (this.data.length === 0) {
+        data.forEach((item) => {
+          this.articles.pushData(item)
+        })
+        if (this.articles.totalCount() == 0) {
           this.loadState = LoadState.EMPTY
         } else {
           this.loadState = LoadState.SUCCESS
@@ -70,7 +72,7 @@ export struct WechatTab {
   @Builder
   private pullToRefreshBuilder() {
     PullToRefresh({
-      data: $data,
+      data: $articles,
       scroller: this.scroller,
       refreshConfigurator: this.refreshConfig,
       customList: () => {
@@ -82,7 +84,9 @@ export struct WechatTab {
             this.loadDataByPage(this.nextPage).then((data) => {
               if (data.length > 0) {
                 this.nextPage++
-                this.data = this.data.concat(data)
+                data.forEach((item) => {
+                  this.articles.pushData(item)
+                })
                 resolve("加载成功")
               } else {
                 this.hasMore = false
@@ -102,17 +106,14 @@ export struct WechatTab {
   @Builder
   private listViewBuilder() {
     List({ scroller: this.scroller }) {
-      ForEach(this.data, (item: Article) => {
+      LazyForEach(this.articles, (item: Article, index) => {
         ListItem() {
           ArticleItemComponent({
             article: item,
-            onCollectClick: ((article: Article) => {
-              CollectUtils.collect(article).then((success) => {
-                if (success) {
-                  this.data = this.data.map(item => item)
-                }
-              })
-            })
+            updateCollectCallBack: async () => {
+              item.collect = !item.collect
+              this.articles.notifyDataChange(index)
+            }
           })
         }
       })

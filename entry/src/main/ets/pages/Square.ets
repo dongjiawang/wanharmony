@@ -1,7 +1,7 @@
 import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh'
-import CollectUtils from '../common/CollectUtils'
 import API from '../network/API'
 import { Article } from '../network/model/Article'
+import { ListDataSource } from '../network/model/ListDataSource'
 import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
 import { LoadState, PageLoading } from '../widgets/PageLoading'
 import TitleLayout from '../widgets/TitleLayout'
@@ -11,7 +11,7 @@ export struct Square {
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
   @State title: string = "广场"
-  @State data: Article[] = []
+  @State articles: ListDataSource<Article> = new ListDataSource()
   private scroller: Scroller = new Scroller()
   private refreshConfig = new PullToRefreshConfigurator()
   private nextPage: number = 0
@@ -33,7 +33,7 @@ export struct Square {
       }) {
         Column() {
           PullToRefresh({
-            data: $data,
+            data: $articles,
             scroller: this.scroller,
             refreshConfigurator: this.refreshConfig,
             customList: () => {
@@ -43,7 +43,10 @@ export struct Square {
               return new Promise<string>((resolve, reject) => {
                 this.loadDataByPage(0).then((data) => {
                   this.nextPage = 1
-                  this.data = data
+                  this.articles.reloadData()
+                  data.forEach((item) => {
+                    this.articles.pushData(item)
+                  })
                   resolve("刷新成功")
                 }, () => {
                   reject("刷新失败")
@@ -56,7 +59,9 @@ export struct Square {
                   this.loadDataByPage(this.nextPage).then((data) => {
                     if (data.length > 0) {
                       this.nextPage++
-                      this.data = this.data.concat(data)
+                      data.forEach((item) => {
+                        this.articles.pushData(item)
+                      })
                       resolve("加载成功")
                     } else {
                       this.hasMore = false
@@ -87,8 +92,10 @@ export struct Square {
   private loadData() {
     this.loadState = LoadState.LOADING
     this.loadDataByPage(0).then((data) => {
-      this.data = data
-      if (this.data.length === 0) {
+      data.forEach((item) => {
+        this.articles.pushData(item)
+      })
+      if (this.articles.totalCount() == 0) {
         this.loadState = LoadState.EMPTY
         this.nextPage = 0
       } else {
@@ -113,17 +120,13 @@ export struct Square {
   @Builder
   private listViewBuilder() {
     List({ scroller: this.scroller }) {
-      ForEach(this.data, (item: Article) => {
+      LazyForEach(this.articles, (item: Article, index) => {
         ListItem() {
           ArticleItemComponent({
             article: item,
-            onCollectClick: ((article: Article) => {
-              CollectUtils.collect(article).then((success) => {
-                if (success) {
-                  this.data = this.data.map(item => item)
-                }
-              })
-            })
+            updateCollectCallBack: async () => {
+              this.articles.notifyDataChange(index)
+            }
           })
         }
       })

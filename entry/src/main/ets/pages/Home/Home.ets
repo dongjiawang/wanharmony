@@ -6,14 +6,14 @@ import { BannerComponent } from './BannerComponent'
 import { ArticleItemComponent } from '../../widgets/ArticleItemComponent'
 import TitleLayout from '../../widgets/TitleLayout'
 import { PullToRefresh } from '@ohos/pulltorefresh'
-import CollectUtils from '../../common/CollectUtils'
 import { router } from '@kit.ArkUI'
+import { ListDataSource } from '../../network/model/ListDataSource'
 
 declare type HomeItemData = Article | HomeBannerData[]
 
 @Component
 export struct Home {
-  @State data: HomeItemData[] = []
+  @State data: ListDataSource<HomeItemData> = new ListDataSource()
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
   @State bannerPosition: number = 0
@@ -30,8 +30,10 @@ export struct Home {
     this.loadState = LoadState.LOADING
     this.loadDataByPage(0)
       .then((data) => {
-        this.data = data
-        if (this.data.length === 0) {
+        data.forEach((item) => {
+          this.data.pushData(item)
+        })
+        if (this.data.totalCount() == 0) {
           this.loadState = LoadState.EMPTY
         } else {
           this.loadState = LoadState.SUCCESS
@@ -122,7 +124,10 @@ export struct Home {
         return new Promise<string>((resolve, reject) => {
           this.loadDataByPage(0)
             .then((data) => {
-              this.data = data
+              this.data.reloadData()
+              data.forEach((item) => {
+                this.data.pushData(item)
+              })
               this.nextPage = 1
               this.hasMore = true
               resolve("刷新成功")
@@ -139,7 +144,10 @@ export struct Home {
               .then((data) => {
                 if (data.length > 0) {
                   this.nextPage++
-                  this.data = this.data.concat(data)
+
+                  data.forEach((item) => {
+                    this.data.pushData(item)
+                  })
                   resolve("加载成功")
                 } else {
                   this.hasMore = false
@@ -162,7 +170,7 @@ export struct Home {
     List({
       scroller: this.scroller
     }) {
-      ForEach(this.data, (item: HomeItemData) => {
+      LazyForEach(this.data, (item: HomeItemData, index) => {
         ListItem() {
           if (item instanceof Array) {
             BannerComponent({
@@ -171,11 +179,8 @@ export struct Home {
           } else {
             ArticleItemComponent({
               article: item as Article,
-              onCollectClick: async (article: Article) => {
-                const success = await CollectUtils.collect(article)
-                if (success) {
-                  this.data = this.data.map(item => item)
-                }
+              updateCollectCallBack: async () => {
+                this.data.notifyDataChange(index)
               }
             })
           }

@@ -3,9 +3,8 @@ import API from '../../network/API';
 import { Article } from '../../network/model/Article';
 import { LoadState, PageLoading } from '../../widgets/PageLoading';
 import { ArticleItemComponent } from '../../widgets/ArticleItemComponent';
-import CollectUtils from '../../common/CollectUtils';
 import TitleLayout from '../../widgets/TitleLayout';
-import WindowUtils from '../../common/WindowUtils';
+import { ListDataSource } from '../../network/model/ListDataSource';
 
 @Entry
 @Component
@@ -13,7 +12,7 @@ struct CollectList {
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
   private title: string = '我的收藏';
-  @State data: Article[] = []
+  @State articles: ListDataSource<Article> = new ListDataSource()
   private scroller: Scroller = new Scroller()
   private nextPage: number = 1
   private hasMore: boolean = true
@@ -47,8 +46,10 @@ struct CollectList {
   private loadData() {
     this.loadState = LoadState.LOADING
     this.loadDataByPage(0).then((data) => {
-      this.data = data
-      if (this.data.length === 0) {
+      data.forEach((item) => {
+        this.articles.pushData(item)
+      })
+      if (this.articles.totalCount() == 0) {
         this.loadState = LoadState.EMPTY
       } else {
         this.loadState = LoadState.SUCCESS
@@ -74,7 +75,7 @@ struct CollectList {
   @Builder
   private pullToRefreshBuilder() {
     PullToRefresh({
-      data: $data,
+      data: $articles,
       scroller: this.scroller,
       customList: () => {
         this.listViewBuilder()
@@ -82,7 +83,10 @@ struct CollectList {
       onRefresh: () => {
         return new Promise<string>((resolve, reject) => {
           this.loadDataByPage(0).then((data) => {
-            this.data = data
+            this.articles.reloadData()
+            data.forEach((item) => {
+              this.articles.pushData(item)
+            })
             this.nextPage = 1
             this.hasMore = true
             resolve("刷新成功")
@@ -97,7 +101,9 @@ struct CollectList {
             this.loadDataByPage(this.nextPage).then((data) => {
               if (data.length > 0) {
                 this.nextPage++
-                this.data = this.data.concat(data)
+                data.forEach((item) => {
+                  this.articles.pushData(item)
+                })
                 resolve("加载成功")
               } else {
                 this.hasMore = false
@@ -117,21 +123,12 @@ struct CollectList {
   @Builder
   private listViewBuilder() {
     List({ scroller: this.scroller }) {
-      ForEach(this.data, (item: Article) => {
+      LazyForEach(this.articles, (item: Article, index) => {
         ListItem() {
           ArticleItemComponent({
             article: item,
-            onCollectClick: ((article: Article) => {
-              CollectUtils.collect(article, article.originId).then((success) => {
-                if (success) {
-                  const existIndex = this.data.findIndex((item) => {
-                    return item.id === article.id
-                  })
-                  if (existIndex >= 0) {
-                    this.data.splice(existIndex, 1)
-                  }
-                }
-              })
+            updateCollectCallBack: (() => {
+              this.articles.deleteData(index)
             })
           })
         }

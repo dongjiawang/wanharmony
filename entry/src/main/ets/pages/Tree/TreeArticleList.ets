@@ -85,6 +85,7 @@ struct TreeArticleList {
       onRefresh: () => {
         return new Promise<string>((resolve, reject) => {
           this.loadDataByPage(0).then((data) => {
+            this.articleList.reloadData()
             data.forEach((item) => {
               this.articleList.pushData(item)
             })
@@ -129,12 +130,8 @@ struct TreeArticleList {
         ListItem(){
           ArticleItemComponent({
             article: item,
-            onCollectClick: async (article: Article) => {
-              const success = await CollectUtils.collect(article)
-              if (success) {
-                item.collect = !item.collect
-                this.articleList.notifyDataChange(index)
-              }
+            updateCollectCallBack: async () => {
+              this.articleList.notifyDataChange(index)
             }
           })
         }

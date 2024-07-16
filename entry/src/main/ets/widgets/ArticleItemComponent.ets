@@ -1,11 +1,17 @@
 import { Article, ArticleTag, getArticleAuthor, getArticleChapter, getTagColor } from '../network/model/Article'
 import { router } from '@kit.ArkUI'
 import StringTool from '../common/StringTool'
+import CollectUtils from '../common/CollectUtils'
 
 @Component
 export struct ArticleItemComponent {
   article: Article = new Article()
-  onCollectClick?: (article: Article) => void
+  @State collect: boolean = false
+  updateCollectCallBack?: () => void
+
+  aboutToAppear(): void {
+    this.collect = this.article.collect
+  }
 
   build() {
     Column() {
@@ -103,12 +109,16 @@ export struct ArticleItemComponent {
         Blank()
 
         // 收藏状态
-        SymbolGlyph(this.article.collect ? $r("sys.symbol.heart_fill") : $r("sys.symbol.heart"))
+        SymbolGlyph(this.collect ? $r("sys.symbol.heart_fill") : $r("sys.symbol.heart"))
           .fontSize(22)
-          .fontColor(this.article.collect ? [$r("app.color.red")] : [$r("app.color.text_h2")])
-          .onClick(() => {
-            if (this.onCollectClick) {
-              this.onCollectClick(this.article)
+          .fontColor(this.collect ? [$r("app.color.red")] : [$r("app.color.text_h2")])
+          .onClick(async () => {
+            const success = await CollectUtils.collect(this.article, this.article.originId)
+
+            this.collect = this.article.collect
+
+            if (this.updateCollectCallBack && success) {
+              this.updateCollectCallBack()
             }
           })
       }
