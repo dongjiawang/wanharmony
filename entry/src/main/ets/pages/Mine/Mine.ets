@@ -136,7 +136,7 @@ export struct Mine {
         .onClick(() => {
           UserService.checkLogin(() => {
             router.pushUrl({
-              url: "pages/CollectList"
+              url: "pages/Mine/CollectList"
             })
           })
         })

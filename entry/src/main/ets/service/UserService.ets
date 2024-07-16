@@ -89,7 +89,7 @@ export default class UserService {
           .then((resp) => {
             if (resp.index === 0) {
               router.pushUrl({
-                url: "pages/Login"
+                url: "pages/Mine/Login"
               })
             }
           })

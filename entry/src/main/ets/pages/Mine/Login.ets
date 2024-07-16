@@ -71,7 +71,7 @@ struct Login {
               .backgroundColor("#ffffffff")
               .onClick(() =>{
                 router.replaceUrl({
-                  url: "pages/Register"
+                  url: "pages/Mine/Register"
                 })
               })
           }

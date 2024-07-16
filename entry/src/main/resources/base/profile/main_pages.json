@@ -6,6 +6,7 @@
     "pages/Search/SearchEntry",
     "pages/Search/SearchResult",
     "pages/Mine/Register",
-    "pages/Mine/CollectList"
+    "pages/Mine/CollectList",
+    "pages/Tree/TreeArticleList"
   ]
 }

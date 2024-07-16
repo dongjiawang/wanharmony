@@ -177,7 +177,7 @@ struct SearchEntry {
     this.historyKeys = historyKeys
     preferences.get(getContext()).putSearchHistory(historyKeys)
     router.pushUrl({
-      url: "pages/SearchResult",
+      url: "pages/Search/SearchResult",
       params: new SearchResultParams(this.keyword)
     })
   }

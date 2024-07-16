@@ -92,7 +92,7 @@ export struct Home {
         rightSymbol: $r("sys.symbol.magnifyingglass"),
         onRightSymbolClick: () => {
           router.pushUrl({
-            url: "pages/SearchEntry"
+            url: "pages/Search/SearchEntry"
           })
         }
       })
