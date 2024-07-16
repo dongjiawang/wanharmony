@@ -1,7 +1,7 @@
-import API from '../network/API'
-import { WeChatAuthor } from '../network/model/WeChat'
-import { LoadState, PageLoading } from '../widgets/PageLoading'
-import TitleLayout from '../widgets/TitleLayout'
+import API from '../../network/API'
+import { WeChatAuthor } from '../../network/model/WeChat'
+import { LoadState, PageLoading } from '../../widgets/PageLoading'
+import TitleLayout from '../../widgets/TitleLayout'
 import { WechatTab } from './WechatTab'
 
 @Component

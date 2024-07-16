@@ -1,4 +1,4 @@
-import { HomeBannerData } from '../network/model/Banner'
+import { HomeBannerData } from '../../network/model/Banner'
 import { router } from '@kit.ArkUI'
 
 /**

@@ -1,11 +1,11 @@
 import OHPermission from "../common/OHPermission"
 import WindowUtils from '../common/WindowUtils'
-import { Home } from './Home'
-import { Mine } from './Mine'
-import { TreeTab } from "./TreeTab"
+import { Home } from './Home/Home'
+import { Mine } from './Mine/Mine'
+import { TreeTab } from "./Tree/TreeTab"
 import { common } from '@kit.AbilityKit'
 import { toast } from '../common/Toast'
-import { Question } from './Question'
+import { Question } from './Question/Question'
 
 @Entry
 @Component

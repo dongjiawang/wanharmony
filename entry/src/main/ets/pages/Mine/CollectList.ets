@@ -1,16 +1,18 @@
 import { PullToRefresh } from '@ohos/pulltorefresh';
-import CollectUtils from '../common/CollectUtils';
-import API from '../network/API';
-import { Article } from '../network/model/Article';
-import { ArticleItemComponent } from '../widgets/ArticleItemComponent';
-import { LoadState, PageLoading } from '../widgets/PageLoading';
-import TitleLayout from '../widgets/TitleLayout';
+import API from '../../network/API';
+import { Article } from '../../network/model/Article';
+import { LoadState, PageLoading } from '../../widgets/PageLoading';
+import { ArticleItemComponent } from '../../widgets/ArticleItemComponent';
+import CollectUtils from '../../common/CollectUtils';
+import TitleLayout from '../../widgets/TitleLayout';
+import WindowUtils from '../../common/WindowUtils';
 
+@Entry
 @Component
-export struct Question {
+struct CollectList {
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
-  private title: string = '问答';
+  private title: string = '我的收藏';
   @State data: Article[] = []
   private scroller: Scroller = new Scroller()
   private nextPage: number = 1
@@ -19,8 +21,7 @@ export struct Question {
   build() {
     Column() {
       TitleLayout({
-        title: this.title,
-        enableBack: false
+        title: this.title
       })
 
       PageLoading({
@@ -35,6 +36,8 @@ export struct Question {
       })
         .layoutWeight(1)
     }
+    .width("100%")
+    .height("100%")
   }
 
   aboutToAppear(): void {
@@ -56,9 +59,12 @@ export struct Question {
   }
 
   private async loadDataByPage(page: number): Promise<Article[]> {
-    const response = await API.getWendaArticleList(page)
+    const response = await API.getCollectList(page)
     if (response.isSuccessWithData()) {
       const list = response.getDataOrThrow().datas
+      list.forEach((item) => {
+        item.collect = true
+      })
       return Promise.resolve(list)
     } else {
       return Promise.reject()
@@ -76,9 +82,9 @@ export struct Question {
       onRefresh: () => {
         return new Promise<string>((resolve, reject) => {
           this.loadDataByPage(0).then((data) => {
+            this.data = data
             this.nextPage = 1
             this.hasMore = true
-            this.data = data
             resolve("刷新成功")
           }, () => {
             reject("刷新失败")
@@ -116,9 +122,14 @@ export struct Question {
           ArticleItemComponent({
             article: item,
             onCollectClick: ((article: Article) => {
-              CollectUtils.collect(article).then((success) => {
+              CollectUtils.collect(article, article.originId).then((success) => {
                 if (success) {
-                  this.data = this.data.map(item => item)
+                  const existIndex = this.data.findIndex((item) => {
+                    return item.id === article.id
+                  })
+                  if (existIndex >= 0) {
+                    this.data.splice(existIndex, 1)
+                  }
                 }
               })
             })

@@ -1,22 +1,17 @@
-import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh'
-import CollectUtils from '../common/CollectUtils'
-import API from '../network/API'
-import { Article } from '../network/model/Article'
-import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
-import { LoadState, PageLoading } from '../widgets/PageLoading'
-import { router } from '@kit.ArkUI'
-import TitleLayout from '../widgets/TitleLayout'
-import StringTool from '../common/StringTool'
+import { PullToRefresh } from '@ohos/pulltorefresh';
+import CollectUtils from '../../common/CollectUtils';
+import API from '../../network/API';
+import { Article } from '../../network/model/Article';
+import { ArticleItemComponent } from '../../widgets/ArticleItemComponent';
+import { LoadState, PageLoading } from '../../widgets/PageLoading';
+import TitleLayout from '../../widgets/TitleLayout';
 
-@Entry
 @Component
-struct SearchResult {
+export struct Question {
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
-  @State title: string = ""
+  private title: string = '问答';
   @State data: Article[] = []
-  private keyword: string = ""
-  private refreshConfig = new PullToRefreshConfigurator()
   private scroller: Scroller = new Scroller()
   private nextPage: number = 1
   private hasMore: boolean = true
@@ -24,29 +19,25 @@ struct SearchResult {
   build() {
     Column() {
       TitleLayout({
-        title: this.title
+        title: this.title,
+        enableBack: false
       })
+
       PageLoading({
         loadState: this.loadState,
         showLoading: this.showLoading,
-        onReload: () => {
+        onReload: (() => {
           this.loadData()
-        },
-        content:(() => {
+        }),
+        content: (() => {
           this.pullToRefreshBuilder()
         })
       })
         .layoutWeight(1)
     }
-    .width("100%")
-    .height("100%")
   }
 
-  aboutToAppear() {
-    const param = router.getParams() as SearchResultParams
-    this.keyword = param.keyword
-    this.title = this.keyword
-    this.refreshConfig.setHasRefresh(false)
+  aboutToAppear(): void {
     this.loadData()
   }
 
@@ -59,20 +50,15 @@ struct SearchResult {
       } else {
         this.loadState = LoadState.SUCCESS
       }
-    },
-      () => {
-        this.loadState = LoadState.FAIL
-      }
-    )
+    }, () => {
+      this.loadState = LoadState.FAIL
+    })
   }
 
   private async loadDataByPage(page: number): Promise<Article[]> {
-    const response = await API.search(this.keyword, page)
+    const response = await API.getWendaArticleList(page)
     if (response.isSuccessWithData()) {
       const list = response.getDataOrThrow().datas
-      list.forEach((item) => {
-        item.title = StringTool.removeHtmlTags(item.title)
-      })
       return Promise.resolve(list)
     } else {
       return Promise.reject()
@@ -84,9 +70,20 @@ struct SearchResult {
     PullToRefresh({
       data: $data,
       scroller: this.scroller,
-      refreshConfigurator: this.refreshConfig,
       customList: () => {
         this.listViewBuilder()
+      },
+      onRefresh: () => {
+        return new Promise<string>((resolve, reject) => {
+          this.loadDataByPage(0).then((data) => {
+            this.nextPage = 1
+            this.hasMore = true
+            this.data = data
+            resolve("刷新成功")
+          }, () => {
+            reject("刷新失败")
+          })
+        })
       },
       onLoadMore: () => {
         return new Promise<string>((resolve, reject) => {
@@ -101,15 +98,13 @@ struct SearchResult {
                 resolve("没有更多了")
               }
             }, () => {
-              reject("没有更多了")
+              reject("加载失败")
             })
           } else {
-            reject("没有更多了")
+            resolve("没有更多了")
           }
         })
-      },
-      customLoad: null,
-      customRefresh: null
+      }
     })
   }
 
@@ -120,13 +115,13 @@ struct SearchResult {
         ListItem() {
           ArticleItemComponent({
             article: item,
-            onCollectClick: (article: Article) => {
+            onCollectClick: ((article: Article) => {
               CollectUtils.collect(article).then((success) => {
                 if (success) {
                   this.data = this.data.map(item => item)
                 }
               })
-            }
+            })
           })
         }
       })
@@ -141,13 +136,5 @@ struct SearchResult {
       endMargin: 16
     })
     .edgeEffect(EdgeEffect.None)
-  }
-}
-
-export class SearchResultParams {
-  keyword: string = ""
-
-  constructor(keyword: string) {
-    this.keyword = keyword
   }
 }

@@ -1,6 +1,6 @@
 import webview from '@ohos.web.webview';
 import { router } from '@kit.ArkUI';
-import TitleLayout from '../widgets/TitleLayout';
+import TitleLayout from '../../widgets/TitleLayout';
 
 @Entry
 @Component

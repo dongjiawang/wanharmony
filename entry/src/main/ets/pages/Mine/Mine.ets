@@ -1,8 +1,8 @@
-import API from '../network/API'
-import UserService, { User } from '../service/UserService'
-import { LoadState, PageLoading } from '../widgets/PageLoading'
+import API from '../../network/API'
+import UserService, { User } from '../../service/UserService'
+import { LoadState, PageLoading } from '../../widgets/PageLoading'
 import { promptAction, router } from '@kit.ArkUI'
-import WindowUtils from '../common/WindowUtils'
+import WindowUtils from '../../common/WindowUtils'
 
 class UserInfo {
   name: string = ""

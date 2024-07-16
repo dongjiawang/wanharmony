@@ -1,11 +1,11 @@
 {
   "src": [
     "pages/Index",
-    "pages/WebPage",
-    "pages/Login",
-    "pages/SearchEntry",
-    "pages/SearchResult",
-    "pages/Register",
-    "pages/CollectList"
+    "pages/Web/WebPage",
+    "pages/Mine/Login",
+    "pages/Search/SearchEntry",
+    "pages/Search/SearchResult",
+    "pages/Mine/Register",
+    "pages/Mine/CollectList"
   ]
 }

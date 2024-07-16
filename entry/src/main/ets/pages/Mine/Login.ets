@@ -1,19 +1,18 @@
-import { toast } from '../common/Toast'
-import API from '../network/API'
-import UserService from '../service/UserService'
-import { LoadState, PageLoading } from '../widgets/PageLoading'
-import TitleLayout from '../widgets/TitleLayout'
+import { toast } from '../../common/Toast'
+import API from '../../network/API'
+import UserService from '../../service/UserService'
+import { LoadState, PageLoading } from '../../widgets/PageLoading'
 import { router } from '@kit.ArkUI'
+import TitleLayout from '../../widgets/TitleLayout'
 
 @Entry
 @Component
-export struct Register {
+struct Login {
   @State loadState: LoadState = LoadState.SUCCESS
   @State showLoading: boolean = false
-  @State title: string = "注册账号"
-  private username: string = ""
+  @State title: string = "登录"
+  private account: string = ""
   private password: string = ""
-  private repassword: string = ""
 
   build() {
     Stack() {
@@ -35,7 +34,7 @@ export struct Register {
               .fontColor($r("app.color.text_h1"))
               .type(InputType.Email)
               .onChange((value) => {
-                this.username = value
+                this.account = value
               })
 
             TextInput({
@@ -49,18 +48,7 @@ export struct Register {
                 this.password = value
               })
 
-            TextInput({
-              placeholder: "请确认输入密码"
-            })
-              .fontSize(15)
-              .margin({ top: 16 })
-              .fontColor($r("app.color.text_h1"))
-              .type(InputType.Password)
-              .onChange((value) => {
-                this.repassword = value
-              })
-
-            Button("注册", {
+            Button("登录", {
               type: ButtonType.Capsule
             })
               .width("100%")
@@ -69,7 +57,22 @@ export struct Register {
               .fontColor($r("app.color.white"))
               .backgroundColor($r("app.color.main"))
               .onClick(() => {
-                this.register().catch()
+                this.login().catch()
+              })
+
+            Button("注册账号", {
+              type: ButtonType.Capsule,
+            })
+              .stateEffect(false)
+              .width("100%")
+              .margin({top: 30})
+              .fontColor(Color.Gray)
+              .fontSize(12)
+              .backgroundColor("#ffffffff")
+              .onClick(() =>{
+                router.replaceUrl({
+                  url: "pages/Register"
+                })
               })
           }
           .width("100%")
@@ -85,8 +88,8 @@ export struct Register {
     .height("100%")
   }
 
-  private async register() {
-    if (!this.username) {
+  private async login() {
+    if (!this.account) {
       toast("请输入用户名")
       return
     }
@@ -95,13 +98,8 @@ export struct Register {
       return
     }
 
-    if (!this.repassword) {
-      toast("请输入确认密码")
-      return
-    }
-
     this.showLoading = true
-    const response = await API.register(this.username, this.password, this.repassword)
+    const response = await API.login(this.account, this.password)
     this.showLoading = false
     if (response.isSuccessWithData()) {
       UserService.setUser(response.data)

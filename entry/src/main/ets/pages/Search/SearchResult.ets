@@ -1,30 +1,38 @@
 import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh'
-import CollectUtils from '../common/CollectUtils'
-import API from '../network/API'
-import { Article } from '../network/model/Article'
-import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
-import { LoadState, PageLoading } from '../widgets/PageLoading'
+import CollectUtils from '../../common/CollectUtils'
+import API from '../../network/API'
+import { Article } from '../../network/model/Article'
+import { ArticleItemComponent } from '../../widgets/ArticleItemComponent'
+import { LoadState, PageLoading } from '../../widgets/PageLoading'
+import { router } from '@kit.ArkUI'
+import TitleLayout from '../../widgets/TitleLayout'
+import StringTool from '../../common/StringTool'
 
+@Entry
 @Component
-export struct WechatTab {
-  authorId: number = 0
+struct SearchResult {
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
+  @State title: string = ""
   @State data: Article[] = []
-  private scroller: Scroller = new Scroller()
+  private keyword: string = ""
   private refreshConfig = new PullToRefreshConfigurator()
+  private scroller: Scroller = new Scroller()
   private nextPage: number = 1
   private hasMore: boolean = true
 
   build() {
     Column() {
+      TitleLayout({
+        title: this.title
+      })
       PageLoading({
         loadState: this.loadState,
         showLoading: this.showLoading,
-        onReload: (() => {
+        onReload: () => {
           this.loadData()
-        }),
-        content: (() => {
+        },
+        content:(() => {
           this.pullToRefreshBuilder()
         })
       })
@@ -34,33 +42,37 @@ export struct WechatTab {
     .height("100%")
   }
 
-  aboutToAppear(): void {
+  aboutToAppear() {
+    const param = router.getParams() as SearchResultParams
+    this.keyword = param.keyword
+    this.title = this.keyword
     this.refreshConfig.setHasRefresh(false)
     this.loadData()
   }
 
   private loadData() {
-    if (this.authorId) {
-      this.loadState = LoadState.LOADING
-      this.loadDataByPage(0).then((data) => {
-        this.data = data
-        if (this.data.length === 0) {
-          this.loadState = LoadState.EMPTY
-        } else {
-          this.loadState = LoadState.SUCCESS
-        }
-      }, () => {
+    this.loadState = LoadState.LOADING
+    this.loadDataByPage(0).then((data) => {
+      this.data = data
+      if (this.data.length === 0) {
+        this.loadState = LoadState.EMPTY
+      } else {
+        this.loadState = LoadState.SUCCESS
+      }
+    },
+      () => {
         this.loadState = LoadState.FAIL
-      })
-    } else {
-      this.loadState = LoadState.FAIL
-    }
+      }
+    )
   }
 
-  private async loadDataByPage(page: number) {
-    const response = await API.getWechatArticleList(this.authorId, page)
+  private async loadDataByPage(page: number): Promise<Article[]> {
+    const response = await API.search(this.keyword, page)
     if (response.isSuccessWithData()) {
       const list = response.getDataOrThrow().datas
+      list.forEach((item) => {
+        item.title = StringTool.removeHtmlTags(item.title)
+      })
       return Promise.resolve(list)
     } else {
       return Promise.reject()
@@ -76,7 +88,7 @@ export struct WechatTab {
       customList: () => {
         this.listViewBuilder()
       },
-      onLoadMore: (() => {
+      onLoadMore: () => {
         return new Promise<string>((resolve, reject) => {
           if (this.hasMore) {
             this.loadDataByPage(this.nextPage).then((data) => {
@@ -89,13 +101,15 @@ export struct WechatTab {
                 resolve("没有更多了")
               }
             }, () => {
-              reject("加载失败")
+              reject("没有更多了")
             })
           } else {
-            resolve("没有更多了")
+            reject("没有更多了")
           }
         })
-      })
+      },
+      customLoad: null,
+      customRefresh: null
     })
   }
 
@@ -106,13 +120,13 @@ export struct WechatTab {
         ListItem() {
           ArticleItemComponent({
             article: item,
-            onCollectClick: ((article: Article) => {
+            onCollectClick: (article: Article) => {
               CollectUtils.collect(article).then((success) => {
                 if (success) {
                   this.data = this.data.map(item => item)
                 }
               })
-            })
+            }
           })
         }
       })
@@ -127,5 +141,13 @@ export struct WechatTab {
       endMargin: 16
     })
     .edgeEffect(EdgeEffect.None)
+  }
+}
+
+export class SearchResultParams {
+  keyword: string = ""
+
+  constructor(keyword: string) {
+    this.keyword = keyword
   }
 }

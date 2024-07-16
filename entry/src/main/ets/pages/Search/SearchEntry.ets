@@ -1,10 +1,10 @@
-import preferences from '../common/Preferences'
-import { toast } from '../common/Toast'
-import API from '../network/API'
-import { HotKey } from '../network/model/Search'
+import preferences from '../../common/Preferences'
+import { toast } from '../../common/Toast'
+import API from '../../network/API'
+import { HotKey } from '../../network/model/Search'
 import { router } from '@kit.ArkUI'
 import { SearchResultParams } from './SearchResult'
-import WindowUtils from '../common/WindowUtils'
+import WindowUtils from '../../common/WindowUtils'
 
 @Entry
 @Component

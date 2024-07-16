@@ -1,29 +1,23 @@
-import { PullToRefresh } from '@ohos/pulltorefresh';
-import API from '../network/API';
-import { Article } from '../network/model/Article';
-import { LoadState, PageLoading } from '../widgets/PageLoading';
-import { ArticleItemComponent } from '../widgets/ArticleItemComponent';
-import CollectUtils from '../common/CollectUtils';
-import TitleLayout from '../widgets/TitleLayout';
-import WindowUtils from '../common/WindowUtils';
+import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh'
+import CollectUtils from '../../common/CollectUtils'
+import API from '../../network/API'
+import { Article } from '../../network/model/Article'
+import { ArticleItemComponent } from '../../widgets/ArticleItemComponent'
+import { LoadState, PageLoading } from '../../widgets/PageLoading'
 
-@Entry
 @Component
-struct CollectList {
+export struct WechatTab {
+  authorId: number = 0
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
-  private title: string = '我的收藏';
   @State data: Article[] = []
   private scroller: Scroller = new Scroller()
+  private refreshConfig = new PullToRefreshConfigurator()
   private nextPage: number = 1
   private hasMore: boolean = true
 
   build() {
     Column() {
-      TitleLayout({
-        title: this.title
-      })
-
       PageLoading({
         loadState: this.loadState,
         showLoading: this.showLoading,
@@ -41,30 +35,32 @@ struct CollectList {
   }
 
   aboutToAppear(): void {
+    this.refreshConfig.setHasRefresh(false)
     this.loadData()
   }
 
   private loadData() {
-    this.loadState = LoadState.LOADING
-    this.loadDataByPage(0).then((data) => {
-      this.data = data
-      if (this.data.length === 0) {
-        this.loadState = LoadState.EMPTY
-      } else {
-        this.loadState = LoadState.SUCCESS
-      }
-    }, () => {
+    if (this.authorId) {
+      this.loadState = LoadState.LOADING
+      this.loadDataByPage(0).then((data) => {
+        this.data = data
+        if (this.data.length === 0) {
+          this.loadState = LoadState.EMPTY
+        } else {
+          this.loadState = LoadState.SUCCESS
+        }
+      }, () => {
+        this.loadState = LoadState.FAIL
+      })
+    } else {
       this.loadState = LoadState.FAIL
-    })
+    }
   }
 
-  private async loadDataByPage(page: number): Promise<Article[]> {
-    const response = await API.getCollectList(page)
+  private async loadDataByPage(page: number) {
+    const response = await API.getWechatArticleList(this.authorId, page)
     if (response.isSuccessWithData()) {
       const list = response.getDataOrThrow().datas
-      list.forEach((item) => {
-        item.collect = true
-      })
       return Promise.resolve(list)
     } else {
       return Promise.reject()
@@ -76,22 +72,11 @@ struct CollectList {
     PullToRefresh({
       data: $data,
       scroller: this.scroller,
+      refreshConfigurator: this.refreshConfig,
       customList: () => {
         this.listViewBuilder()
       },
-      onRefresh: () => {
-        return new Promise<string>((resolve, reject) => {
-          this.loadDataByPage(0).then((data) => {
-            this.data = data
-            this.nextPage = 1
-            this.hasMore = true
-            resolve("刷新成功")
-          }, () => {
-            reject("刷新失败")
-          })
-        })
-      },
-      onLoadMore: () => {
+      onLoadMore: (() => {
         return new Promise<string>((resolve, reject) => {
           if (this.hasMore) {
             this.loadDataByPage(this.nextPage).then((data) => {
@@ -110,7 +95,7 @@ struct CollectList {
             resolve("没有更多了")
           }
         })
-      }
+      })
     })
   }
 
@@ -122,14 +107,9 @@ struct CollectList {
           ArticleItemComponent({
             article: item,
             onCollectClick: ((article: Article) => {
-              CollectUtils.collect(article, article.originId).then((success) => {
+              CollectUtils.collect(article).then((success) => {
                 if (success) {
-                  const existIndex = this.data.findIndex((item) => {
-                    return item.id === article.id
-                  })
-                  if (existIndex >= 0) {
-                    this.data.splice(existIndex, 1)
-                  }
+                  this.data = this.data.map(item => item)
                 }
               })
             })

@@ -1,13 +1,13 @@
 import { PullToRefresh } from '@ohos/pulltorefresh'
-import CollectUtils from '../common/CollectUtils'
-import Preferences from '../common/Preferences'
-import { Pair } from '../common/Struct'
-import API from '../network/API'
-import { Article } from '../network/model/Article'
-import { Tree } from '../network/model/Tree'
-import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
-import { LoadState, PageLoading } from '../widgets/PageLoading'
-import WindowUtils from '../common/WindowUtils'
+import CollectUtils from '../../common/CollectUtils'
+import Preferences from '../../common/Preferences'
+import { Pair } from '../../common/Struct'
+import API from '../../network/API'
+import { Article } from '../../network/model/Article'
+import { Tree } from '../../network/model/Tree'
+import { ArticleItemComponent } from '../../widgets/ArticleItemComponent'
+import { LoadState, PageLoading } from '../../widgets/PageLoading'
+import WindowUtils from '../../common/WindowUtils'
 
 @Component
 export struct TreeTab {
