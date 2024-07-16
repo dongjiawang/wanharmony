@@ -82,7 +82,7 @@ struct Index {
       SymbolGlyph(this.currentIndex == targetIndex ? selectedImg : normalImg)
         .fontSize(24)
         .fontColor(this.currentIndex == targetIndex ? [$r("app.color.main")] : [$r("app.color.navi_tab_unselect")])
-        .effectStrategy(this.currentIndex == targetIndex ? SymbolEffectStrategy.SCALE : SymbolEffectStrategy.NONE)
+        .symbolEffect(new ScaleSymbolEffect(EffectScope.WHOLE, EffectDirection.UP), this.currentIndex == targetIndex)
         .padding({ top: 5, bottom: 5 })
 
       Text(title)
