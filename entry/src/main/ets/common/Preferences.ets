@@ -7,8 +7,6 @@ import { Pair } from './Struct';
 const PREFERENCES_NAME = "top.djw.wanharmony"
 const KEY_USER_INFO = "user_info"
 const KEY_SEARCH_HISTORY = "search_history"
-const KEY_SELECTED_TREE_ID_1 = "selected_tree_id_1"
-const KEY_SELECTED_TREE_ID_2 = "selected_tree_id_2"
 
 export default class Preferences {
   private static instance: Preferences
@@ -67,35 +65,6 @@ export default class Preferences {
    */
   putSearchHistory(historyKeys: string[]) {
     this.preferences.putSync(KEY_SEARCH_HISTORY, historyKeys)
-    this.preferences.flush()
-  }
-
-  /**
-   * 获取体系记录
-   * @returns
-   */
-  getSelectedTreeId(): Pair<number, number> {
-    const id1 = this.preferences.getSync(KEY_SELECTED_TREE_ID_1, 0) as number
-    const id2 = this.preferences.getSync(KEY_SELECTED_TREE_ID_2, 0) as number
-    if (id1 > 0 && id2 > 0) {
-      return {
-        first: id1, second: id2
-      }
-    } else {
-      return {
-        first: 0, second: 0
-      }
-    }
-  }
-
-  /**
-   * 记录选中的体系
-   * @param treeId1
-   * @param treeId2
-   */
-  putSelectedTreeId(treeId1: number, treeId2: number) {
-    this.preferences.putSync(KEY_SELECTED_TREE_ID_1, treeId1)
-    this.preferences.putSync(KEY_SELECTED_TREE_ID_2, treeId2)
     this.preferences.flush()
   }
 }
