@@ -46,9 +46,7 @@ struct CollectList {
   private loadData() {
     this.loadState = LoadState.LOADING
     this.loadDataByPage(0).then((data) => {
-      data.forEach((item) => {
-        this.articles.pushData(item)
-      })
+      this.articles.resetAllData(data)
       if (this.articles.totalCount() == 0) {
         this.loadState = LoadState.EMPTY
       } else {
@@ -83,10 +81,8 @@ struct CollectList {
       onRefresh: () => {
         return new Promise<string>((resolve, reject) => {
           this.loadDataByPage(0).then((data) => {
-            this.articles.reloadData()
-            data.forEach((item) => {
-              this.articles.pushData(item)
-            })
+            this.articles.clearData()
+            this.articles.resetAllData(data)
             this.nextPage = 1
             this.hasMore = true
             resolve("刷新成功")
@@ -101,9 +97,7 @@ struct CollectList {
             this.loadDataByPage(this.nextPage).then((data) => {
               if (data.length > 0) {
                 this.nextPage++
-                data.forEach((item) => {
-                  this.articles.pushData(item)
-                })
+                this.articles.pushDataList(data)
                 resolve("加载成功")
               } else {
                 this.hasMore = false
@@ -128,12 +122,13 @@ struct CollectList {
           ArticleItemComponent({
             article: item,
             updateCollectCallBack: (() => {
-              this.articles.deleteData(index)
+              this.articles.deleteData(this.articles.dataArray.indexOf(item))
             })
           })
         }
-      })
+      }, (item: Article, index) => `${item.originId} + ${index} + ${item.collect}`)
     }
+    .cachedCount(5)
     .width("100%")
     .height("100%")
     .listDirection(Axis.Vertical)

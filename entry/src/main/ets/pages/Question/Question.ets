@@ -44,9 +44,7 @@ export struct Question {
   private loadData() {
     this.loadState = LoadState.LOADING
     this.loadDataByPage(0).then((data) => {
-      data.forEach((item) => {
-        this.articles.pushData(item)
-      })
+      this.articles.resetAllData(data)
       if (this.articles.totalCount() == 0) {
         this.loadState = LoadState.EMPTY
       } else {
@@ -78,12 +76,9 @@ export struct Question {
       onRefresh: () => {
         return new Promise<string>((resolve, reject) => {
           this.loadDataByPage(0).then((data) => {
-            this.articles.reloadData()
+            this.articles.resetAllData(data)
             this.nextPage = 1
             this.hasMore = true
-            data.forEach((item) => {
-              this.articles.pushData(item)
-            })
             resolve("刷新成功")
           }, () => {
             reject("刷新失败")
@@ -96,9 +91,7 @@ export struct Question {
             this.loadDataByPage(this.nextPage).then((data) => {
               if (data.length > 0) {
                 this.nextPage++
-                data.forEach((item) => {
-                  this.articles.pushData(item)
-                })
+                this.articles.pushDataList(data)
                 resolve("加载成功")
               } else {
                 this.hasMore = false
@@ -127,8 +120,9 @@ export struct Question {
             }
           })
         }
-      })
+      }, (item: Article, index) => `${item.id} + ${index} + ${item.collect}`)
     }
+    .cachedCount(5)
     .width("100%")
     .height("100%")
     .listDirection(Axis.Vertical)

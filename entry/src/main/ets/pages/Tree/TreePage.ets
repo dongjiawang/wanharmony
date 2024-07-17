@@ -36,9 +36,7 @@ export struct TreePage {
     if (response.isSuccessWithData()) {
       if (response.getDataOrThrow().length > 0) {
         this.loadState = LoadState.SUCCESS
-        response.getDataOrThrow().forEach(item => {
-          this.treeList.pushData(item)
-        })
+        this.treeList.resetAllData(response.getDataOrThrow())
       } else {
         this.loadState = LoadState.EMPTY
       }
@@ -56,7 +54,8 @@ export struct TreePage {
             tree: item
           })
         }
-      })
+      }, (item: Tree, index) => `${item.id} + ${index}`)
     }
+    .cachedCount(5)
   }
 }

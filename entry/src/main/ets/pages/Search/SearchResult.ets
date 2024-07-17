@@ -53,9 +53,7 @@ struct SearchResult {
   private loadData() {
     this.loadState = LoadState.LOADING
     this.loadDataByPage(0).then((data) => {
-      data.forEach((item) => {
-        this.articles.pushData(item)
-      })
+      this.articles.resetAllData(data)
       if (this.articles.totalCount() == 0) {
         this.loadState = LoadState.EMPTY
       } else {
@@ -96,9 +94,7 @@ struct SearchResult {
             this.loadDataByPage(this.nextPage).then((data) => {
               if (data.length > 0) {
                 this.nextPage++
-                data.forEach((item) => {
-                  this.articles.pushData(item)
-                })
+                this.articles.pushDataList(data)
                 resolve("加载成功")
               } else {
                 this.hasMore = false
@@ -129,8 +125,9 @@ struct SearchResult {
             }
           })
         }
-      })
+      }, (item: Article, index) => `${item.id} + ${index} + ${item.collect}`)
     }
+    .cachedCount(5)
     .width("100%")
     .height("100%")
     .listDirection(Axis.Vertical)

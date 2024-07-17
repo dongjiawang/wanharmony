@@ -43,9 +43,7 @@ export struct WechatTab {
     if (this.authorId) {
       this.loadState = LoadState.LOADING
       this.loadDataByPage(0).then((data) => {
-        data.forEach((item) => {
-          this.articles.pushData(item)
-        })
+        this.articles.resetAllData(data)
         if (this.articles.totalCount() == 0) {
           this.loadState = LoadState.EMPTY
         } else {
@@ -84,9 +82,7 @@ export struct WechatTab {
             this.loadDataByPage(this.nextPage).then((data) => {
               if (data.length > 0) {
                 this.nextPage++
-                data.forEach((item) => {
-                  this.articles.pushData(item)
-                })
+                this.articles.pushDataList(data)
                 resolve("加载成功")
               } else {
                 this.hasMore = false
@@ -116,8 +112,9 @@ export struct WechatTab {
             }
           })
         }
-      })
+      }, (item: Article, index) => `${item.id} + ${index} + ${item.collect}`)
     }
+    .cachedCount(5)
     .width("100%")
     .height("100%")
     .listDirection(Axis.Vertical)

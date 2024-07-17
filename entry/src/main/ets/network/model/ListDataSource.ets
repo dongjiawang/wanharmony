@@ -1,7 +1,7 @@
 import { BaseDataSource } from './BaseDataSource';
 
 export class ListDataSource<T> extends BaseDataSource<T> {
-  private dataArray: T[] = []
+  dataArray: T[] = []
 
   public totalCount(): number {
     return this.dataArray.length
@@ -22,12 +22,28 @@ export class ListDataSource<T> extends BaseDataSource<T> {
   }
 
   public deleteData(index: number): void {
-    this.dataArray.slice(index, 1)
+    this.dataArray.splice(index, 1)
     this.notifyDataDelete(index)
   }
 
-  public reloadData () {
+  public clearData() {
     this.dataArray = [] // 不会引起状态变化
+    // 必须通过DataChangeListener来更新
+    this.notifyDataReload() // 重新加载数据
+  }
+
+  public resetAllData(datas: T[]) {
+    this.dataArray = []
+    this.dataArray.push(...datas)
+    this.notifyDataReload()
+  }
+
+  public pushDataList(datas: T[]) {
+    this.dataArray.push(...datas)
+    this.notifyDataReload()
+  }
+
+  public reloadData() {
     // 必须通过DataChangeListener来更新
     this.notifyDataReload() // 重新加载数据
   }

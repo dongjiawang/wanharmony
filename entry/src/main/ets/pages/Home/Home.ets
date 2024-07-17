@@ -13,7 +13,7 @@ declare type HomeItemData = Article | HomeBannerData[]
 
 @Component
 export struct Home {
-  @State data: ListDataSource<HomeItemData> = new ListDataSource()
+  @State dataList: ListDataSource<HomeItemData> = new ListDataSource()
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
   @State bannerPosition: number = 0
@@ -30,10 +30,8 @@ export struct Home {
     this.loadState = LoadState.LOADING
     this.loadDataByPage(0)
       .then((data) => {
-        data.forEach((item) => {
-          this.data.pushData(item)
-        })
-        if (this.data.totalCount() == 0) {
+        this.dataList.resetAllData(data)
+        if (this.dataList.totalCount() == 0) {
           this.loadState = LoadState.EMPTY
         } else {
           this.loadState = LoadState.SUCCESS
@@ -115,7 +113,7 @@ export struct Home {
   @Builder
   private pullToRefreshBuilder() {
     PullToRefresh({
-      data: $data,
+      data: $dataList,
       scroller: this.scroller,
       customList: () => {
         this.listViewBuilder()
@@ -124,10 +122,7 @@ export struct Home {
         return new Promise<string>((resolve, reject) => {
           this.loadDataByPage(0)
             .then((data) => {
-              this.data.reloadData()
-              data.forEach((item) => {
-                this.data.pushData(item)
-              })
+              this.dataList.resetAllData(data)
               this.nextPage = 1
               this.hasMore = true
               resolve("刷新成功")
@@ -143,11 +138,8 @@ export struct Home {
             this.loadDataByPage(this.nextPage)
               .then((data) => {
                 if (data.length > 0) {
+                  this.dataList.pushDataList(data)
                   this.nextPage++
-
-                  data.forEach((item) => {
-                    this.data.pushData(item)
-                  })
                   resolve("加载成功")
                 } else {
                   this.hasMore = false
@@ -158,7 +150,7 @@ export struct Home {
                   reject("加载失败")
                 })
           } else {
-            reject("没有更多了")
+            resolve("没有更多了")
           }
         })
       }
@@ -167,10 +159,11 @@ export struct Home {
 
   @Builder
   private listViewBuilder() {
+
     List({
       scroller: this.scroller
     }) {
-      LazyForEach(this.data, (item: HomeItemData, index) => {
+      LazyForEach(this.dataList, (item: HomeItemData, index) => {
         ListItem() {
           if (item instanceof Array) {
             BannerComponent({
@@ -180,13 +173,14 @@ export struct Home {
             ArticleItemComponent({
               article: item as Article,
               updateCollectCallBack: async () => {
-                this.data.notifyDataChange(index)
+                this.dataList.notifyDataChange(index)
               }
             })
           }
         }
-      })
+      }, (item: Article, index) => `${item.id} + ${index} + ${item.collect}`)
     }
+    .cachedCount(5)
     .width("100%")
     .height("100%")
     .listDirection(Axis.Vertical)

@@ -1,9 +1,7 @@
 import { PullToRefresh } from '@ohos/pulltorefresh';
-import CollectUtils from '../../common/CollectUtils';
 import API from '../../network/API';
 import { Article } from '../../network/model/Article';
 import { ListDataSource } from '../../network/model/ListDataSource';
-import { Tree } from '../../network/model/Tree';
 import { ArticleItemComponent } from '../../widgets/ArticleItemComponent';
 import { LoadState, PageLoading } from '../../widgets/PageLoading';
 import TitleLayout from '../../widgets/TitleLayout';
@@ -49,9 +47,7 @@ struct TreeArticleList {
 
   private loadData() {
     this.loadDataByPage(0).then((data) => {
-      data.forEach((item) => {
-        this.articleList.pushData(item)
-      })
+      this.articleList.resetAllData(data)
       if (this.articleList.totalCount() == 0) {
         this.loadState = LoadState.EMPTY
       } else {
@@ -85,10 +81,7 @@ struct TreeArticleList {
       onRefresh: () => {
         return new Promise<string>((resolve, reject) => {
           this.loadDataByPage(0).then((data) => {
-            this.articleList.reloadData()
-            data.forEach((item) => {
-              this.articleList.pushData(item)
-            })
+            this.articleList.resetAllData(data)
             this.nextPage = 1
             this.hasMore = true
             resolve("刷新成功")
@@ -103,9 +96,7 @@ struct TreeArticleList {
             this.loadDataByPage(this.nextPage).then((data) => {
               if (data.length > 0) {
                 this.nextPage++
-                data.forEach((item) => {
-                  this.articleList.pushData(item)
-                })
+                this.articleList.pushDataList(data)
                 resolve("加载成功")
               } else {
                 this.hasMore = false
@@ -135,8 +126,9 @@ struct TreeArticleList {
             }
           })
         }
-      })
+      }, (item: Article, index) => `${item.id} + ${index} + ${item.collect}`)
     }
+    .cachedCount(5)
     .width("100%")
     .height("100%")
     .listDirection(Axis.Vertical)
