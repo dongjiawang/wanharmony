@@ -98,7 +98,7 @@ export function getTagColor(tag: ArticleTag): Resource {
     case "问答":
       return $r("app.color.cyan")
     case "公众号":
-      return $r("app.color.main")
+      return $r("app.color.green")
     case "项目":
       return $r("app.color.teal")
     default:

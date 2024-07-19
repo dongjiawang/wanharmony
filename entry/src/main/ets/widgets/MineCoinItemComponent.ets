@@ -1,3 +1,4 @@
+import { DateUtils } from '../common/DateUtils'
 import { CoinModel } from '../network/model/CoinModel'
 
 @Component
@@ -14,7 +15,7 @@ export struct MineCoinItemComponent {
             bottom: 5
           })
 
-        Text(this.coin.desc)
+        Text(DateUtils.getDateTime(this.coin.date, "yyyy-MM-dd HH:mm:ss"))
           .fontSize(10)
           .fontColor($r("app.color.text_h2"))
           .textOverflow({

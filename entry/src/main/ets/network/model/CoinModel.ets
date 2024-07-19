@@ -3,6 +3,7 @@ export class CoinModel {
   coinCount: number = 0
   desc: string = ""
   reason: string = ""
+  date: number = 0
 }
 
 export class CoinList {
