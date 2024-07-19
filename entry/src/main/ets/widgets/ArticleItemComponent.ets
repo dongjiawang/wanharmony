@@ -5,9 +5,12 @@ import CollectUtils from '../common/CollectUtils'
 
 @Component
 export struct ArticleItemComponent {
+  // 是否为分享的文章
+  isShare: boolean = false
   article: Article = new Article()
   @State collect: boolean = false
   updateCollectCallBack?: () => void
+  deleteCallBack?: () => void
 
   aboutToAppear(): void {
     this.collect = this.article.collect
@@ -108,19 +111,30 @@ export struct ArticleItemComponent {
 
         Blank()
 
-        // 收藏状态
-        SymbolGlyph(this.collect ? $r("sys.symbol.heart_fill") : $r("sys.symbol.heart"))
-          .fontSize(22)
-          .fontColor(this.collect ? [$r("app.color.red")] : [$r("app.color.text_h2")])
-          .onClick(async () => {
-            const success = await CollectUtils.collect(this.article, this.article.originId)
+        if (this.isShare) {
+          Text("删除")
+            .fontSize(14)
+            .fontColor($r("app.color.text_h2"))
+            .onClick( () => {
+              if (this.deleteCallBack) {
+                this.deleteCallBack()
+              }
+            })
+        } else {
+          // 收藏状态
+          SymbolGlyph(this.collect ? $r("sys.symbol.heart_fill") : $r("sys.symbol.heart"))
+            .fontSize(22)
+            .fontColor(this.collect ? [$r("app.color.red")] : [$r("app.color.text_h2")])
+            .onClick(async () => {
+              const success = await CollectUtils.collect(this.article, this.article.originId)
 
-            this.collect = this.article.collect
+              this.collect = this.article.collect
 
-            if (this.updateCollectCallBack && success) {
-              this.updateCollectCallBack()
-            }
-          })
+              if (this.updateCollectCallBack && success) {
+                this.updateCollectCallBack()
+              }
+            })
+        }
       }
       .justifyContent(FlexAlign.Center)
       .width("100%")

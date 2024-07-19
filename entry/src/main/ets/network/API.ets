@@ -186,4 +186,18 @@ export default class API {
   static async getShareArticleList(page: number): Promise<Response<MineShare>> {
     return Network.requestSync(`/user/lg/private_articles/${page}/json`, http.RequestMethod.GET)
   }
+
+  /** 分享文章
+   *
+   */
+  static async shareArticle(title: string, link: string): Promise<Response<object>> {
+    return Network.requestSync(`/lg/user_article/add/json?title=${title}&link=${link}`, http.RequestMethod.POST)
+  }
+
+  /** 删除分享的文章
+   *
+   */
+  static async deleteSharedArticle(id: number): Promise<Response<object>> {
+    return Network.requestSync(`/lg/user_article/delete/${id}/json`, http.RequestMethod.POST)
+  }
 }

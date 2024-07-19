@@ -12,6 +12,7 @@ import API from '../../../network/API'
 @Component
 struct MineShare {
   @State loadState: LoadState = LoadState.LOADING
+  @State showLoading: boolean = false
   @State articles: ListDataSource<Article> = new ListDataSource()
   private scroller: Scroller = new Scroller()
   private nextPage: number = 2
@@ -33,7 +34,7 @@ struct MineShare {
 
       PageLoading({
         loadState: this.loadState,
-        showLoading: false,
+        showLoading: this.showLoading,
         content: () => {
           this.pullToRefreshBuilder()
         }
@@ -121,16 +122,25 @@ struct MineShare {
     List({
       scroller: this.scroller
     }) {
-      LazyForEach(this.articles, (item: Article, index) => {
+      LazyForEach(this.articles, (item: Article) => {
         ListItem() {
           ArticleItemComponent({
+            isShare: true,
             article: item as Article,
-            updateCollectCallBack: async () => {
-              this.articles.notifyDataChange(index)
+            deleteCallBack: async () => {
+              this.showLoading = true
+              const success = await API.deleteSharedArticle(item.id)
+              this.showLoading = false
+              if (success) {
+                this.articles.deleteData(this.articles.dataArray.indexOf(item))
+                if (this.articles.totalCount() == 0) {
+                  this.loadData()
+                }
+              }
             }
           })
         }
-      }, (item: Article, index) => `${item.id} + ${index} + ${item.collect}`)
+      }, (item: Article) => `${item.id}`)
     }
     .cachedCount(5)
     .width("100%")
