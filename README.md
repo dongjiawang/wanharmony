@@ -29,6 +29,10 @@
 * [ ] 系统设置
 * [ ] 关于我们
 
+### 基础框架
+
+* [ ] 重新封装网络请求
+
 ## 感谢
 
 UI 参考了：<https://github.com/goweii/WanAndroid>  
