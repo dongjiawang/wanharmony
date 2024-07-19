@@ -131,9 +131,9 @@ export struct Mine {
     })
   }
 
-  async aboutToAppear(): Promise<void> {
+  aboutToAppear(): void {
     UserService.addUserObserver(this.userObserver)
-    const user = await UserService.updateUser()
+    const user = UserService.getUser()
     this.userObserver(user)
   }
 
@@ -183,6 +183,13 @@ export struct Mine {
         UserService.checkLogin(() => {
           router.pushUrl({
             url: "pages/Mine/CollectList"
+          })
+        })
+        break
+      case 2:
+        UserService.checkLogin(() => {
+          router.pushUrl({
+            url: "pages/Mine/Share/MineShare"
           })
         })
         break

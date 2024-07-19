@@ -8,6 +8,8 @@
     "pages/Mine/Register",
     "pages/Mine/CollectList",
     "pages/Tree/TreeArticleList",
-    "pages/Mine/CoinList"
+    "pages/Mine/CoinList",
+    "pages/Mine/Share/MineShare",
+    "pages/Mine/Share/AddShare"
   ]
 }

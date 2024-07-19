@@ -8,6 +8,7 @@ import { HotKey } from './model/Search';
 import { Tree } from './model/Tree';
 import { WeChatAuthor } from './model/WeChat';
 import { CoinList } from './model/CoinModel';
+import { MineShare } from './model/MineShare';
 
 export default class API {
   /**
@@ -177,5 +178,12 @@ export default class API {
    */
   static async getMineCoin(page: number): Promise<Response<CoinList>> {
     return Network.requestSync(`/lg/coin/list/${page}/json`, http.RequestMethod.GET)
+  }
+
+  /** 获取用户分享的文章列表
+   * 页码，从1开始
+   */
+  static async getShareArticleList(page: number): Promise<Response<MineShare>> {
+    return Network.requestSync(`/user/lg/private_articles/${page}/json`, http.RequestMethod.GET)
   }
 }
