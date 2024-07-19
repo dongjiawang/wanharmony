@@ -2,7 +2,7 @@ import API from '../../network/API'
 import UserService, { User } from '../../service/UserService'
 import { promptAction, router } from '@kit.ArkUI'
 import WindowUtils from '../../common/WindowUtils'
-import { MineListItem, MineListItemModel } from '../../widgets/MineListItem'
+import { MineListItemComponent, MineListItemModel } from '../../widgets/MineListItemComponent'
 import { toast } from '../../common/Toast'
 
 class UserInfo {
@@ -42,7 +42,6 @@ export struct Mine {
       this.creatListModel()
     }
   }
-
   @State listData: MineListItemModel[] = []
 
   build() {
@@ -90,7 +89,7 @@ export struct Mine {
       List() {
         ForEach(this.listData, (item: MineListItemModel, index) => {
           ListItem() {
-            MineListItem({
+            MineListItemComponent({
               itemModel: item
             })
               .onClick(() => {
@@ -132,11 +131,14 @@ export struct Mine {
     })
   }
 
-  aboutToAppear(): void {
-    this.creatListModel()
+  async aboutToAppear(): Promise<void> {
     UserService.addUserObserver(this.userObserver)
-    const user = UserService.getUser()
+    const user = await UserService.updateUser()
     this.userObserver(user)
+  }
+
+  onPageShow(): void {
+    UserService.updateUser()
   }
 
   aboutToDisappear(): void {
@@ -167,16 +169,32 @@ export struct Mine {
 
     this.listData = [coin, collect, share, setting, about]
   }
-  
+
   private pushPageByIndex(index: number) {
-    if (index == 1) {
-      UserService.checkLogin(() =>{
-        router.pushUrl({
-          url: "pages/Mine/CollectList"
+    switch (index) {
+      case 0:
+        UserService.checkLogin(() => {
+          router.pushUrl({
+            url: "pages/Mine/CoinList"
+          })
         })
-      })
+        break;
+      case 1:
+        UserService.checkLogin(() => {
+          router.pushUrl({
+            url: "pages/Mine/CollectList"
+          })
+        })
+        break
+
+      default:
+        toast("功能开发中")
+        break;
+    }
+    if (index == 1) {
+
     } else {
-      toast("功能开发中")
+
     }
   }
 

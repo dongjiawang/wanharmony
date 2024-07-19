@@ -1,5 +1,5 @@
 @Component
-export struct MineListItem {
+export struct MineListItemComponent {
   itemModel: MineListItemModel = new MineListItemModel()
 
   build() {

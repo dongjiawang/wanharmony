@@ -7,6 +7,7 @@
     "pages/Search/SearchResult",
     "pages/Mine/Register",
     "pages/Mine/CollectList",
-    "pages/Tree/TreeArticleList"
+    "pages/Tree/TreeArticleList",
+    "pages/Mine/CoinList"
   ]
 }

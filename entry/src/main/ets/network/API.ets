@@ -7,6 +7,7 @@ import { User } from '../service/UserService';
 import { HotKey } from './model/Search';
 import { Tree } from './model/Tree';
 import { WeChatAuthor } from './model/WeChat';
+import { CoinList } from './model/CoinModel';
 
 export default class API {
   /**
@@ -169,5 +170,12 @@ export default class API {
    */
   static async getWendaArticleList(page: number): Promise<Response<ArticleList>> {
     return Network.requestSync(`/wenda/list/${page}/json`, http.RequestMethod.GET)
+  }
+
+  /** 获取个人积分获取列表（需要登录后访问）
+   *
+   */
+  static async getMineCoin(page: number): Promise<Response<CoinList>> {
+    return Network.requestSync(`/lg/coin/list/${page}/json`, http.RequestMethod.GET)
   }
 }
