@@ -20,7 +20,10 @@ struct Index {
       if (this.isPermissionGrant) {
         Tabs({ barPosition: BarPosition.End, controller: this.tabsController }) {
           TabContent() {
-            Home()
+            Home({
+              pageIndex: 0,
+              currentPosition: this.currentIndex
+            })
           }.tabBar(this.tabBuilder("首页", 0, $r("sys.symbol.house_fill"), $r("sys.symbol.house")))
 
           TabContent() {

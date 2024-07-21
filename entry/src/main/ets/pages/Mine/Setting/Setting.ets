@@ -6,8 +6,10 @@ import { ConfigurationConstant } from '@kit.AbilityKit'
 @Entry
 @Component
 struct Setting {
-  @State isOn: boolean = false
+  @State isAutoColorModeOn: boolean = false
   @State isDark: boolean = false
+  @State isBannerOff: boolean = false
+  @State isTopOff: boolean = false
   private app = getContext().getApplicationContext()
 
   build() {
@@ -17,7 +19,7 @@ struct Setting {
       })
 
       Row() {
-        Column({ space: 3}) {
+        Column({ space: 3 }) {
           Text("跟随系统深色模式")
             .fontSize(16)
             .fontColor($r("app.color.text_h1"))
@@ -30,13 +32,14 @@ struct Setting {
 
         Toggle({
           type: ToggleType.Switch,
-          isOn: this.isOn
+          isOn: this.isAutoColorModeOn
         })
           .onChange((value) => {
-            this.isOn = value
+            this.isAutoColorModeOn = value
             if (value) {
               Preferences.get(EntryContext.getContext() as Context).putColorMode(-1)
               this.app.setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET)
+              this.isDark = false
             } else {
               Preferences.get(EntryContext.getContext() as Context).putColorMode(1)
               this.app.setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT)
@@ -51,7 +54,6 @@ struct Setting {
       })
       .justifyContent(FlexAlign.SpaceBetween)
 
-
       Divider()
         .width("100%")
         .height(2)
@@ -59,14 +61,14 @@ struct Setting {
 
       Row() {
         Text("深色模式")
-          .fontColor(this.isOn ? $r("app.color.search_input_placeholder") : $r("app.color.text_h1"))
+          .fontColor(this.isAutoColorModeOn ? $r("app.color.search_input_placeholder") : $r("app.color.text_h1"))
           .fontSize(16)
 
         Toggle({
           type: ToggleType.Switch,
           isOn: this.isDark
         })
-          .enabled(!this.isOn)
+          .enabled(!this.isAutoColorModeOn)
           .onChange((value) => {
             this.isDark = value
             if (value) {
@@ -85,14 +87,69 @@ struct Setting {
         right: 16
       })
       .justifyContent(FlexAlign.SpaceBetween)
+
+      Divider()
+        .width("100%")
+        .height(2)
+        .backgroundColor(Color.Transparent)
+
+      Row() {
+        Text("显示首页轮播")
+          .fontColor($r("app.color.text_h1"))
+          .fontSize(16)
+
+        Toggle({
+          type: ToggleType.Switch,
+          isOn: this.isBannerOff
+        })
+          .onChange((value) => {
+            Preferences.get(EntryContext.getContext() as Context).putHomeBannerOff(!value)
+          })
+      }
+      .width("100%")
+      .height(50)
+      .padding({
+        left: 16,
+        right: 16
+      })
+      .justifyContent(FlexAlign.SpaceBetween)
+
+      Divider()
+        .width("100%")
+        .height(2)
+        .backgroundColor(Color.Transparent)
+
+      Row() {
+        Text("显示首页置顶文章")
+          .fontColor($r("app.color.text_h1"))
+          .fontSize(16)
+
+        Toggle({
+          type: ToggleType.Switch,
+          isOn: this.isTopOff
+        })
+          .onChange((value) => {
+            Preferences.get(EntryContext.getContext() as Context).putHomeTopOff(!value)
+          })
+      }
+      .width("100%")
+      .height(50)
+      .padding({
+        left: 16,
+        right: 16
+      })
+      .justifyContent(FlexAlign.SpaceBetween)
     }
     .height('100%')
     .width('100%')
   }
 
   aboutToAppear(): void {
-    const colorMode = Preferences.get(EntryContext.getContext() as Context).getColorMode()
-    this.isOn = colorMode == (-1 || undefined)
+    const preferences = Preferences.get(EntryContext.getContext() as Context)
+    const colorMode = preferences.getColorMode()
+    this.isAutoColorModeOn = colorMode == (-1 || undefined)
     this.isDark = colorMode == 0
+    this.isBannerOff = !preferences.getHomeBannerOff()
+    this.isTopOff = !preferences.getHomeTopOff()
   }
 }

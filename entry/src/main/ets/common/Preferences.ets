@@ -8,6 +8,8 @@ const PREFERENCES_NAME = "top.djw.wanharmony"
 const KEY_USER_INFO = "user_info"
 const KEY_SEARCH_HISTORY = "search_history"
 const kEY_COLOR_MODE = "color_mode"
+const KEY_HOME_BANNER_OFF = "home_banner_off"
+const KEY_HOME_TOP_OFF = "home_top_off"
 
 export default class Preferences {
   private static instance: Preferences
@@ -74,7 +76,7 @@ export default class Preferences {
    * @returns
    */
   getColorMode(): ColorMode {
-    return this.preferences.getSync(kEY_COLOR_MODE, 0) as ColorMode
+    return this.preferences.getSync(kEY_COLOR_MODE, -1) as ColorMode
   }
 
   /**
@@ -83,6 +85,40 @@ export default class Preferences {
    */
   putColorMode(number: ColorMode) {
     this.preferences.putSync(kEY_COLOR_MODE, number)
+    this.preferences.flush()
+  }
+
+  /**
+   * 获取首页 banner 是否关闭
+   * @returns
+   */
+  getHomeBannerOff(): boolean {
+    return this.preferences.getSync(KEY_HOME_BANNER_OFF, false) as boolean
+  }
+
+  /**
+   * 关闭首页 banner 显示
+   * @param off
+   */
+  putHomeBannerOff(off: boolean) {
+    this.preferences.putSync(KEY_HOME_BANNER_OFF, off)
+    this.preferences.flush()
+  }
+
+  /**
+   * 获取首页置顶是否显示
+   * @returns
+   */
+  getHomeTopOff(): boolean {
+    return this.preferences.getSync(KEY_HOME_TOP_OFF, false) as boolean
+  }
+
+  /**
+   * 关闭首页置顶显示
+   * @param off
+   */
+  putHomeTopOff(off: boolean) {
+    this.preferences.putSync(KEY_HOME_TOP_OFF, off)
     this.preferences.flush()
   }
 }
