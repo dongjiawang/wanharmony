@@ -10,6 +10,7 @@
     "pages/Tree/TreeArticleList",
     "pages/Mine/CoinList",
     "pages/Mine/Share/MineShare",
-    "pages/Mine/Share/AddShare"
+    "pages/Mine/Share/AddShare",
+    "pages/Mine/Setting/Setting"
   ]
 }

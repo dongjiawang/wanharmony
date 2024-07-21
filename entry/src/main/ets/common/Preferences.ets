@@ -7,6 +7,7 @@ import { Pair } from './Struct';
 const PREFERENCES_NAME = "top.djw.wanharmony"
 const KEY_USER_INFO = "user_info"
 const KEY_SEARCH_HISTORY = "search_history"
+const kEY_COLOR_MODE = "color_mode"
 
 export default class Preferences {
   private static instance: Preferences
@@ -65,6 +66,23 @@ export default class Preferences {
    */
   putSearchHistory(historyKeys: string[]) {
     this.preferences.putSync(KEY_SEARCH_HISTORY, historyKeys)
+    this.preferences.flush()
+  }
+
+  /**
+   * 记获取颜色模式
+   * @returns
+   */
+  getColorMode(): ColorMode {
+    return this.preferences.getSync(kEY_COLOR_MODE, 0) as ColorMode
+  }
+
+  /**
+   * 记录颜色模式
+   * @param number
+   */
+  putColorMode(number: ColorMode) {
+    this.preferences.putSync(kEY_COLOR_MODE, number)
     this.preferences.flush()
   }
 }

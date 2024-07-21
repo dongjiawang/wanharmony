@@ -193,6 +193,11 @@ export struct Mine {
           })
         })
         break
+      case 3:
+        router.pushUrl({
+          url: "pages/Mine/Setting/Setting"
+        })
+        break
 
       default:
         toast("功能开发中")
