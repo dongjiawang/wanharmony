@@ -1,7 +1,6 @@
 import UserService, { User } from '../../service/UserService'
 import WindowUtils from '../../common/WindowUtils'
 import { MineListItemComponent, MineListItemModel } from '../../widgets/MineListItemComponent'
-import { toast } from '../../common/Toast'
 import { router } from '@kit.ArkUI'
 
 class UserInfo {
@@ -48,26 +47,26 @@ export struct Mine {
   build() {
 
     Column() {
-      Blank().height(WindowUtils.statusBarHeight)
+      Blank().height(WindowUtils.statusBarHeight).backgroundColor($r("app.color.title_bar_bg"))
 
       Column() {
         Image(this.isLogin ? this.userInfo.icon : $r("app.media.logo"))
           .width(100)
           .height(100)
           .borderRadius(50)
-          .borderWidth(2)
-          .borderColor($r("app.color.main"))
+          .borderWidth(1)
+          .borderColor($r("app.color.white"))
 
         Text(this.userInfo.name)
-          .fontColor($r("app.color.text_h1"))
-          .fontSize(17)
+          .fontWeight(FontWeight.Medium)
+          .fontColor($r("app.color.title_bar_text"))
+          .fontSize(18)
           .margin({ top: 16 })
 
         Row({ space: 5 }) {
-          Text("LV" + this.userInfo.level)
-            .fontColor($r("app.color.white"))
-            .fontSize(15)
-            .backgroundColor($r("app.color.main"))
+          Text("等级:" + this.userInfo.level)
+            .fontColor($r("app.color.title_bar_text"))
+            .fontSize(14)
             .padding({
               left: 4,
               top: 2,
@@ -75,10 +74,9 @@ export struct Mine {
               bottom: 2
             })
 
-          Text("排名" + this.userInfo.rank)
-            .fontColor($r("app.color.white"))
-            .fontSize(15)
-            .backgroundColor($r("app.color.blue"))
+          Text("排名:" + this.userInfo.rank)
+            .fontColor($r("app.color.title_bar_text"))
+            .fontSize(14)
             .padding({
               left: 4,
               top: 2,
@@ -86,8 +84,10 @@ export struct Mine {
               bottom: 2
             })
         }
-        .margin({ top: 16 })
+        .padding({ top: 5})
       }
+      .padding({ top: 30, bottom: 30 })
+      .backgroundColor($r("app.color.title_bar_bg"))
       .width("100%")
       .alignItems(HorizontalAlign.Center)
       .onClick(() => {
@@ -108,17 +108,16 @@ export struct Mine {
         })
       }
       .width("100%")
+      .layoutWeight(1)
       .divider({
         strokeWidth: 0.5,
         color: $r("app.color.divider"),
         startMargin: 16,
         endMargin: 16
       })
-      .padding({ top: 50 })
     }
     .width("100%")
     .height("100%")
-    .margin({ top: 30 })
     .alignItems(HorizontalAlign.Center)
   }
 
@@ -196,9 +195,13 @@ export struct Mine {
           url: "pages/Mine/Setting/Setting"
         })
         break
+      case 4:
+        router.pushUrl({
+          url: "pages/Mine/About/About"
+        })
 
       default:
-        toast("功能开发中")
+
         break;
     }
   }

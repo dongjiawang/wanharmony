@@ -11,6 +11,8 @@
     "pages/Mine/CoinList",
     "pages/Mine/Share/MineShare",
     "pages/Mine/Share/AddShare",
-    "pages/Mine/Setting/Setting"
+    "pages/Mine/Setting/Setting",
+    "pages/Mine/About/About",
+    "pages/Mine/About/OpenSource"
   ]
 }
