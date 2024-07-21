@@ -68,7 +68,7 @@ struct Login {
               .margin({top: 30})
               .fontColor(Color.Gray)
               .fontSize(12)
-              .backgroundColor("#ffffffff")
+              .backgroundColor("#00000000")
               .onClick(() =>{
                 router.replaceUrl({
                   url: "pages/Mine/Register"

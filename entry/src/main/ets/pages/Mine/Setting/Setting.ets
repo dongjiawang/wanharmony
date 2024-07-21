@@ -63,7 +63,7 @@ struct Setting {
           .width("100%")
           .height(2)
           .backgroundColor(Color.Transparent)
-          .padding({left: 16, right: 16})
+          .padding({ left: 16, right: 16 })
 
         Row() {
           Text("深色模式")
@@ -98,7 +98,7 @@ struct Setting {
           .width("100%")
           .height(2)
           .backgroundColor(Color.Transparent)
-          .padding({left: 16, right: 16})
+          .padding({ left: 16, right: 16 })
 
         Row() {
           Text("显示首页轮播")
@@ -125,7 +125,7 @@ struct Setting {
           .width("100%")
           .height(2)
           .backgroundColor(Color.Transparent)
-          .padding({left: 16, right: 16})
+          .padding({ left: 16, right: 16 })
 
         Row() {
           Text("显示首页置顶文章")
@@ -156,7 +156,7 @@ struct Setting {
             .fontSize(15)
             .fontColor($r("app.color.red"))
             .borderColor($r("app.color.divider"))
-            .backgroundColor("#ffffffff")
+            .backgroundColor("#00000000")
             .borderWidth(1)
             .borderRadius(2)
             .onClick(() => {
