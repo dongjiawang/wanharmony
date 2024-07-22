@@ -27,7 +27,10 @@ struct Index {
           }.tabBar(this.tabBuilder("首页", 0, $r("sys.symbol.house_fill"), $r("sys.symbol.house")))
 
           TabContent() {
-            Question()
+            Question({
+              pageIndex: 1,
+              currentPosition: this.currentIndex
+            })
           }
           .tabBar(this.tabBuilder("问答", 1, $r("sys.symbol.message_on_message_fill"),
             $r("sys.symbol.message_on_message")))

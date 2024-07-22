@@ -63,28 +63,30 @@ export struct Mine {
           .fontSize(18)
           .margin({ top: 16 })
 
-        Row({ space: 5 }) {
-          Text("等级:" + this.userInfo.level)
-            .fontColor($r("app.color.title_bar_text"))
-            .fontSize(14)
-            .padding({
-              left: 4,
-              top: 2,
-              right: 4,
-              bottom: 2
-            })
+        if (this.isLogin) {
+          Row({ space: 5 }) {
+            Text("等级:" + this.userInfo.level)
+              .fontColor($r("app.color.title_bar_text"))
+              .fontSize(14)
+              .padding({
+                left: 4,
+                top: 2,
+                right: 4,
+                bottom: 2
+              })
 
-          Text("排名:" + this.userInfo.rank)
-            .fontColor($r("app.color.title_bar_text"))
-            .fontSize(14)
-            .padding({
-              left: 4,
-              top: 2,
-              right: 4,
-              bottom: 2
-            })
+            Text("排名:" + this.userInfo.rank)
+              .fontColor($r("app.color.title_bar_text"))
+              .fontSize(14)
+              .padding({
+                left: 4,
+                top: 2,
+                right: 4,
+                bottom: 2
+              })
+          }
+          .padding({ top: 5 })
         }
-        .padding({ top: 5})
       }
       .padding({ top: 30, bottom: 30 })
       .backgroundColor($r("app.color.title_bar_bg"))
@@ -125,13 +127,6 @@ export struct Mine {
     UserService.addUserObserver(this.userObserver)
     const user = UserService.getUser()
     this.userObserver(user)
-  }
-
-  onPageShow(): void {
-    this.isLogin = UserService.isLogin()
-    if (this.isLogin == false) {
-      this.listData[0].rightTitle = ""
-    }
   }
 
   aboutToDisappear(): void {

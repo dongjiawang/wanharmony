@@ -2,6 +2,7 @@ import { PullToRefresh } from '@ohos/pulltorefresh';
 import API from '../../network/API';
 import { Article } from '../../network/model/Article';
 import { ListDataSource } from '../../network/model/ListDataSource';
+import UserService, { User } from '../../service/UserService';
 import { ArticleItemComponent } from '../../widgets/ArticleItemComponent';
 import { LoadState, PageLoading } from '../../widgets/PageLoading';
 import TitleLayout from '../../widgets/TitleLayout';
@@ -15,6 +16,23 @@ export struct Question {
   private scroller: Scroller = new Scroller()
   private nextPage: number = 1
   private hasMore: boolean = true
+  @State needRefresh: boolean = false
+  @Prop pageIndex: number
+  @Prop @Watch("onRefresh") currentPosition: number
+  private userObserver = (user?: User) => {
+    // 用户状态变化，刷新列表
+    if (user) {
+      this.needRefresh = true
+      this.onRefresh()
+    } else {
+      this.articles.dataArray.forEach((item, index) => {
+        if (item.collect) {
+          item.collect = false
+          this.articles.notifyDataChange(index)
+        }
+      })
+    }
+  }
 
   build() {
     Column() {
@@ -39,9 +57,21 @@ export struct Question {
 
   aboutToAppear(): void {
     this.loadData()
+    UserService.addUserObserver(this.userObserver)
+  }
+
+  onRefresh(): void {
+    if (this.pageIndex != this.currentPosition) {
+      return
+    }
+
+    if (this.needRefresh) {
+      this.loadData()
+    }
   }
 
   private loadData() {
+    this.needRefresh = false
     this.loadState = LoadState.LOADING
     this.loadDataByPage(0).then((data) => {
       this.articles.resetAllData(data)

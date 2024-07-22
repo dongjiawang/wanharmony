@@ -10,6 +10,7 @@ import { router } from '@kit.ArkUI'
 import { ListDataSource } from '../../network/model/ListDataSource'
 import Preferences from '../../common/Preferences'
 import EntryContext from '../../common/EntryContext'
+import UserService, { User } from '../../service/UserService'
 
 declare type HomeItemData = Article | HomeBannerData[]
 
@@ -24,38 +25,63 @@ export struct Home {
   private scroller: Scroller = new Scroller()
   @State bannerOff: boolean = false
   @State topOff: boolean = false
+  @State needRefresh: boolean = false
   @Prop pageIndex: number
   @Prop @Watch("onRefresh") currentPosition: number
 
-  async aboutToAppear() {
+  private userObserver = (user?: User) => {
+    // 用户状态变化，刷新列表
+    if (user) {
+      this.needRefresh = true
+      this.onRefresh()
+    } else {
+      this.dataList.dataArray.forEach((item, index) => {
+        if (!Array.isArray(item)) {
+          if (item.collect) {
+            item.collect = false
+            this.dataList.notifyDataChange(index)
+          }
+        }
+      })
+    }
+  }
+
+  aboutToAppear() {
     this.LoadData()
 
     this.bannerOff = Preferences.get(EntryContext.getContext() as Context).getHomeBannerOff()
     this.topOff = Preferences.get(EntryContext.getContext() as Context).getHomeTopOff()
+
+    UserService.addUserObserver(this.userObserver)
+  }
+
+  aboutToDisappear(): void {
+    UserService.removeUserObserver(this.userObserver)
   }
 
   onRefresh(): void {
     if (this.pageIndex != this.currentPosition) {
       return
     }
-    let needRefresh = false
+
     const bannerOff = Preferences.get(EntryContext.getContext() as Context).getHomeBannerOff()
     if (this.bannerOff != bannerOff) {
       this.bannerOff = bannerOff
-      needRefresh = true
+      this.needRefresh = true
     }
     const topOff = Preferences.get(EntryContext.getContext() as Context).getHomeTopOff()
     if (this.topOff != topOff) {
       this.topOff = topOff
-      needRefresh = true
+      this.needRefresh = true
     }
 
-    if (needRefresh) {
+    if (this.needRefresh) {
       this.LoadData()
     }
   }
 
-  async LoadData() {
+  LoadData() {
+    this.needRefresh = false
     this.loadState = LoadState.LOADING
     this.loadDataByPage(0)
       .then((data) => {

@@ -10,20 +10,19 @@ import TitleLayout from '../../widgets/TitleLayout'
 struct Login {
   @State loadState: LoadState = LoadState.SUCCESS
   @State showLoading: boolean = false
-  @State title: string = "登录"
   private account: string = ""
   private password: string = ""
 
   build() {
-    Stack() {
+
+    Column() {
       PageLoading({
         loadState: this.loadState,
         showLoading: this.showLoading
       }) {
         Column() {
           TitleLayout({
-            title: this.title,
-            enableBack: false
+            title: "登录"
           })
 
           Column() {
@@ -65,11 +64,11 @@ struct Login {
             })
               .stateEffect(false)
               .width("100%")
-              .margin({top: 30})
+              .margin({ top: 30 })
               .fontColor(Color.Gray)
               .fontSize(12)
               .backgroundColor("#00000000")
-              .onClick(() =>{
+              .onClick(() => {
                 router.replaceUrl({
                   url: "pages/Mine/Register"
                 })
