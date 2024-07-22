@@ -17,7 +17,7 @@ export default class Network {
   private constructor() {
   }
 
-  static async requestSync<T>(path: string, method: http.RequestMethod, extraData?: object): Promise<Response<T>> {
+  static async requestSync<T>(path: string, method: http.RequestMethod, extraData?: Object): Promise<Response<T>> {
     return Network.get().requestSync(path, method, extraData)
   }
 
@@ -28,20 +28,13 @@ export default class Network {
    * @param extraData 返回数据
    * @returns Promise 回调
    */
-  private async requestSync<T>(path: string, method: http.RequestMethod, extraData?: object): Promise<Response<T>> {
+  private async requestSync<T>(path: string, method: http.RequestMethod, extraData?: Object): Promise<Response<T>> {
     return new Promise<Response<T>>((resolve, reject) => {
-      const headers = new Headers()
       const url = BASE_URL + path
       const uri = parseUri(url)
-      const cookies = cookieJar.loadForRequest(uri)
-      if (cookies.length > 0) {
-        headers.cookie = CookieUtils.cookieHeader(cookies)
-      }
-      if (method === http.RequestMethod.POST) {
-        headers.contentType = "application/x-www-form-urlencoded"
-        if (!extraData) {
-          extraData = new Object()
-        }
+
+      if (method == http.RequestMethod.POST && !extraData) {
+        extraData = new Object()
       }
 
       const httpRequest = http.createHttp()
@@ -52,7 +45,7 @@ export default class Network {
         {
           method: method,
           expectDataType: http.HttpDataType.OBJECT,
-          header: headers,
+          header: this.creatHeader(uri, method),
           extraData: extraData
         },
         (err, data) => {
@@ -63,7 +56,7 @@ export default class Network {
             response.errorMsg = err.message
             reject(response)
             hilog.error(0, TAG, `request failed, path：${path}, error: ${JSON.stringify(err, undefined, undefined)}`)
-          } else if (data.responseCode === 200) {
+          } else if (data.responseCode == 200) {
             cookieJar.saveFromResponse(uri, CookieUtils.parseHttpRequestCookies(data.cookies))
             if (data.resultType === http.HttpDataType.STRING) {
               const result: Response<T> = JSON.parse(data.result as string) as Response<T>
@@ -103,14 +96,30 @@ export default class Network {
   static clearCookie() {
     cookieJar.clear()
   }
+
+  private creatHeader(uri: uri.URI, method: http.RequestMethod): Header {
+    const cookies = cookieJar.loadForRequest(uri)
+
+    if (method == http.RequestMethod.POST) {
+      return {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": CookieUtils.cookieHeader(cookies)
+      }
+    }
+    return {
+      "Content-Type": "application/json",
+      "Cookie": CookieUtils.cookieHeader(cookies)
+    }
+  }
 }
 
 function parseUri(url: string): uri.URI {
   return new uri.URI(url)
 }
 
-class Headers {
-  contentType?: string
-  cookie?: string
+interface Header {
+  "Content-Type": string
+  "Cookie": string
 }
+
 

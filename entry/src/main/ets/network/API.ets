@@ -18,7 +18,7 @@ export default class API {
    * @returns
    */
   static async login(username: string, password: string): Promise<Response<User>> {
-    return Network.requestSync(`/user/login?username=${username}&password=${password}`, http.RequestMethod.POST)
+    return Network.requestSync(`/user/login`, http.RequestMethod.POST, `username=${username}&password=${password}`)
   }
 
   /**
@@ -37,8 +37,8 @@ export default class API {
    * @returns
    */
   static async register(username: string, password: string, repassword: string): Promise<Response<User>> {
-    return Network.requestSync(`/user/register?username=${username}&password=${password}&repassword=${repassword}`,
-      http.RequestMethod.POST)
+    return Network.requestSync("/user/register",
+      http.RequestMethod.POST, `username=${username}&password=${password}&repassword=${repassword}`)
   }
 
   /**
@@ -116,7 +116,7 @@ export default class API {
    * @returns
    */
   static async search(keyword: string, page: number): Promise<Response<ArticleList>> {
-    return Network.requestSync(`/article/query/${page}/json?k=${encodeURIComponent(keyword)}`, http.RequestMethod.POST)
+    return Network.requestSync(`/article/query/${page}/json`, http.RequestMethod.POST, `k=${encodeURIComponent(keyword)}`)
   }
 
   /**
@@ -191,7 +191,7 @@ export default class API {
    *
    */
   static async shareArticle(title: string, link: string): Promise<Response<object>> {
-    return Network.requestSync(`/lg/user_article/add/json?title=${title}&link=${link}`, http.RequestMethod.POST)
+    return Network.requestSync("/lg/user_article/add/json", http.RequestMethod.POST, `title=${title}&link=${link}`)
   }
 
   /** 删除分享的文章
