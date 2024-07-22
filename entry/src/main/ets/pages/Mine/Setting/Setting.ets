@@ -15,6 +15,7 @@ struct Setting {
   @State isBannerOff: boolean = false
   @State isTopOff: boolean = false
   private app = getContext().getApplicationContext()
+  @State isLogin: boolean = UserService.isLogin()
 
   build() {
     Column() {
@@ -149,7 +150,7 @@ struct Setting {
         .justifyContent(FlexAlign.SpaceBetween)
       }
 
-      if (UserService.isLogin()) {
+      if (this.isLogin) {
         Row() {
           Button("退出登录")
             .width("100%")
@@ -199,6 +200,7 @@ struct Setting {
     if (response.index === 0) {
       await API.logout()
       UserService.clearUser()
+      this.isLogin = false
     }
   }
 }
