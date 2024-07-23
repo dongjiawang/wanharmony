@@ -2,6 +2,9 @@
   "ohos-module-entry": {
     "SELECT_TARGET": "default",
     "MODULE_BUILD_DIR": "/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/build",
+    "DEPENDENCY_INFO": {
+      "@ohos/pulltorefresh": "/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/oh_modules/.ohpm/@ohos+pulltorefresh@2.0.6/oh_modules/@ohos/pulltorefresh"
+    },
     "TARGETS": {
       "default": {
         "SOURCE_ROOT": "/Users/dongjiawang/DevEcoStudioProjects/wanHarmony/entry/src/main",
@@ -52,7 +55,8 @@
       "default-default": {
         "debuggable": true,
         "copyFrom": "default",
-        "name": "debug"
+        "name": "debug",
+        "resOptions": {}
       }
     },
     "BUILD_PROFILE_OPT": {
@@ -107,7 +111,8 @@
               "default"
             ]
           }
-        ]
+        ],
+        "belongProjectPath": "/Users/dongjiawang/DevEcoStudioProjects/wanHarmony"
       }
     ],
     "PROFILE_OPT": {
@@ -148,7 +153,10 @@
     "CONFIG_PROPERTIES": {
       "enableSignTask": true,
       "skipNativeIncremental": false
-    }
+    },
+    "OVERALL_PROJECT_PATHS": [
+      "/Users/dongjiawang/DevEcoStudioProjects/wanHarmony"
+    ]
   },
   "version": 1
 }

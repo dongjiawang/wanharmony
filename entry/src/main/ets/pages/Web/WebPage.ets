@@ -1,6 +1,8 @@
 import webview from '@ohos.web.webview';
 import { router } from '@kit.ArkUI';
 import TitleLayout from '../../widgets/TitleLayout';
+import Preferences from '../../common/Preferences';
+import EntryContext from '../../common/EntryContext';
 
 @Entry
 @Component
@@ -9,6 +11,11 @@ struct WebPage {
   private url: string = (router.getParams() as WebPageParams).url
   @State title: string = "加载中"
   @State progress: number = 0
+  private isOnlyDark: boolean = false
+
+  aboutToAppear() {
+    this.isOnlyDark = Preferences.get(EntryContext.getContext() as Context).getColorMode() == 0
+  }
 
   onBackPress(): boolean | void {
     if (this.webController.accessBackward()) {
@@ -37,12 +44,13 @@ struct WebPage {
         })
           .width("100%")
           .height("100%")
+          .backgroundColor($r("app.color.start_window_background"))
           .onlineImageAccess(true)
           .javaScriptAccess(true)
           .domStorageAccess(true)
           .databaseAccess(true)
           .mixedMode(MixedMode.All)
-          .darkMode(WebDarkMode.Auto)
+          .darkMode(this.isOnlyDark ? WebDarkMode.On : WebDarkMode.Auto)
           .forceDarkAccess(true)
           .onTitleReceive((event) => {
             this.title = event?.title ?? ""
