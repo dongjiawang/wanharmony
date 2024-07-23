@@ -117,7 +117,7 @@ struct CollectList {
   @Builder
   private listViewBuilder() {
     List({ scroller: this.scroller }) {
-      LazyForEach(this.articles, (item: Article, index) => {
+      LazyForEach(this.articles, (item: Article) => {
         ListItem() {
           ArticleItemComponent({
             article: item,

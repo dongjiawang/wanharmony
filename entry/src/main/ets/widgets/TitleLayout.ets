@@ -1,6 +1,5 @@
 import WindowUtils from '../common/WindowUtils'
 import { router } from '@kit.ArkUI'
-import { SymbolEffectStrategy } from '@ohos.arkui.advanced.SubHeader'
 
 @Component
 export default struct TitleLayout {

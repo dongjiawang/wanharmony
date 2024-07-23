@@ -7,7 +7,7 @@ import { router } from '@kit.ArkUI'
 
 @Entry
 @Component
-export struct Register {
+ struct Register {
   @State loadState: LoadState = LoadState.SUCCESS
   @State showLoading: boolean = false
   @State title: string = "注册账号"
