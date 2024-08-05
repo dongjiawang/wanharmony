@@ -23,8 +23,7 @@ export struct Home {
   @State bannerOff: boolean = false
   @State topOff: boolean = false
   @State needRefresh: boolean = false
-  @Prop pageIndex: number
-  @Prop @Watch("onRefresh") currentPosition: number
+  @Prop @Watch("onRefresh") isShow: boolean
 
   private userObserver = (user?: User) => {
     // 用户状态变化，刷新列表
@@ -57,7 +56,7 @@ export struct Home {
   }
 
   onRefresh(): void {
-    if (this.pageIndex != this.currentPosition) {
+    if (this.isShow == false) {
       return
     }
 

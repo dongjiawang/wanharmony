@@ -1,106 +1,89 @@
 import WindowUtils from '../../common/WindowUtils'
-import { Square } from './Square'
+import { router, SymbolGlyphModifier } from '@kit.ArkUI'
 import { Home } from './Home'
-import { router } from '@kit.ArkUI'
+import { Square } from './Square'
 import { Wechat } from './Wechat/Wechat'
 
 @Component
 export struct Main {
-  @State tabTitles: string[] = []
-  private tabsController = new TabsController()
-  @State currentIndex: number = 0
-  @State needRefresh: boolean = false
+  private menuList: Array<SelectMenuModel> = [
+    { id: 0, value: "热门博文" },
+    { id: 1, value: "广场" },
+    { id: 1, value: "公众号" }
+  ]
+  @State selectedValue: string = "热门博文"
+  @State selectedIndex: number = 0
+
   @Prop pageIndex: number
   @Prop @Watch("onRefresh") currentPosition: number
+  @State isShow: boolean = false
 
   build() {
     Column() {
       Blank()
-        .height(WindowUtils.statusBarHeight)
         .backgroundColor($r("app.color.title_bar_bg"))
+        .height(WindowUtils.statusBarHeight)
 
-      Tabs({ barPosition: BarPosition.Start, controller: this.tabsController }) {
-        ForEach(this.tabTitles, (title: string, index) => {
-          TabContent() {
-            if (index == 0) {
-              Home({
-                pageIndex: index,
-                currentPosition: this.currentIndex
-              })
-            } else if (index == 1) {
-              Square()
-            } else {
-              Wechat()
-            }
-          }.tabBar(this.tabBuilder(title, index, index == this.tabTitles.length - 1))
-        })
-      }
-      .barMode(BarMode.Fixed)
-      .width("100%")
-      .barHeight(44)
-      .divider(null)
-      .barBackgroundColor($r("app.color.start_window_background"))
-      .onChange((index) => {
-        this.currentIndex = index
-      })
-    }
-    .width("100%")
-    .height("100%")
-  }
-
-  aboutToAppear(): void {
-    this.creatTabs()
-  }
-
-  private creatTabs() {
-    this.tabTitles = ["热门博文", "广场", "公众号"]
-  }
-
-  onRefresh(): void {
-    if (this.pageIndex != this.currentPosition) {
-      return
-    }
-
-    if (this.needRefresh) {
-      this.creatTabs()
-    }
-  }
-
-  @Builder
-  tabBuilder(title: string, targetIndex: number, showSearchBtn: boolean) {
-    Row() {
       Row() {
-        Text(title)
-          .fontColor(this.currentIndex == targetIndex ? $r("app.color.title_bar_text") :
-          $r("app.color.navi_tab_unselect"))
-          .fontSize(14)
-          .onClick(() => {
-            this.currentIndex = targetIndex
-            this.tabsController.changeIndex(targetIndex)
-          })
-      }
-      .layoutWeight(1)
-      .justifyContent(FlexAlign.Center)
+        Row()
+          .width(44)
 
-      if (showSearchBtn) {
+        Select(this.menuList)
+          .onSelect((index: number, value: string) => {
+            this.selectedIndex = index
+            this.selectedValue = value
+          })
+          .value(this.selectedValue)
+          .selectedOptionFontColor($r("app.color.main"))
+          .fontColor($r("app.color.title_bar_text"))
+          .backgroundColor($r("app.color.title_bar_bg"))
+          .menuBackgroundColor($r("app.color.start_window_background"))
+          .menuAlign(MenuAlignType.CENTER)
+
         SymbolGlyph($r("sys.symbol.magnifyingglass"))
           .fontSize(22)
           .fontColor([$r("app.color.title_bar_text")])
           .width(44)
-          .height(44)
+          .height("100%")
           .padding({ left: 10, right: 10 })
-          .backgroundColor($r("app.color.title_bar_bg"))
           .onClick(() => {
             router.pushUrl({
               url: "pages/Search/SearchEntry"
             })
           })
       }
+      .width("100%")
+      .height(44)
+      .justifyContent(FlexAlign.SpaceBetween)
+      .backgroundColor($r("app.color.title_bar_bg"))
 
+      Column() {
+        if (this.selectedIndex == 0) {
+          Home({
+            isShow: this.isShow
+          })
+        } else if (this.selectedIndex == 1) {
+          Square()
+        } else {
+          Wechat()
+        }
+      }
+      .layoutWeight(1)
     }
-    .height("100%")
     .width("100%")
-    .justifyContent(FlexAlign.SpaceBetween)
-    .backgroundColor($r("app.color.title_bar_bg"))
+    .height("100%")
   }
+
+  onRefresh(): void {
+
+    this.isShow = this.pageIndex == this.currentPosition
+  }
+}
+
+
+export class SelectMenuModel implements SelectOption {
+  id: number = 0
+  value: ResourceStr = ""
+  icon?: ResourceStr | undefined
+  symbolIcon?: SymbolGlyphModifier | undefined
 }
