@@ -2,6 +2,7 @@ import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh'
 import API from '../../network/API'
 import { Article } from '../../network/model/Article'
 import { ListDataSource } from '../../network/model/ListDataSource'
+import UserService, { User } from '../../service/UserService'
 import { ArticleItemComponent } from '../../widgets/ArticleItemComponent'
 import { LoadState, PageLoading } from '../../widgets/PageLoading'
 
@@ -9,12 +10,29 @@ import { LoadState, PageLoading } from '../../widgets/PageLoading'
 export struct Square {
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
-  @State title: string = "广场"
   @State articles: ListDataSource<Article> = new ListDataSource()
   private scroller: Scroller = new Scroller()
   private refreshConfig = new PullToRefreshConfigurator()
   private nextPage: number = 0
   private hasMore: boolean = true
+  @State needRefresh: boolean = false
+  @Prop @Watch("onRefresh") isShow: boolean
+  private userObserver = (user?: User) => {
+    // 用户状态变化，刷新列表
+    if (user) {
+      this.needRefresh = true
+      this.onRefresh()
+    } else {
+      this.articles.dataArray.forEach((item, index) => {
+        if (!Array.isArray(item)) {
+          if (item.collect) {
+            item.collect = false
+            this.articles.notifyDataChange(index)
+          }
+        }
+      })
+    }
+  }
 
   build() {
     Column() {
@@ -75,8 +93,24 @@ export struct Square {
     .height("100%")
   }
 
+  onRefresh(): void {
+    if (this.isShow == false) {
+      return
+    }
+
+    if (this.needRefresh) {
+      this.loadData()
+      this.needRefresh = false
+    }
+  }
+
   aboutToAppear(): void {
     this.loadData()
+    UserService.addUserObserver(this.userObserver)
+  }
+
+  aboutToDisappear(): void {
+    UserService.removeUserObserver(this.userObserver)
   }
 
   private loadData() {

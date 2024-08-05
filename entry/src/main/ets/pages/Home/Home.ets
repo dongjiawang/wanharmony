@@ -43,7 +43,7 @@ export struct Home {
   }
 
   aboutToAppear() {
-    this.LoadData()
+    this.loadData()
 
     this.bannerOff = Preferences.get(EntryContext.getContext() as Context).getHomeBannerOff()
     this.topOff = Preferences.get(EntryContext.getContext() as Context).getHomeTopOff()
@@ -72,12 +72,12 @@ export struct Home {
     }
 
     if (this.needRefresh) {
-      this.LoadData()
+      this.loadData()
+      this.needRefresh = false
     }
   }
 
-  LoadData() {
-    this.needRefresh = false
+  loadData() {
     this.loadState = LoadState.LOADING
     this.loadDataByPage(0)
       .then((data) => {
@@ -152,7 +152,7 @@ export struct Home {
         loadState: this.loadState,
         showLoading: this.showLoading,
         onReload: () => {
-          this.LoadData()
+          this.loadData()
         },
         content: (() => {
           this.pullToRefreshBuilder()

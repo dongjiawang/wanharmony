@@ -63,7 +63,9 @@ export struct Main {
             isShow: this.isShow
           })
         } else if (this.selectedIndex == 1) {
-          Square()
+          Square({
+            isShow: this.isShow
+          })
         } else {
           Wechat()
         }
