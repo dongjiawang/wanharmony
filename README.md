@@ -10,16 +10,17 @@
 
 ## 截图
 
-![浅色模式](./Art/art_light.png)
-![深色模式](./Art/art_dark.png)
+![浅色模式](./Art/art_light_0.png)
+
+![浅色模式](./Art/art_light_1.png)![深色模式](./Art/art_dark.png)
 
 ## 功能迭代
 
 ### 首页
 
-* [ ] 增加广场入口
+* [x] 增加广场入口
 
-* [ ] 增加公众号入口
+* [x] 增加公众号入口
 
 ### 个人中心
 
