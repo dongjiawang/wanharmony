@@ -1,7 +1,6 @@
-import API from '../../network/API'
-import { WeChatAuthor } from '../../network/model/WeChat'
-import { LoadState, PageLoading } from '../../widgets/PageLoading'
-import TitleLayout from '../../widgets/TitleLayout'
+import API from '../../../network/API'
+import { WeChatAuthor } from '../../../network/model/WeChat'
+import { LoadState, PageLoading } from '../../../widgets/PageLoading'
 import { WechatTab } from './WechatTab'
 
 @Component
@@ -13,11 +12,6 @@ export struct Wechat {
 
   build() {
     Column() {
-      TitleLayout({
-        title: this.title,
-        enableBack: false
-      })
-
       PageLoading({
         loadState: this.loadState,
         showLoading: this.showLoading,

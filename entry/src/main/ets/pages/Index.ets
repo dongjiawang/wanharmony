@@ -1,11 +1,11 @@
 import OHPermission from "../common/OHPermission"
 import WindowUtils from '../common/WindowUtils'
-import { Home } from './Home/Home'
 import { Mine } from './Mine/Mine'
 import { TreePage } from "./Tree/TreePage"
 import { common } from '@kit.AbilityKit'
 import { toast } from '../common/Toast'
 import { Question } from './Question/Question'
+import { Main } from './Home/Main'
 
 @Entry
 @Component
@@ -20,7 +20,7 @@ struct Index {
       if (this.isPermissionGrant) {
         Tabs({ barPosition: BarPosition.End, controller: this.tabsController }) {
           TabContent() {
-            Home({
+            Main({
               pageIndex: 0,
               currentPosition: this.currentIndex
             })
@@ -44,7 +44,6 @@ struct Index {
           }.tabBar(this.tabBuilder("我的", 3, $r("sys.symbol.person_shield_fill"), $r("sys.symbol.person_shield")))
         }
         .layoutWeight(1)
-        .scrollable(true)
         .animationDuration(0)
         .onChange((index) => {
           this.currentIndex = index

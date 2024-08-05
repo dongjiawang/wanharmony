@@ -4,9 +4,7 @@ import { HomeBannerData } from '../../network/model/Banner'
 import { LoadState, PageLoading } from '../../widgets/PageLoading'
 import { BannerComponent } from './BannerComponent'
 import { ArticleItemComponent } from '../../widgets/ArticleItemComponent'
-import TitleLayout from '../../widgets/TitleLayout'
 import { PullToRefresh } from '@ohos/pulltorefresh'
-import { router } from '@kit.ArkUI'
 import { ListDataSource } from '../../network/model/ListDataSource'
 import Preferences from '../../common/Preferences'
 import EntryContext from '../../common/EntryContext'
@@ -19,7 +17,6 @@ export struct Home {
   @State dataList: ListDataSource<HomeItemData> = new ListDataSource()
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
-  private title: string = "首页"
   private nextPage: number = 1
   private hasMore: boolean = true
   private scroller: Scroller = new Scroller()
@@ -152,16 +149,6 @@ export struct Home {
   build() {
 
     Column() {
-      TitleLayout({
-        title: this.title,
-        enableBack: false,
-        rightSymbol: $r("sys.symbol.magnifyingglass"),
-        onRightSymbolClick: () => {
-          router.pushUrl({
-            url: "pages/Search/SearchEntry"
-          })
-        }
-      })
       PageLoading({
         loadState: this.loadState,
         showLoading: this.showLoading,

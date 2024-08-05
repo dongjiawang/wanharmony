@@ -1,10 +1,9 @@
 import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh'
-import API from '../network/API'
-import { Article } from '../network/model/Article'
-import { ListDataSource } from '../network/model/ListDataSource'
-import { ArticleItemComponent } from '../widgets/ArticleItemComponent'
-import { LoadState, PageLoading } from '../widgets/PageLoading'
-import TitleLayout from '../widgets/TitleLayout'
+import API from '../../network/API'
+import { Article } from '../../network/model/Article'
+import { ListDataSource } from '../../network/model/ListDataSource'
+import { ArticleItemComponent } from '../../widgets/ArticleItemComponent'
+import { LoadState, PageLoading } from '../../widgets/PageLoading'
 
 @Component
 export struct Square {
@@ -19,10 +18,6 @@ export struct Square {
 
   build() {
     Column() {
-      TitleLayout({
-        title: this.title,
-        enableBack: false
-      })
 
       PageLoading({
         loadState: this.loadState,

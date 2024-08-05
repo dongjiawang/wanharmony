@@ -1,9 +1,9 @@
 import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh'
-import API from '../../network/API'
-import { Article } from '../../network/model/Article'
-import { ListDataSource } from '../../network/model/ListDataSource'
-import { ArticleItemComponent } from '../../widgets/ArticleItemComponent'
-import { LoadState, PageLoading } from '../../widgets/PageLoading'
+import API from '../../../network/API'
+import { Article } from '../../../network/model/Article'
+import { ListDataSource } from '../../../network/model/ListDataSource'
+import { ArticleItemComponent } from '../../../widgets/ArticleItemComponent'
+import { LoadState, PageLoading } from '../../../widgets/PageLoading'
 
 @Component
 export struct WechatTab {
