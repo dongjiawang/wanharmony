@@ -2,6 +2,7 @@ import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh'
 import API from '../../../network/API'
 import { Article } from '../../../network/model/Article'
 import { ListDataSource } from '../../../network/model/ListDataSource'
+import UserService, { User } from '../../../service/UserService'
 import { ArticleItemComponent } from '../../../widgets/ArticleItemComponent'
 import { LoadState, PageLoading } from '../../../widgets/PageLoading'
 
@@ -15,6 +16,20 @@ export struct WechatTab {
   private refreshConfig = new PullToRefreshConfigurator()
   private nextPage: number = 1
   private hasMore: boolean = true
+
+  private userObserver = (user?: User) => {
+    // 用户状态变化，刷新列表
+    if (!user) {
+      this.articles.dataArray.forEach((item, index) => {
+        if (!Array.isArray(item)) {
+          if (item.collect) {
+            item.collect = false
+            this.articles.notifyDataChange(index)
+          }
+        }
+      })
+    }
+  }
 
   build() {
     Column() {
@@ -37,6 +52,11 @@ export struct WechatTab {
   aboutToAppear(): void {
     this.refreshConfig.setHasRefresh(false)
     this.loadData()
+    UserService.addUserObserver(this.userObserver)
+  }
+
+  aboutToDisappear(): void {
+    UserService.removeUserObserver(this.userObserver)
   }
 
   private loadData() {
