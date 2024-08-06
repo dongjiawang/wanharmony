@@ -12,18 +12,9 @@ import TitleLayout from '../../widgets/TitleLayout';
 struct CoinList {
   @State loadState: LoadState = LoadState.LOADING
   @State coinList: ListDataSource<CoinModel> = new ListDataSource()
-  @State userCoin: number = 0
   private scroller: Scroller = new Scroller()
   private nextPage: number = 1
   private hasMore: boolean = true
-
-  private userObserver = (user?: User) => {
-    if (user) {
-      this.userCoin = user.coinCount
-    } else {
-      this.userCoin = 0
-    }
-  }
 
   build() {
     Column() {
@@ -31,7 +22,7 @@ struct CoinList {
         title: "我的积分"
       })
 
-      Text(this.userCoin.toString())
+      Text(UserService.getUser()?.coinCount.toString())
         .fontSize(50)
         .fontColor($r("app.color.title_bar_text"))
         .textAlign(TextAlign.Center)
@@ -54,17 +45,8 @@ struct CoinList {
     .width('100%')
   }
 
-  async aboutToAppear(): Promise<void> {
-    UserService.addUserObserver(this.userObserver)
-    const user = await UserService.updateUser()
-    this.userObserver(user)
-    UserService.updateUser()
-
+  aboutToAppear() {
     this.loadData()
-  }
-
-  aboutToDisappear(): void {
-    UserService.removeUserObserver(this.userObserver)
   }
 
   private loadData() {

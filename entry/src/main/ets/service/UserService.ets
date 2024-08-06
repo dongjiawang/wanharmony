@@ -4,6 +4,7 @@ import { Context } from '@ohos.abilityAccessCtrl'
 import API from '../network/API'
 import Network from '../network/Network'
 import { promptAction, router } from '@kit.ArkUI'
+import { toast } from '../common/Toast'
 
 export default class UserService {
   private static instance: UserService
@@ -96,6 +97,26 @@ export default class UserService {
       } catch (error) {
         console.error(`showDialog args error code is ${error.code}, message is ${error.message}`)
       }
+    }
+  }
+
+  /**
+   * 登录账号
+   * @param username
+   * @param password
+   * @param callBack
+   */
+  static async login(username: string, password: string, callBack: ((isLogin: boolean) => void)) {
+    const response = await API.login(username, password)
+    if (response.isSuccessWithData()) {
+      UserService.get().user = response.data
+      const user = await UserService.updateUser()
+      if (user) {
+        callBack(true)
+      }
+    } else {
+      toast(response.errorMsg)
+      callBack(false)
     }
   }
 

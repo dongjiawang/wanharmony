@@ -41,8 +41,6 @@ export struct Mine {
     }
   }
   @State listData: MineListItemModel[] = []
-  @Prop pageIndex: number
-  @Prop @Watch("onRefresh") currentPosition: number
 
   build() {
 
@@ -131,10 +129,6 @@ export struct Mine {
 
   aboutToDisappear(): void {
     UserService.removeUserObserver(this.userObserver)
-  }
-
-  onRefresh(): void {
-    UserService.updateUser()
   }
 
   private creatListModel() {

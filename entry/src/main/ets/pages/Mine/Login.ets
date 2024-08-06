@@ -1,5 +1,4 @@
 import { toast } from '../../common/Toast'
-import API from '../../network/API'
 import UserService from '../../service/UserService'
 import { LoadState, PageLoading } from '../../widgets/PageLoading'
 import { router } from '@kit.ArkUI'
@@ -98,16 +97,11 @@ struct Login {
     }
 
     this.showLoading = true
-    const response = await API.login(this.account, this.password)
-    this.showLoading = false
-    if (response.isSuccessWithData()) {
-      UserService.setUser(response.data)
-      const user = await UserService.updateUser()
-      if (user) {
+    UserService.login(this.account, this.password, (isLogin) =>{
+      this.showLoading = false
+      if (isLogin) {
         router.back()
       }
-    } else {
-      toast(response.errorMsg)
-    }
+    })
   }
 }
