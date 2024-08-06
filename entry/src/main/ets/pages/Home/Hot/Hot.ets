@@ -1,20 +1,20 @@
-import API from '../../network/API'
-import { Article, ArticleTag } from '../../network/model/Article'
-import { HomeBannerData } from '../../network/model/Banner'
-import { LoadState, PageLoading } from '../../widgets/PageLoading'
+import API from '../../../network/API'
+import { Article, ArticleTag } from '../../../network/model/Article'
+import { HomeBannerData } from '../../../network/model/Banner'
+import { LoadState, PageLoading } from '../../../widgets/PageLoading'
 import { BannerComponent } from './BannerComponent'
-import { ArticleItemComponent } from '../../widgets/ArticleItemComponent'
+import { ArticleItemComponent } from '../../../widgets/ArticleItemComponent'
 import { PullToRefresh } from '@ohos/pulltorefresh'
-import { ListDataSource } from '../../network/model/ListDataSource'
-import Preferences from '../../common/Preferences'
-import EntryContext from '../../common/EntryContext'
-import UserService, { User } from '../../service/UserService'
+import { ListDataSource } from '../../../network/model/ListDataSource'
+import Preferences from '../../../common/Preferences'
+import EntryContext from '../../../common/EntryContext'
+import UserService, { User } from '../../../service/UserService'
 
-declare type HomeItemData = Article | HomeBannerData[]
+declare type HotItemData = Article | HomeBannerData[]
 
 @Component
-export struct Home {
-  @State dataList: ListDataSource<HomeItemData> = new ListDataSource()
+export struct Hot {
+  @State dataList: ListDataSource<HotItemData> = new ListDataSource()
   @State loadState: LoadState = LoadState.LOADING
   @State showLoading: boolean = false
   private nextPage: number = 1
@@ -92,11 +92,11 @@ export struct Home {
       })
   }
 
-  private async loadDataByPage(page: number): Promise<HomeItemData[]> {
+  private async loadDataByPage(page: number): Promise<HotItemData[]> {
     if (page == 0) {
 
       let articleList: Article[] = []
-      let dataList: HomeItemData[] = []
+      let dataList: HotItemData[] = []
 
       const articleResponse = await API.getHomeArticleList(page)
 
@@ -215,7 +215,7 @@ export struct Home {
     List({
       scroller: this.scroller
     }) {
-      LazyForEach(this.dataList, (item: HomeItemData, index) => {
+      LazyForEach(this.dataList, (item: HotItemData, index) => {
         ListItem() {
           if (item instanceof Array) {
             BannerComponent({

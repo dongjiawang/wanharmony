@@ -1,6 +1,6 @@
 import WindowUtils from '../../common/WindowUtils'
 import { router, SymbolGlyphModifier } from '@kit.ArkUI'
-import { Home } from './Home'
+import { Hot } from './Hot/Hot'
 import { Square } from './Square'
 import { Wechat } from './Wechat/Wechat'
 
@@ -59,7 +59,7 @@ export struct Main {
 
       Column() {
         if (this.selectedIndex == 0) {
-          Home({
+          Hot({
             isShow: this.isShow
           })
         } else if (this.selectedIndex == 1) {
@@ -67,7 +67,9 @@ export struct Main {
             isShow: this.isShow
           })
         } else {
-          Wechat()
+          Wechat({
+            isShow: this.isShow
+          })
         }
       }
       .layoutWeight(1)
