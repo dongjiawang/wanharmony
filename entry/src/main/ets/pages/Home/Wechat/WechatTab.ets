@@ -127,7 +127,6 @@ export struct WechatTab {
           ArticleItemComponent({
             article: item,
             updateCollectCallBack: async () => {
-              item.collect = !item.collect
               this.articles.notifyDataChange(index)
             }
           })
