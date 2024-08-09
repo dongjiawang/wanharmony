@@ -61,7 +61,7 @@ export struct Question {
   }
 
   onRefresh(): void {
-    if (this.pageIndex != this.currentPosition) {
+    if (this.pageIndex !== this.currentPosition) {
       return
     }
 
@@ -75,7 +75,7 @@ export struct Question {
     this.loadState = LoadState.LOADING
     this.loadDataByPage(0).then((data) => {
       this.articles.resetAllData(data)
-      if (this.articles.totalCount() == 0) {
+      if (this.articles.totalCount() === 0) {
         this.loadState = LoadState.EMPTY
       } else {
         this.loadState = LoadState.SUCCESS

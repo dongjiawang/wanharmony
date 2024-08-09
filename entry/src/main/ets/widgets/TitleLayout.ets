@@ -59,14 +59,14 @@ export default struct TitleLayout {
 
         Row() {
           Stack() {
-            Text(this.rightText == null ? "" : this.rightText)
+            Text(this.rightText === null ? "" : this.rightText)
               .fontSize(16)
               .fontColor($r("app.color.text_h1"))
           }
           .height(44)
           .padding({ left: 10, right: 10 })
           .alignContent(Alignment.Center)
-          .visibility(this.rightText == null ? Visibility.None : Visibility.Visible)
+          .visibility(this.rightText === null ? Visibility.None : Visibility.Visible)
           .onClick(() => {
             if (this.onRightTextClick) {
               this.onRightTextClick()
@@ -74,7 +74,7 @@ export default struct TitleLayout {
           })
 
           Stack() {
-            Image(this.rightImage == null ? null : this.rightImage)
+            Image(this.rightImage === null ? null : this.rightImage)
               .width(22)
               .height(22)
               .fillColor($r("app.color.title_bar_text"))
@@ -83,7 +83,7 @@ export default struct TitleLayout {
           .height(44)
           .padding({ left: 10, right: 10 })
           .alignContent(Alignment.Center)
-          .visibility(this.rightImage == null ? Visibility.None : Visibility.Visible)
+          .visibility(this.rightImage === null ? Visibility.None : Visibility.Visible)
           .onClick(() => {
             if (this.onRightImageClick) {
               this.onRightImageClick()
@@ -98,7 +98,7 @@ export default struct TitleLayout {
           .height(44)
           .padding({ left: 10, right: 10 })
           .alignContent(Alignment.Center)
-          .visibility(this.rightSymbol == null ? Visibility.None : Visibility.Visible)
+          .visibility(this.rightSymbol === null ? Visibility.None : Visibility.Visible)
           .onClick(() => {
             if (this.onRightSymbolClick) {
               this.onRightSymbolClick()

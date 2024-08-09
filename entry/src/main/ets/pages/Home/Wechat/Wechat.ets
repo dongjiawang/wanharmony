@@ -69,7 +69,7 @@ export struct Wechat {
   }
 
   onRefresh(): void {
-    if (this.isShow == false) {
+    if (this.isShow === false) {
       return
     }
 

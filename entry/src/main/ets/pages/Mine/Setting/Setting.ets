@@ -176,8 +176,8 @@ struct Setting {
   aboutToAppear(): void {
     const preferences = Preferences.get(EntryContext.getContext() as Context)
     const colorMode = preferences.getColorMode()
-    this.isAutoColorModeOn = colorMode == (-1 || undefined)
-    this.isDark = colorMode == 0
+    this.isAutoColorModeOn = colorMode === (-1 || undefined)
+    this.isDark = colorMode === 0
     this.isBannerOff = !preferences.getHomeBannerOff()
     this.isTopOff = !preferences.getHomeTopOff()
   }

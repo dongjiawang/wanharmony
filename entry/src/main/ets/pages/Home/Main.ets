@@ -58,11 +58,11 @@ export struct Main {
       .backgroundColor($r("app.color.title_bar_bg"))
 
       Column() {
-        if (this.selectedIndex == 0) {
+        if (this.selectedIndex === 0) {
           Hot({
             isShow: this.isShow
           })
-        } else if (this.selectedIndex == 1) {
+        } else if (this.selectedIndex === 1) {
           Square({
             isShow: this.isShow
           })
@@ -80,7 +80,7 @@ export struct Main {
 
   onRefresh(): void {
 
-    this.isShow = this.pageIndex == this.currentPosition
+    this.isShow = this.pageIndex === this.currentPosition
   }
 }
 

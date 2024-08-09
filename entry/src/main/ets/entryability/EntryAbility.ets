@@ -11,11 +11,11 @@ export default class EntryAbility extends UIAbility {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
     EntryContext.setContext(this.context)
     const colorMode = Preferences.get(this.context).getColorMode()
-    if (colorMode == -1) {
+    if (colorMode === -1) {
       this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET)
-    } else if (colorMode == 0) {
+    } else if (colorMode === 0) {
       this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_DARK)
-    } else if (colorMode == 1) {
+    } else if (colorMode === 1) {
       this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT)
     } else {
       this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET)

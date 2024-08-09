@@ -56,17 +56,17 @@ export struct Hot {
   }
 
   onRefresh(): void {
-    if (this.isShow == false) {
+    if (this.isShow === false) {
       return
     }
 
     const bannerOff = Preferences.get(EntryContext.getContext() as Context).getHomeBannerOff()
-    if (this.bannerOff != bannerOff) {
+    if (this.bannerOff !== bannerOff) {
       this.bannerOff = bannerOff
       this.needRefresh = true
     }
     const topOff = Preferences.get(EntryContext.getContext() as Context).getHomeTopOff()
-    if (this.topOff != topOff) {
+    if (this.topOff !== topOff) {
       this.topOff = topOff
       this.needRefresh = true
     }
@@ -82,7 +82,7 @@ export struct Hot {
     this.loadDataByPage(0)
       .then((data) => {
         this.dataList.resetAllData(data)
-        if (this.dataList.totalCount() == 0) {
+        if (this.dataList.totalCount() === 0) {
           this.loadState = LoadState.EMPTY
         } else {
           this.loadState = LoadState.SUCCESS
@@ -93,7 +93,7 @@ export struct Hot {
   }
 
   private async loadDataByPage(page: number): Promise<HotItemData[]> {
-    if (page == 0) {
+    if (page === 0) {
 
       let articleList: Article[] = []
       let dataList: HotItemData[] = []
@@ -107,7 +107,7 @@ export struct Hot {
       }
 
       // 加载第一页数据,同时需要加载 banner 和置顶文章
-      if (this.topOff == false) {
+      if (this.topOff === false) {
         const topResponse = await API.getTopArticle()
 
         if (topResponse.isSuccessWithData()) {
@@ -120,7 +120,7 @@ export struct Hot {
         }
       }
 
-      if (this.bannerOff == false) {
+      if (this.bannerOff === false) {
         const bannerResponse = await API.getHomeBanner()
 
         if (bannerResponse.isSuccessWithData()) {

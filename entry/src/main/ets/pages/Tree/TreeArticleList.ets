@@ -48,7 +48,7 @@ struct TreeArticleList {
   private loadData() {
     this.loadDataByPage(0).then((data) => {
       this.articleList.resetAllData(data)
-      if (this.articleList.totalCount() == 0) {
+      if (this.articleList.totalCount() === 0) {
         this.loadState = LoadState.EMPTY
       } else {
         this.loadState = LoadState.SUCCESS

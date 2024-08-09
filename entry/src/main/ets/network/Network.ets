@@ -33,7 +33,7 @@ export default class Network {
       const url = BASE_URL + path
       const uri = parseUri(url)
 
-      if (method == http.RequestMethod.POST && !extraData) {
+      if (method === http.RequestMethod.POST && !extraData) {
         extraData = new Object()
       }
 
@@ -56,7 +56,7 @@ export default class Network {
             response.errorMsg = err.message
             reject(response)
             hilog.error(0, TAG, `request failed, path：${path}, error: ${JSON.stringify(err, undefined, undefined)}`)
-          } else if (data.responseCode == 200) {
+          } else if (data.responseCode === 200) {
             cookieJar.saveFromResponse(uri, CookieUtils.parseHttpRequestCookies(data.cookies))
             if (data.resultType === http.HttpDataType.STRING) {
               const result: Response<T> = JSON.parse(data.result as string) as Response<T>
@@ -100,7 +100,7 @@ export default class Network {
   private creatHeader(uri: uri.URI, method: http.RequestMethod): Header {
     const cookies = cookieJar.loadForRequest(uri)
 
-    if (method == http.RequestMethod.POST) {
+    if (method === http.RequestMethod.POST) {
       return {
         "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": CookieUtils.cookieHeader(cookies)

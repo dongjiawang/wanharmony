@@ -53,7 +53,7 @@ struct MineShare {
     this.loadState = LoadState.LOADING
     this.loadDataByPage(1).then((data) => {
       this.articles.resetAllData(data)
-      if (this.articles.totalCount() == 0) {
+      if (this.articles.totalCount() === 0) {
         this.loadState = LoadState.EMPTY
       } else {
         this.loadState = LoadState.SUCCESS
@@ -133,7 +133,7 @@ struct MineShare {
               this.showLoading = false
               if (success) {
                 this.articles.deleteData(this.articles.dataArray.indexOf(item))
-                if (this.articles.totalCount() == 0) {
+                if (this.articles.totalCount() === 0) {
                   this.loadData()
                 }
               }

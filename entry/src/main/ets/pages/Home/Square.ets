@@ -94,7 +94,7 @@ export struct Square {
   }
 
   onRefresh(): void {
-    if (this.isShow == false) {
+    if (this.isShow === false) {
       return
     }
 
@@ -117,7 +117,7 @@ export struct Square {
     this.loadState = LoadState.LOADING
     this.loadDataByPage(0).then((data) => {
       this.articles.resetAllData(data)
-      if (this.articles.totalCount() == 0) {
+      if (this.articles.totalCount() === 0) {
         this.loadState = LoadState.EMPTY
         this.nextPage = 0
       } else {

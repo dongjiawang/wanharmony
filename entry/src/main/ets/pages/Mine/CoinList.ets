@@ -53,7 +53,7 @@ struct CoinList {
     this.loadState = LoadState.LOADING
     this.loadDataByPage(0).then((data) => {
       this.coinList.resetAllData(data)
-      if (this.coinList.totalCount() == 0) {
+      if (this.coinList.totalCount() === 0) {
         this.loadState = LoadState.EMPTY
       } else {
         this.loadState = LoadState.SUCCESS

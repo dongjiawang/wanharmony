@@ -14,7 +14,7 @@ struct ArticleWebPage {
   private isOnlyDark: boolean = false
 
   aboutToAppear() {
-    this.isOnlyDark = Preferences.get(EntryContext.getContext() as Context).getColorMode() == 0
+    this.isOnlyDark = Preferences.get(EntryContext.getContext() as Context).getColorMode() === 0
   }
 
   onBackPress(): boolean | void {
