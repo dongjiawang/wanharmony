@@ -4,8 +4,8 @@
 
 ## 开发环境
 
-* DevEco Studio NEXT Developer Beta2
-* 构建版本：5.0.3.500
+* DevEco Studio NEXT Developer Beta3
+* 构建版本：5.0.3.600
 * Harmony OS API 12
 
 ## 截图
